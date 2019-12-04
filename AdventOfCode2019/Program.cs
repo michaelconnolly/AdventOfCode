@@ -9,7 +9,8 @@ namespace AdventOfCode2019 {
 
             //Day1();
             //Day2();
-            Day3();
+            //Day3();
+            Day4();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -84,7 +85,7 @@ namespace AdventOfCode2019 {
             //string content = "1,1,1,4,99,5,6,0,99";
 
             //string[] opCodes = content.Split(",");
-            string[] opCodes = (string[]) opCodesInput.Clone();
+            string[] opCodes = (string[])opCodesInput.Clone();
 
             // Once you have a working computer, the first step is to restore the gravity assist program (your puzzle input) to the "1202 program alarm" state 
             // it had just before the last computer caught fire. To do this, before running the program, replace position 1 with the value 12 and replace
@@ -216,7 +217,7 @@ namespace AdventOfCode2019 {
 
                 char direction = path[0];
                 int distance = Convert.ToInt32(path.Substring(1));
-               // stepsCount++;
+                // stepsCount++;
                 Console.WriteLine("direction: " + direction + "; distance: " + distance.ToString());
 
                 switch (direction) {
@@ -313,6 +314,115 @@ namespace AdventOfCode2019 {
 
             Console.WriteLine("Shortest Distance: " + minimumDistance.ToString());
             Console.WriteLine("Shortest Steps: " + minimumSteps.ToString());
+        }
+
+        static bool Day4_isValidCombination(string combination, bool includePart2Criteria=false) {
+
+            // It is a six - digit number.
+            // The value is within the range given in your puzzle input.
+            // Two adjacent digits are the same(like 22 in 122345).
+            // Going from left to right, the digits never decrease; they only ever increase or stay the same(like 111123 or 135679).
+            // Part 2 Criteria: the two adjacent matching digits are not part of a larger group of matching digits.
+
+            if (combination.Length != 6) return false;
+
+            bool foundSameDigitsAdjacent = false;
+            bool digitsNeverDecrease = true;
+            int part2_digitsInRowCount = 1;
+            bool part2_foundAtLeastOnePair = false;
+
+            char lastDigit = combination[0];
+            for (int i=1; i< (combination.Length); i++) {
+
+                // Is the current digit the same as the one before it?
+                char currentDigit = combination[i];
+                if (currentDigit == lastDigit) {
+                    foundSameDigitsAdjacent = true;
+                    part2_digitsInRowCount++;
+
+                    // special case the last character.
+                    if ((i == (combination.Length - 1)) && (part2_digitsInRowCount == 2)) {
+                        part2_foundAtLeastOnePair = true;
+                    }
+                }
+                else {
+                    if (part2_digitsInRowCount == 2) { 
+                        part2_foundAtLeastOnePair = true;
+                    }
+                    part2_digitsInRowCount = 1;
+                }
+
+                // Is the current digit smaller than the one before it? 
+                if (Convert.ToInt32(lastDigit) > Convert.ToInt32(currentDigit)) {
+
+                    digitsNeverDecrease = false;
+                }
+
+                lastDigit = currentDigit;
+            }
+
+            if (!foundSameDigitsAdjacent) return false;
+
+            if (!digitsNeverDecrease) return false;
+
+            if (includePart2Criteria) {
+                if (!part2_foundAtLeastOnePair) return false;
+            }
+
+            return true;
+        }
+
+        static bool Day4_TestValue(string combination, bool expectedAnswer, bool includePart2Criteria=false) {
+
+            bool isValid = Day4_isValidCombination(combination, includePart2Criteria);
+            Console.WriteLine(combination + ": " + isValid.ToString() + "; expected: " + expectedAnswer.ToString());
+
+            return isValid;
+        }
+
+        static void Day4() {
+
+            // Day 4 Part 1: Test cases.
+            Day4_TestValue("111111", true);  // 111111 meets these criteria(double 11, never decreases).
+            Day4_TestValue("223450", false);  // 223450 does not meet these criteria(decreasing pair of digits 50).
+            Day4_TestValue("123789", false);  // 123789 does not meet these criteria(no double).
+            Day4_TestValue("111123", true);  // true
+            Day4_TestValue("135679", false);  // false
+         
+            // Day 4 part 1: Real range of 125730-579381; replace these values with whatever you have been assigned.
+            int startValue = 125730;
+            int endValue = 579381;
+            int validCombinations = 0;
+
+            for (int i=startValue; i <= endValue; i++) {
+
+                if (Day4_isValidCombination(i.ToString())) { 
+                    validCombinations++;
+                }
+            }
+
+            Console.WriteLine("Part 1: Amount of valid combinations in the range of " + startValue.ToString() + "-" + endValue.ToString() + ": " + validCombinations.ToString());
+
+            // Day 4 Part 2: Test Cases.
+            Day4_TestValue("112233", true, includePart2Criteria: true); // 112233 meets these criteria because the digits never decrease and all repeated digits are exactly two digits long.
+            Day4_TestValue("123444", false, includePart2Criteria: true); // 123444 no longer meets the criteria(the repeated 44 is part of a larger group of 444).
+            Day4_TestValue("111122", true, includePart2Criteria: true); // 111122 meets the criteria(even though 1 is repeated more than twice, it still contains a double 22).
+            Day4_TestValue("111779", true, includePart2Criteria: true);  // true
+            Day4_TestValue("135779", true, includePart2Criteria: true);
+            Day4_TestValue("111779", true, includePart2Criteria: true);
+            Day4_TestValue("555777", false, includePart2Criteria: true);
+
+            // Day 4 part 2: Real range.
+            validCombinations = 0;
+
+            for (int i = startValue; i <= endValue; i++) {
+
+                if (Day4_isValidCombination(i.ToString(), includePart2Criteria: true)) {
+                    validCombinations++;
+                }
+            }
+
+            Console.WriteLine("Part 2: Amount of valid combinations in the range of " + startValue.ToString() + "-" + endValue.ToString() + ": " + validCombinations.ToString());
         }
     }
 }
