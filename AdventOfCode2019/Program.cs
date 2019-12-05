@@ -439,7 +439,7 @@ namespace AdventOfCode2019 {
             }
         }
 
-        static string[] Day5_Intcode(string[] instructionsInput, string input, string replacementValue1, string replacementValue2) {
+        static string[] Day5_Intcode(string[] instructionsInput, string input) {
 
             // Opcodes(like 1, 2, or 99) mark the beginning of an instruction. The values used immediately after an opcode, if any, are called the instruction's
             // parameters. For example, in the instruction 1,2,3,4, 1 is the opcode; 2, 3, and 4 are the parameters. The instruction 99 contains only an opcode
@@ -447,16 +447,6 @@ namespace AdventOfCode2019 {
 
             string[] instructions = (string[])instructionsInput.Clone();
             string output = "";
-
-            // Once you have a working computer, the first step is to restore the gravity assist program (your puzzle input) to the "1202 program alarm" state 
-            // it had just before the last computer caught fire. To do this, before running the program, replace position 1 with the value 12 and replace
-            // position 2 with the value 2. What value is left at position 0 after the program halts?
-            if (replacementValue1 != null) {
-                instructions[1] = replacementValue1;
-            }
-            if (replacementValue2 != null) {
-                instructions[2] = replacementValue2;
-            }
 
             // Display the file contents.
             Console.WriteLine("Contents of file = ");
@@ -467,143 +457,140 @@ namespace AdventOfCode2019 {
             Console.WriteLine("Total number of opCodes: " + numberOfOpCodes.ToString());
 
             bool keepGoing = true;
- 
-            for (int i = 0; i < numberOfOpCodes; i++) {
+            int i = 0;
+            while (keepGoing) {
 
-                if (keepGoing) {
+                // Grab opCode
+                string instruction = instructions[i].PadLeft(5, '0');
+                int opCode = Convert.ToInt32(instruction.Substring(instruction.Length - 2));
 
-                    // Grab opCode
-                    string instruction = instructions[i].PadLeft(5, '0');
-                    int opCode = Convert.ToInt32(instruction.Substring(instruction.Length - 2));
+                int parameterMode1 = Convert.ToInt32(instruction.Substring(instruction.Length - 3, 1));
+                int parameterMode2 = Convert.ToInt32(instruction.Substring(instruction.Length - 4, 1));
+                int parameterMode3 = Convert.ToInt32(instruction.Substring(instruction.Length - 5, 1));
 
-                    int parameterMode1 = Convert.ToInt32(instruction.Substring(instruction.Length - 3, 1));
-                    int parameterMode2 = Convert.ToInt32(instruction.Substring(instruction.Length - 4, 1));
-                    int parameterMode3 = Convert.ToInt32(instruction.Substring(instruction.Length - 5, 1));
+                int value1, value2, value3, value3Location;
 
-                    int value1, value2, value3, value3Location;
+                switch (opCode) {
 
-                    switch (opCode) {
-            
-                        case 1:
+                    case 1:
 
-                            // Opcode 1 adds together numbers read from two positions and stores the result in a third position.The three integers immediately after the opcode
-                            // tell you these three positions -the first two indicate the positions from which you should read the input values, and the third indicates the position
-                            // at which the output should be stored.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            value3Location = Convert.ToInt32(instructions[i + 3]);
-                            value3 = value1 + value2;
-                            instructions[value3Location] = (value3).ToString();
+                        // Opcode 1 adds together numbers read from two positions and stores the result in a third position.The three integers immediately after the opcode
+                        // tell you these three positions -the first two indicate the positions from which you should read the input values, and the third indicates the position
+                        // at which the output should be stored.
 
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 + value2;
+                        instructions[value3Location] = (value3).ToString();
+
+                        i += 4;
+                        break;
+
+                    case 2:
+
+                        // Opcode 2 works exactly like opcode 1, except it multiplies the two inputs instead of adding them. Again, the three integers after the opcode indicate
+                        // where the inputs and outputs are, not their values.
+
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 * value2;
+                        instructions[value3Location] = (value3).ToString();
+
+                        i += 4;
+                        break;
+
+                    case 3:
+
+                        // Opcode 3 takes a single integer as input and saves it to the address given by its only parameter.For example, the instruction 3,50 would take an input value and store it at address 50.
+                        // We should never get a parameterMode1 == 1 for case 3.
+                        if (parameterMode1 == 1) {
+                            Console.WriteLine("ERROR! Received parameterMode==1 in OpCode 3.  Ignoring.");
+                        }
+
+                        int valueLocation1 = Convert.ToInt32(instructions[(i + 1)]);
+                        instructions[valueLocation1] = input;
+
+                        i += 2;
+                        break;
+
+                    case 4:
+
+                        // Opcode 4 outputs the value of its only parameter.For example, the instruction 4,50 would output the value at address 50.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        output = value1.ToString();
+
+                        i += 2;
+                        break;
+
+                    case 5:
+
+                        // Opcode 5 is jump -if-true: if the first parameter is non - zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        if (value1 != 0) {
+                            i = value2;
+                        }
+                        else {
                             i += 3;
-                            break;
+                        }
 
-                        case 2:
+                        break;
 
-                            // Opcode 2 works exactly like opcode 1, except it multiplies the two inputs instead of adding them. Again, the three integers after the opcode indicate
-                            // where the inputs and outputs are, not their values.
+                    case 6:
 
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            value3Location = Convert.ToInt32(instructions[i + 3]); 
-                            value3 = value1 * value2;
-                            instructions[value3Location] = (value3).ToString();
-
+                        // Opcode 6 is jump -if-false: if the first parameter is zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        if (value1 == 0) {
+                            i = value2;
+                        }
+                        else {
                             i += 3;
-                            break;
+                        }
 
-                        case 3:
+                        break;
 
-                            // Opcode 3 takes a single integer as input and saves it to the address given by its only parameter.For example, the instruction 3,50 would take an input value and store it at address 50.
-                            // We should never get a parameterMode1 == 1 for case 3.
-                            if (parameterMode1 == 1) {
-                                Console.WriteLine("ERROR! Received parameterMode==1 in OpCode 3.  Ignoring.");
-                            }
+                    case 7:
 
-                            int valueLocation1 = Convert.ToInt32(instructions[(i + 1)]);
-                            instructions[valueLocation1] = input;
+                        // Opcode 7 is less than: if the first parameter is less than the second parameter, it stores 1 in the position given by the third parameter. Otherwise, it stores 0.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+                        if (value1 < value2) {
+                            instructions[value3Location] = "1";
+                        }
+                        else {
+                            instructions[value3Location] = "0";
+                        }
 
-                            i += 1;
-                            break;
+                        i += 4;
+                        break;
 
-                        case 4:
-                           
-                            // Opcode 4 outputs the value of its only parameter.For example, the instruction 4,50 would output the value at address 50.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            output = value1.ToString();
-                
-                            i += 1;
-                            break;
+                    case 8:
 
-                        case 5:
+                        //  Opcode 8 is equals: if the first parameter is equal to the second parameter, it stores 1 in the position given by the third parameter.Otherwise, it stores 0.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+                        if (value1 == value2) {
+                            instructions[value3Location] = "1";
+                        }
+                        else {
+                            instructions[value3Location] = "0";
+                        }
 
-                            // Opcode 5 is jump -if-true: if the first parameter is non - zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            if (value1 != 0) {
-                                i = (value2 - 1); // we automatically iterate i in the for loop, so subtract 1 to compensate.
-                            }
-                            else {
-                                i += 2;
-                            }
+                        i += 4;
+                        break;
 
-                            break;
+                    case 99:
 
-                        case 6:
+                        keepGoing = false;
+                        break;
 
-                            // Opcode 6 is jump -if-false: if the first parameter is zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            if (value1 == 0) {
-                                i = (value2 - 1); // we automatically iterate i in the for loop, so subtract 1 to compensate.
-                            }
-                            else {
-                                i += 2;
-                            }
-
-                            break;
-
-                        case 7:
-
-                            // Opcode 7 is less than: if the first parameter is less than the second parameter, it stores 1 in the position given by the third parameter. Otherwise, it stores 0.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            value3Location = Convert.ToInt32(instructions[(i + 3)]);
-                            if (value1 < value2) {
-                                instructions[value3Location] = "1";
-                            }
-                            else {
-                                instructions[value3Location] = "0";
-                            }
-
-                            i += 3;
-                            break;
-
-                        case 8:
-
-                            //  Opcode 8 is equals: if the first parameter is equal to the second parameter, it stores 1 in the position given by the third parameter.Otherwise, it stores 0.
-                            value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
-                            value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
-                            value3Location = Convert.ToInt32(instructions[(i + 3)]);
-                            if (value1 == value2) {
-                                instructions[value3Location] = "1";
-                            }
-                            else {
-                                instructions[value3Location] = "0";
-                            }
-
-                            i += 3;
-                            break;
-
-                        case 99:
-
-                            keepGoing = false;
-                            break;
-
-                        default:
-                            break;
-                    }
-
+                    default:
+                        break;
                 }
             }
 
@@ -628,27 +615,27 @@ namespace AdventOfCode2019 {
             // Test cases.
             // content = "1002,4,3,4,33"; // should just exit.
             // content = "3,0,4,0,99";  // Should output whatever you input.
-            //  content = "1101,100,-1,4,0"; // Should just exit. 
+            // content = "1101,100,-1,4,0"; // Should just exit. 
             // content = "1101,34,53,0,99"; // Should write 87 into 0 position.
-            //  content = "1102,34,53,0,99"; // Should write 1802 into 0 position.
+            // content = "1102,34,53,0,99"; // Should write 1802 into 0 position.
             // content = "103,0,99"; // Should get an ignorable error and writes the 'input' to 0 position;
             // content = "104,56,99"; // Should output to 'output' the value 56.
-            //content = "4,2,99"; // Should output 99 to 'output'.
+            // content = "4,2,99"; // Should output 99 to 'output'.
 
             // Test cases for part 2.
-            //content = "3,9,8,9,10,9,4,9,99,-1,8"; // - Using position mode, consider whether the input is equal to 8; output 1(if it is) or 0(if it is not).
-            //content = "3,9,7,9,10,9,4,9,99,-1,8"; // - Using position mode, consider whether the input is less than 8; output 1(if it is) or 0(if it is not).
-            //content = "3,3,1108,-1,8,3,4,3,99"; // - Using immediate mode, consider whether the input is equal to 8; output 1(if it is) or 0(if it is not).
-            //content = "3,3,1107,-1,8,3,4,3,99"; // - Using immediate mode, consider whether the input is less than 8; output 1(if it is) or 0(if it is not).
-            //content = "3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9"; // take an input, then output 0 if the input was zero or 1 if the input was non-zero
-            //content = "3,3,1105,-1,9,1101,0,0,12,4,12,99,1"; //  take an input, then output 0 if the input was zero or 1 if the input was non-zero
-            //content = "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"; // input instruction to ask for a single number. The program will then output 999 if the input value is below 8, output 1000 if the input value is equal to 8, or output 1001 if the input value is greater than 8.
+            // content = "3,9,8,9,10,9,4,9,99,-1,8"; // - Using position mode, consider whether the input is equal to 8; output 1(if it is) or 0(if it is not).
+            // content = "3,9,7,9,10,9,4,9,99,-1,8"; // - Using position mode, consider whether the input is less than 8; output 1(if it is) or 0(if it is not).
+            // content = "3,3,1108,-1,8,3,4,3,99"; // - Using immediate mode, consider whether the input is equal to 8; output 1(if it is) or 0(if it is not).
+            // content = "3,3,1107,-1,8,3,4,3,99"; // - Using immediate mode, consider whether the input is less than 8; output 1(if it is) or 0(if it is not).
+            // content = "3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9"; // take an input, then output 0 if the input was zero or 1 if the input was non-zero
+            // content = "3,3,1105,-1,9,1101,0,0,12,4,12,99,1"; //  take an input, then output 0 if the input was zero or 1 if the input was non-zero
+            // content = "3,21,1008,21,8,20,1005,20,22,107,8,21,20,1006,20,31,1106,0,36,98,0,0,1002,21,125,20,4,20,1105,1,46,104,999,1105,1,46,1101,1000,1,20,4,20,1105,1,46,98,99"; // input instruction to ask for a single number. The program will then output 999 if the input value is below 8, output 1000 if the input value is equal to 8, or output 1001 if the input value is greater than 8.
 
             string[] instructions = content.Split(",");
             string input = "5";
 
             // Day 5 - actual running of program.
-            string[] opCodesReturned = Day5_Intcode(instructions, input, null, null);
+            string[] opCodesReturned = Day5_Intcode(instructions, input);
         }
     }
 }
