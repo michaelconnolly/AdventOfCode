@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 
 namespace AdventOfCode2019 {
 
@@ -11,7 +11,8 @@ namespace AdventOfCode2019 {
             //Day2();
             //Day3();
             //Day4();
-            Day5();
+            //Day5();
+            Day6();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -317,7 +318,7 @@ namespace AdventOfCode2019 {
             Console.WriteLine("Shortest Steps: " + minimumSteps.ToString());
         }
 
-        static bool Day4_isValidCombination(string combination, bool includePart2Criteria=false) {
+        static bool Day4_isValidCombination(string combination, bool includePart2Criteria = false) {
 
             // It is a six - digit number.
             // The value is within the range given in your puzzle input.
@@ -333,7 +334,7 @@ namespace AdventOfCode2019 {
             bool part2_foundAtLeastOnePair = false;
 
             char lastDigit = combination[0];
-            for (int i=1; i< (combination.Length); i++) {
+            for (int i = 1; i < (combination.Length); i++) {
 
                 // Is the current digit the same as the one before it?
                 char currentDigit = combination[i];
@@ -347,7 +348,7 @@ namespace AdventOfCode2019 {
                     }
                 }
                 else {
-                    if (part2_digitsInRowCount == 2) { 
+                    if (part2_digitsInRowCount == 2) {
                         part2_foundAtLeastOnePair = true;
                     }
                     part2_digitsInRowCount = 1;
@@ -373,7 +374,7 @@ namespace AdventOfCode2019 {
             return true;
         }
 
-        static bool Day4_TestValue(string combination, bool expectedAnswer, bool includePart2Criteria=false) {
+        static bool Day4_TestValue(string combination, bool expectedAnswer, bool includePart2Criteria = false) {
 
             bool isValid = Day4_isValidCombination(combination, includePart2Criteria);
             Console.WriteLine(combination + ": " + isValid.ToString() + "; expected: " + expectedAnswer.ToString());
@@ -389,15 +390,15 @@ namespace AdventOfCode2019 {
             Day4_TestValue("123789", false);  // 123789 does not meet these criteria(no double).
             Day4_TestValue("111123", true);  // true
             Day4_TestValue("135679", false);  // false
-         
+
             // Day 4 part 1: Real range of 125730-579381; replace these values with whatever you have been assigned.
             int startValue = 125730;
             int endValue = 579381;
             int validCombinations = 0;
 
-            for (int i=startValue; i <= endValue; i++) {
+            for (int i = startValue; i <= endValue; i++) {
 
-                if (Day4_isValidCombination(i.ToString())) { 
+                if (Day4_isValidCombination(i.ToString())) {
                     validCombinations++;
                 }
             }
@@ -636,6 +637,80 @@ namespace AdventOfCode2019 {
 
             // Day 5 - actual running of program.
             string[] opCodesReturned = Day5_Intcode(instructions, input);
+        }
+
+        static void Day6() {
+
+            string[] orbitList;
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day6_input.txt";
+            orbitList = System.IO.File.ReadAllLines(fileName);
+
+            //string orbitListRaw = "COM)B,B)C,C)D,D)E,E)F,B)G,G)H,D)I,E)J,J)K,K)L";
+            //string orbitListRaw = "COM)B,B)C,C)D,D)E,E)F,B)G,G)H,D)I,E)J,J)K,K)L,K)YOU,I)SAN"; // should be 4.
+            //string orbitListRaw = "COM)K,K)YOU,K)SAN"; // should be 0.
+            // string orbitListRaw = "COM)A,COM)B,A)YOU,B)SAN"; // should be 2.
+            // string orbitListRaw = "COM)A,COM)B,A)F,A)YOU,F)SAN"; // should be 1
+            //string orbitListRaw = "COM)A,A)C,C)E,E)G,G)I,E)YOU,I)SAN"; // should be 2.
+            //string orbitListRaw = "COM)A,A)C,C)E,E)G,G)I,C)YOU,I)SAN"; // should be 3.
+            //orbitList = orbitListRaw.Split(",");
+
+            Dictionary<string, Day6_Object> dict = new Dictionary<string, Day6_Object>();
+
+            foreach (string orbit in orbitList) {
+
+                string[] objects = orbit.Split(')');
+                string parent = objects[0];
+                string child = objects[1];
+
+                Day6_Object parentObject;
+                if (!dict.ContainsKey(parent)) {
+
+                    parentObject = new Day6_Object(parent, null);
+                    dict[parent] = parentObject;
+
+                    // I think this shouldn't ever happen, skipping if it happens but warn me.
+                    if (parent != "COM") {
+                        Console.WriteLine("ERROR! We ran into a parent object that isn't COM that we hadn't yet run into.");
+                    }
+                }
+                else {
+                    parentObject = dict[parent];
+                }
+
+                Day6_Object childObject;
+                if (!dict.ContainsKey(child)) {
+
+                    childObject = new Day6_Object(child, parentObject);
+                    dict[child] = childObject;
+                }
+                else {
+
+                    childObject = dict[child];
+                    childObject.AddParent(parentObject);
+                    // I think this shouldn't ever happen, skippit if it happens but warn me.
+                    Console.WriteLine("WARNING! We ran into a child object that was already referenced.");
+                }
+            }
+
+            int totalOrbitCount = 0;
+
+            foreach (string item in dict.Keys) {
+
+                Console.WriteLine(dict[item].description);
+                totalOrbitCount += dict[item].indirectOrbitalChildrenCount;
+            }
+
+            Console.WriteLine("TOTAL: " + totalOrbitCount.ToString());
+
+            // Part 2.
+            Day6_Object you = dict["YOU"];
+            Day6_Object santa = dict["SAN"];
+
+            Console.WriteLine(you.description);
+            Console.WriteLine(santa.description);
+
+            int distance = you.orbitalParent.DoYouHavePathTo(santa, you);
+            Console.WriteLine("distance: " + distance.ToString());
         }
     }
 }
