@@ -743,18 +743,18 @@ namespace AdventOfCode2019 {
 
 
         //static string AmplifierSeries(string phaseSettingA, int phaseSettingB, int phaseSettingC, int phaseSettingD, int phaseSettingE) {
-        static string AmplifierSeries(string[] instructions, string[] phaseSettings) {
+        //static string AmplifierSeries(string[] instructions, string[] phaseSettings) {
 
-            string input = "0";
+        //    string input = "0";
 
-            for (int i = 0; i < phaseSettings.Length; i++) {
+        //    for (int i = 0; i < phaseSettings.Length; i++) {
 
-                // input = Amplifier(instructions, phaseSettings[i], input);
-                input = new Amplifier(instructions, phaseSettings[i], input).Run();
-            }
+        //        // input = Amplifier(instructions, phaseSettings[i], input);
+        //        input = new Amplifier(instructions, phaseSettings[i], input).Run();
+        //    }
 
-            return input;
-        }
+        //    return input;
+        //}
 
         static object[] CalculateMaximumOutput(string[] instructions, int startPhaseSetting) {
 
@@ -773,7 +773,10 @@ namespace AdventOfCode2019 {
                                 bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
 
                                 if (isUnique) {
-                                    string output = AmplifierSeries(instructions, phaseSettings);
+
+                                    AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
+                                    string output = amplifiers.Run("0");
+                                    // output = AmplifierSeries(instructions, phaseSettings);
                                     int outputValue = Convert.ToInt32(output);
 
                                     if (outputValue > maxSignal) {
@@ -789,6 +792,44 @@ namespace AdventOfCode2019 {
 
             return new object[] { maxSignal, maxPhaseSettings };
         }
+
+
+        static object[] CalculateMaximumOutputPart2(string[] instructions, int startPhaseSetting) {
+
+            int maxSignal = int.MinValue;
+            string[] maxPhaseSettings = new string[] { };
+
+            for (int a = startPhaseSetting; a < startPhaseSetting + 5; a++) {
+                for (int b = startPhaseSetting; b < startPhaseSetting + 5; b++) {
+                    for (int c = startPhaseSetting; c < startPhaseSetting + 5; c++) {
+                        for (int d = startPhaseSetting; d < startPhaseSetting + 5; d++) {
+                            for (int e = startPhaseSetting; e < startPhaseSetting + 5; e++) {
+
+                                // if this collection of phaseSettings unique, i.e., each setting only used once?
+                                string[] phaseSettings = new string[] { a.ToString(), b.ToString(), c.ToString(), d.ToString(), e.ToString() };
+                                HashSet<string> phaseSettingsSet = new HashSet<string>(phaseSettings);
+                                bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
+
+                                if (isUnique) {
+                                    //string output = AmplifierSeries(instructions, phaseSettings);
+                                    AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
+                                    string output = amplifiers.RunFeedbackLoop("0");
+                                    int outputValue = Convert.ToInt32(output);
+
+                                    if (outputValue > maxSignal) {
+                                        maxSignal = outputValue;
+                                        maxPhaseSettings = phaseSettings;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return new object[] { maxSignal, maxPhaseSettings };
+        }
+
 
         public static object[] Day7_Intcode(string[] instructionsInput, string phaseSetting, string inputSignal) {
 
@@ -989,8 +1030,7 @@ namespace AdventOfCode2019 {
             string content;
             string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day7_input.txt";
             content = System.IO.File.ReadAllText(fileName);
-            string[] phaseSettings; // = new string[] { };
-            string output ;
+            string[] phaseSettings; 
 
             // Test cases for part1.
             //content = "3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0"; // Max thruster signal 43210 (from phase setting sequence 4,3,2,1,0)
@@ -1002,67 +1042,46 @@ namespace AdventOfCode2019 {
             //content = "3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0"; // Max thruster signal 65210 (from phase setting sequence 1,0,4,3,2)
             //phaseSettings = new string[] { "1", "0", "4", "3", "2" };
 
-
             string[] instructions = content.Split(",");
 
-            // Let's try one amplifier.
-            //string output = Amplifier(instructions, "4", "0");
-            //Console.WriteLine("output of one Amplifier: " + output.ToString());
-
-            // Day 5 - actual running of program.
-            //string output = Day7_Intcode(instructions, input);
-
-            //output = AmplifierSeries(instructions, phaseSettings);
-            //Console.WriteLine("output of Amplifier series: " + output.ToString());
-
+            // Calculate maximum output based on algorithm defined in day 7 part 1.
             object[] outputs = CalculateMaximumOutput(instructions, 0);
             int maxSignal = (int) outputs[0];
             string[] maxPhaseSettings = (string[])outputs[1];
 
-            //int maxSignal = int.MinValue;
-            //string[] maxPhaseSettings = new string[] { };
-            //for (int a = 0; a < 5; a++) {
-            //    for (int b = 0; b < 5; b++) {
-            //        for (int c = 0; c < 5; c++) {
-            //            for (int d = 0; d < 5; d++) {
-            //                for (int e = 0; e < 5; e++) {
-
-            //                    // are the values only used once?
-            //                    //return myArray.length === new HashSet<string>(my)
-
-            //                    phaseSettings = new string[] { a.ToString(), b.ToString(), c.ToString(), d.ToString(), e.ToString() };
-            //                    HashSet<string> phaseSettingsSet = new HashSet<string>(phaseSettings);
-            //                    bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
-            //                    if (isUnique) {
-            //                        output = AmplifierSeries(instructions, phaseSettings);
-            //                        int outputValue = Convert.ToInt32(output);
-
-            //                        if (outputValue > maxSignal) {
-            //                            maxSignal = outputValue;
-            //                            maxPhaseSettings = phaseSettings;
-            //                        }
-            //                    }
-            //                    //maxSignal = (outputValue > maxSignal ? outputValue : maxSignal);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-
+            // Spit out summary.
             Console.WriteLine("maximum signal: " + maxSignal.ToString());
-
             Console.Write("maximum phase settings: ");
             foreach (string phaseSetting in maxPhaseSettings) {
                 Console.Write(" " + phaseSetting);
             }
             Console.WriteLine("");
 
+            // **********************
             // Test cases for part 2.
+            // **********************
             content = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"; // Max thruster signal 139629729 (from phase setting sequence 9,8,7,6,5)
             phaseSettings = new string[] { "9", "8", "7", "6", "5" };
 
             instructions = content.Split(",");
 
+            // Test phase: just try one series.
+            AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
+            string outputTest = amplifiers.RunFeedbackLoop("0");
+            Console.WriteLine("Output of part 2 test: " + outputTest);
+
+        //    // Calculate maximum output based on algorithm defined in day 7 part 2. 
+        //    outputs = CalculateMaximumOutputPart2(instructions, 5);
+        //    maxSignal = (int)outputs[0];
+        //    maxPhaseSettings = (string[])outputs[1];
+
+        //    // Spit out summary.
+        //    Console.WriteLine("maximum signal: " + maxSignal.ToString());
+        //    Console.Write("maximum phase settings: ");
+        //    foreach (string phaseSetting in maxPhaseSettings) {
+        //        Console.Write(" " + phaseSetting);
+        //    }
+        //    Console.WriteLine("");
         }
     }
 }
