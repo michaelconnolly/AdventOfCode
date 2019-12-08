@@ -12,7 +12,8 @@ namespace AdventOfCode2019 {
             //Day3();
             //Day4();
             //Day5();
-            Day6();
+            //Day6();
+            Day7();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -711,6 +712,357 @@ namespace AdventOfCode2019 {
 
             int distance = you.orbitalParent.DoYouHavePathTo(santa, you);
             Console.WriteLine("distance: " + distance.ToString());
+        }
+
+        //static string Amplifier(string[] instructions, string phaseSetting, string inputSignal) {
+
+        //    //string[] instructions = (string[]) instructionsInput.Clone();
+
+        //    //instructions[0] = phaseSetting;
+        //    //instructions[1] = inputSignal;
+
+        //    //string output = Day7_Intcode(instructions, phaseSetting, inputSignal);
+
+        //    object[] returnObject = Day7_Intcode(instructions, phaseSetting, inputSignal);
+        //    string output1 = (string)returnObject[0];
+        //    string[] instructionsModified1 = (string[])returnObject[1];
+        //    return output1;
+
+
+
+        //    //object[] returnObject = Day7_Intcode(instructions, phaseSetting);
+        //    //string output1 = (string) returnObject[0];
+        //    //string[] instructionsModified1 = (string[]) returnObject[1];
+
+        //    //returnObject = Day7_Intcode(instructionsModified1, inputSignal);
+        //    //string output2 = (string)returnObject[0];
+        //    //string[] instructionsModified2 = (string[])returnObject[1];
+        //    //return output2;
+        //}
+
+
+
+        //static string AmplifierSeries(string phaseSettingA, int phaseSettingB, int phaseSettingC, int phaseSettingD, int phaseSettingE) {
+        static string AmplifierSeries(string[] instructions, string[] phaseSettings) {
+
+            string input = "0";
+
+            for (int i = 0; i < phaseSettings.Length; i++) {
+
+                // input = Amplifier(instructions, phaseSettings[i], input);
+                input = new Amplifier(instructions, phaseSettings[i], input).Run();
+            }
+
+            return input;
+        }
+
+        static object[] CalculateMaximumOutput(string[] instructions, int startPhaseSetting) {
+
+            int maxSignal = int.MinValue;
+            string[] maxPhaseSettings = new string[] { };
+
+            for (int a = startPhaseSetting; a < startPhaseSetting + 5; a++) {
+                for (int b = startPhaseSetting; b < startPhaseSetting + 5; b++) {
+                    for (int c = startPhaseSetting; c < startPhaseSetting + 5; c++) {
+                        for (int d = startPhaseSetting; d < startPhaseSetting + 5; d++) {
+                            for (int e = startPhaseSetting; e < startPhaseSetting + 5; e++) {
+
+                                // if this collection of phaseSettings unique, i.e., each setting only used once?
+                                string[] phaseSettings = new string[] { a.ToString(), b.ToString(), c.ToString(), d.ToString(), e.ToString() };
+                                HashSet<string> phaseSettingsSet = new HashSet<string>(phaseSettings);
+                                bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
+
+                                if (isUnique) {
+                                    string output = AmplifierSeries(instructions, phaseSettings);
+                                    int outputValue = Convert.ToInt32(output);
+
+                                    if (outputValue > maxSignal) {
+                                        maxSignal = outputValue;
+                                        maxPhaseSettings = phaseSettings;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return new object[] { maxSignal, maxPhaseSettings };
+        }
+
+        public static object[] Day7_Intcode(string[] instructionsInput, string phaseSetting, string inputSignal) {
+
+            // Opcodes(like 1, 2, or 99) mark the beginning of an instruction. The values used immediately after an opcode, if any, are called the instruction's
+            // parameters. For example, in the instruction 1,2,3,4, 1 is the opcode; 2, 3, and 4 are the parameters. The instruction 99 contains only an opcode
+            // and has no parameters.
+
+            string[] instructions = (string[])instructionsInput.Clone();
+            string output = "";
+            int i = 0;
+
+            //instructions[1] = input;
+            //instructions[3] = input2;
+            //i += 2;
+
+            //// Display the file contents.
+            //Console.WriteLine("Contents of file = ");
+            //foreach (string opCode in instructions) {
+            //    Console.WriteLine("\t" + opCode);
+            //}
+            //int numberOfOpCodes = instructions.Length;
+            //Console.WriteLine("Total number of opCodes: " + numberOfOpCodes.ToString());
+
+            bool keepGoing = true;
+            int processedInputCount = 0;
+
+            while (keepGoing) {
+
+                // Grab opCode
+                string instruction = instructions[i].PadLeft(5, '0');
+                int opCode = Convert.ToInt32(instruction.Substring(instruction.Length - 2));
+
+                int parameterMode1 = Convert.ToInt32(instruction.Substring(instruction.Length - 3, 1));
+                int parameterMode2 = Convert.ToInt32(instruction.Substring(instruction.Length - 4, 1));
+                int parameterMode3 = Convert.ToInt32(instruction.Substring(instruction.Length - 5, 1));
+
+                int value1, value2, value3, value3Location;
+
+                switch (opCode) {
+
+                    case 1:
+
+                        // Opcode 1 adds together numbers read from two positions and stores the result in a third position.The three integers immediately after the opcode
+                        // tell you these three positions -the first two indicate the positions from which you should read the input values, and the third indicates the position
+                        // at which the output should be stored.
+
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 + value2;
+                        instructions[value3Location] = (value3).ToString();
+
+                        i += 4;
+                        break;
+
+                    case 2:
+
+                        // Opcode 2 works exactly like opcode 1, except it multiplies the two inputs instead of adding them. Again, the three integers after the opcode indicate
+                        // where the inputs and outputs are, not their values.
+
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 * value2;
+                        instructions[value3Location] = (value3).ToString();
+
+                        i += 4;
+                        break;
+
+                    case 3:
+
+                        string inputToUse;
+                        if (processedInputCount == 0) {
+                            inputToUse = phaseSetting;
+                        }
+                        //else if (processedInputCount == 1) {
+                        //    inputToUse = inputSignal;
+                        //}
+                        else {
+                            inputToUse = inputSignal;
+                            //Console.WriteLine("ERROR! Inside opCode 3: called more than 2 times.");
+                        }
+                        processedInputCount++;
+
+                        // Opcode 3 takes a single integer as input and saves it to the address given by its only parameter.For example, the instruction 3,50 would take an input value and store it at address 50.
+                        // We should never get a parameterMode1 == 1 for case 3.
+                        if (parameterMode1 == 1) {
+                            Console.WriteLine("ERROR! Received parameterMode==1 in OpCode 3.  Ignoring.");
+                        }
+
+                        int valueLocation1 = Convert.ToInt32(instructions[(i + 1)]);
+                        instructions[valueLocation1] = inputToUse;
+
+                        i += 2;
+                        break;
+
+                    case 4:
+
+                        // Opcode 4 outputs the value of its only parameter.For example, the instruction 4,50 would output the value at address 50.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        output = value1.ToString();
+
+                        i += 2;
+                        break;
+
+                    case 5:
+
+                        // Opcode 5 is jump -if-true: if the first parameter is non - zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        if (value1 != 0) {
+                            i = value2;
+                        }
+                        else {
+                            i += 3;
+                        }
+
+                        break;
+
+                    case 6:
+
+                        // Opcode 6 is jump -if-false: if the first parameter is zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        if (value1 == 0) {
+                            i = value2;
+                        }
+                        else {
+                            i += 3;
+                        }
+
+                        break;
+
+                    case 7:
+
+                        // Opcode 7 is less than: if the first parameter is less than the second parameter, it stores 1 in the position given by the third parameter. Otherwise, it stores 0.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+                        if (value1 < value2) {
+                            instructions[value3Location] = "1";
+                        }
+                        else {
+                            instructions[value3Location] = "0";
+                        }
+
+                        i += 4;
+                        break;
+
+                    case 8:
+
+                        //  Opcode 8 is equals: if the first parameter is equal to the second parameter, it stores 1 in the position given by the third parameter.Otherwise, it stores 0.
+                        value1 = Day5_GetValue(instructions, (i + 1), parameterMode1);
+                        value2 = Day5_GetValue(instructions, (i + 2), parameterMode2);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+                        if (value1 == value2) {
+                            instructions[value3Location] = "1";
+                        }
+                        else {
+                            instructions[value3Location] = "0";
+                        }
+
+                        i += 4;
+                        break;
+
+                    case 99:
+
+                        keepGoing = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("ERROR: illegal opcode: " + opCode);
+                        break;
+                }
+            }
+
+            //Console.WriteLine("Final list:");
+            //foreach (string opCode in instructions) {
+            //    Console.WriteLine("\t" + opCode);
+            //}
+
+            //Console.WriteLine("Phase Setting: " + phaseSetting);
+            //Console.WriteLine("Input: " + inputSignal);
+            //Console.WriteLine("Output: " + output);
+            //Console.WriteLine("Final value in position 0: " + instructions[0]);
+
+            //return instructions;
+            object[] returnObject = new object[] { output, instructions };
+            return returnObject;
+            //returnObject[0] = outputSignal;
+            //returnObject[1] = instructions;
+            //return new object[] = {[outputSignal, instructions] };
+        }
+
+
+        static void Day7() {
+
+            string content;
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day7_input.txt";
+            content = System.IO.File.ReadAllText(fileName);
+            string[] phaseSettings; // = new string[] { };
+            string output ;
+
+            // Test cases for part1.
+            //content = "3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0"; // Max thruster signal 43210 (from phase setting sequence 4,3,2,1,0)
+            //phaseSettings = new string[] { "4", "3", "2", "1", "0" };
+            // --
+            //content = "3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0"; // Max thruster signal 54321 (from phase setting sequence 0,1,2,3,4)
+            //phaseSettings = new string[] { "0", "1", "2", "3", "4" };
+            // --
+            //content = "3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0"; // Max thruster signal 65210 (from phase setting sequence 1,0,4,3,2)
+            //phaseSettings = new string[] { "1", "0", "4", "3", "2" };
+
+
+            string[] instructions = content.Split(",");
+
+            // Let's try one amplifier.
+            //string output = Amplifier(instructions, "4", "0");
+            //Console.WriteLine("output of one Amplifier: " + output.ToString());
+
+            // Day 5 - actual running of program.
+            //string output = Day7_Intcode(instructions, input);
+
+            //output = AmplifierSeries(instructions, phaseSettings);
+            //Console.WriteLine("output of Amplifier series: " + output.ToString());
+
+            object[] outputs = CalculateMaximumOutput(instructions, 0);
+            int maxSignal = (int) outputs[0];
+            string[] maxPhaseSettings = (string[])outputs[1];
+
+            //int maxSignal = int.MinValue;
+            //string[] maxPhaseSettings = new string[] { };
+            //for (int a = 0; a < 5; a++) {
+            //    for (int b = 0; b < 5; b++) {
+            //        for (int c = 0; c < 5; c++) {
+            //            for (int d = 0; d < 5; d++) {
+            //                for (int e = 0; e < 5; e++) {
+
+            //                    // are the values only used once?
+            //                    //return myArray.length === new HashSet<string>(my)
+
+            //                    phaseSettings = new string[] { a.ToString(), b.ToString(), c.ToString(), d.ToString(), e.ToString() };
+            //                    HashSet<string> phaseSettingsSet = new HashSet<string>(phaseSettings);
+            //                    bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
+            //                    if (isUnique) {
+            //                        output = AmplifierSeries(instructions, phaseSettings);
+            //                        int outputValue = Convert.ToInt32(output);
+
+            //                        if (outputValue > maxSignal) {
+            //                            maxSignal = outputValue;
+            //                            maxPhaseSettings = phaseSettings;
+            //                        }
+            //                    }
+            //                    //maxSignal = (outputValue > maxSignal ? outputValue : maxSignal);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            Console.WriteLine("maximum signal: " + maxSignal.ToString());
+
+            Console.Write("maximum phase settings: ");
+            foreach (string phaseSetting in maxPhaseSettings) {
+                Console.Write(" " + phaseSetting);
+            }
+            Console.WriteLine("");
+
+            // Test cases for part 2.
+            content = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"; // Max thruster signal 139629729 (from phase setting sequence 9,8,7,6,5)
+            phaseSettings = new string[] { "9", "8", "7", "6", "5" };
+
+            instructions = content.Split(",");
+
         }
     }
 }
