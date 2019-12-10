@@ -14,7 +14,8 @@ namespace AdventOfCode2019 {
             //Day5();
             //Day6();
             //Day7();
-            Day8();
+            //Day8();
+            Day9();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -921,7 +922,7 @@ namespace AdventOfCode2019 {
             image.PrintOut();
 
             // Output for Part 1.
-            Console.WriteLine("Day 7, Part 1:");
+            Console.WriteLine("Day 8, Part 1:");
             int countOfOnes = layerWithLeastZeros.HowMany('1');
             int countOfTwos = layerWithLeastZeros.HowMany('2');
             int answer = countOfOnes * countOfTwos;
@@ -933,6 +934,263 @@ namespace AdventOfCode2019 {
             Console.WriteLine("Day 8, Part 2:");
             ImageLayer visibleLayer = image.VisibleLayer();
             visibleLayer.PrintOutJustWhite();
+        }
+
+        static void SetValue(string[] instructions, string value, long index, int parameterMode, long relativeBase) {
+
+            long indexToUse = index;
+
+            if (parameterMode == 2) {
+                indexToUse += relativeBase;
+            }
+
+            instructions[indexToUse] = value;
+        }
+
+        static long GetValue(string[] instructions, long index, int parameterMode, long relativeBase) {
+
+            long parameterInt = Convert.ToInt64(instructions[index]);
+
+            if (parameterMode == 0) {
+                return Convert.ToInt64(instructions[parameterInt]);
+            }
+            else if (parameterMode == 1) {
+                return parameterInt;
+            }
+            else if (parameterMode == 2) {
+                // Parameters in mode 2, relative mode, behave very similarly to parameters in position mode: the parameter is interpreted as a position.
+                // Like position mode, parameters in relative mode can be read from or written to.
+                // The important difference is that relative mode parameters don't count from address 0. Instead, they count from a value called 
+                // the relative base. The relative base starts at 0.
+                // The address a relative mode parameter refers to is itself plus the current relative base.When the relative base is 0, relative mode 
+                // parameters and position mode parameters with the same value refer to the same address.
+                long address = relativeBase + parameterInt;
+                return Convert.ToInt32(instructions[address]);
+            }
+            else {
+                Console.WriteLine("ERROR!  Unknown parameter mode!");
+                return -1;
+            }
+        }
+
+        static string Day9_IntcodeProgram(string[] instructionsInput, string input) {
+
+            // The computer's available memory should be much larger than the initial program. Memory beyond the initial program starts with
+            // the value 0 and can be read or written like any other memory. (It is invalid to try to access memory at a negative address, though.)
+            //string[] instructions = (string[])instructionsInput.Clone();
+            string[] instructions = new string[10000];
+            for (int index = 0; index < instructions.Length; index++) {
+                instructions.SetValue("0", index);
+            }
+            for (int index = 0; index < instructionsInput.Length; index++) {
+                instructions.SetValue(instructionsInput[index], index);
+            }
+
+            string output = "";
+            long i = 0;
+            long relativeBase = 0;
+            bool keepGoing = true;
+
+            while (keepGoing) {
+
+                // Grab opCode
+                string instruction = instructions[i].PadLeft(5, '0');
+                int opCode = Convert.ToInt32(instruction.Substring(instruction.Length - 2));
+                int parameterMode1 = Convert.ToInt32(instruction.Substring(instruction.Length - 3, 1));
+                int parameterMode2 = Convert.ToInt32(instruction.Substring(instruction.Length - 4, 1));
+                int parameterMode3 = Convert.ToInt32(instruction.Substring(instruction.Length - 5, 1));
+
+                long value1, value2, value3, value3Location;
+
+                // Useful for testing, but slows down execution, especially for part 2.
+                // Console.WriteLine("\topCode: " + opCode + "; current output: " + output);
+
+                switch (opCode) {
+
+                    case 1:
+
+                        // Opcode 1 adds together numbers read from two positions and stores the result in a third position.The three integers immediately after the opcode
+                        // tell you these three positions -the first two indicate the positions from which you should read the input values, and the third indicates the position
+                        // at which the output should be stored.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 + value2;
+                        SetValue(instructions, value3.ToString(), value3Location, parameterMode3, relativeBase);
+
+                        i += 4;
+                        break;
+
+                    case 2:
+
+                        // Opcode 2 works exactly like opcode 1, except it multiplies the two inputs instead of adding them. Again, the three integers after the opcode indicate
+                        // where the inputs and outputs are, not their values.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        value3Location = Convert.ToInt32(instructions[i + 3]);
+                        value3 = value1 * value2;
+                        SetValue(instructions, value3.ToString(), value3Location, parameterMode3, relativeBase);
+
+                        i += 4;
+                        break;
+
+                    case 3:
+                       
+                        // Opcode 3 takes a single integer as input and saves it to the address given by its only parameter.For example, the instruction 3,50 would take an input value and store it at address 50.
+                        // We should never get a parameterMode1 == 1 for case 3.
+
+                        if (parameterMode1 == 1) {
+                            Console.WriteLine("ERROR! Received parameterMode==1 in OpCode 3.  Ignoring.");
+                        }
+
+                        long valueLocation1 = Convert.ToInt32(instructions[(i + 1)]);
+                        SetValue(instructions, input, valueLocation1, parameterMode1, relativeBase);
+
+                        i += 2;
+                        break;
+
+                    case 4:
+
+                        // Opcode 4 outputs the value of its only parameter.For example, the instruction 4,50 would output the value at address 50.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        output = value1.ToString();
+
+                        // If we are in feedback loop mode, tell our AmplifierSeries parent that we changed our output.
+                        //int setting = Convert.ToInt32(this.phaseSetting);
+                        //if (setting >= 5 && setting <= 9) {
+                        //    this.amplifierSeries.AmplifierChangedOutput(this, this.outputSignal);
+                        //}
+
+                        i += 2;
+                        break;
+
+                    case 5:
+
+                        // Opcode 5 is jump -if-true: if the first parameter is non - zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        if (value1 != 0) {
+                            i = value2;
+                        }
+                        else {
+                            i += 3;
+                        }
+
+                        break;
+
+                    case 6:
+
+                        // Opcode 6 is jump -if-false: if the first parameter is zero, it sets the instruction pointer to the value from the second parameter.Otherwise, it does nothing.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        if (value1 == 0) {
+                            i = value2;
+                        }
+                        else {
+                            i += 3;
+                        }
+
+                        break;
+
+                    case 7:
+
+                        // Opcode 7 is less than: if the first parameter is less than the second parameter, it stores 1 in the position given by the third parameter. Otherwise, it stores 0.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+
+                        if (value1 < value2) {
+                            SetValue(instructions, "1", value3Location, parameterMode3, relativeBase);
+                        }
+                        else {
+                            SetValue(instructions, "0", value3Location, parameterMode3, relativeBase);
+                        }
+
+                        i += 4;
+                        break;
+
+                    case 8:
+
+                        //  Opcode 8 is equals: if the first parameter is equal to the second parameter, it stores 1 in the position given by the third parameter.
+                        // Otherwise, it stores 0.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        value2 = GetValue(instructions, (i + 2), parameterMode2, relativeBase);
+                        value3Location = Convert.ToInt32(instructions[(i + 3)]);
+                        if (value1 == value2) {
+                            SetValue(instructions, "1", value3Location, parameterMode3, relativeBase);
+                        }
+                        else {
+                            SetValue(instructions, "0", value3Location, parameterMode3, relativeBase);
+                        }
+
+                        i += 4;
+                        break;
+
+                    case 9:
+
+                        // Opcode 9 adjusts the relative base by the value of its only parameter. 
+                        // The relative base increases (or decreases, if the value is negative) by the value of the parameter.
+
+                        value1 = GetValue(instructions, (i + 1), parameterMode1, relativeBase);
+                        relativeBase += Convert.ToInt32(value1);
+
+                        i += 2;
+                        break;
+
+                    case 99:
+
+                        keepGoing = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("ERROR: illegal opcode: " + opCode);
+                        break;
+                }
+            }
+
+            return output;
+        }
+
+        static void Day9() {
+
+            string content;
+            string input;
+            string output;
+
+            // Main content to run through the program.
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day9_input.txt";
+            content = System.IO.File.ReadAllText(fileName);
+            input = "1";
+
+            // Test cases for part1.
+            //content = "109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99"; // takes no input and produces a copy of itself as output.
+            //content = "1102,34915192,34915192,7,4,7,99,0"; // should output a 16 - digit number.
+            //content = "104,1125899906842624,99"; //  should output the large number in the middle.
+
+            //content = "109,2000,3,1985,109,19,204,-34,99"; //For example, if the relative base is 2000, then after the instruction 109,19, the relative base would be 2019.If the next instruction were 204,-34, then the value at address 1985 would be output.
+            //input = "69";
+
+            string[] instructions = content.Split(",");
+
+            // Output for Part 1.
+            output = Day9_IntcodeProgram(instructions, input);
+            Console.WriteLine("Day 9, Part 1:");
+            Console.WriteLine("\tInput: " + input);
+            Console.WriteLine("\tOutput: " + output);
+
+            // Part 2.
+            input = "2";
+            output = Day9_IntcodeProgram(instructions, input);
+            Console.WriteLine("Day 8, Part 2:");
+            Console.WriteLine("\tInput: " + input);
+            Console.WriteLine("\tOutput: " + output);
         }
     }
 }
