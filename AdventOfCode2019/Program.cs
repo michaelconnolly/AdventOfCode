@@ -13,9 +13,10 @@ namespace AdventOfCode2019 {
             //Day4();
             //Day5();
             //Day6();
-            //Day7();
+            Day7();
             //Day8();
-            Day9();
+            //Day9();
+            //Day10();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -716,49 +717,7 @@ namespace AdventOfCode2019 {
             Console.WriteLine("distance: " + distance.ToString());
         }
 
-        //static string Amplifier(string[] instructions, string phaseSetting, string inputSignal) {
-
-        //    //string[] instructions = (string[]) instructionsInput.Clone();
-
-        //    //instructions[0] = phaseSetting;
-        //    //instructions[1] = inputSignal;
-
-        //    //string output = Day7_Intcode(instructions, phaseSetting, inputSignal);
-
-        //    object[] returnObject = Day7_Intcode(instructions, phaseSetting, inputSignal);
-        //    string output1 = (string)returnObject[0];
-        //    string[] instructionsModified1 = (string[])returnObject[1];
-        //    return output1;
-
-
-
-        //    //object[] returnObject = Day7_Intcode(instructions, phaseSetting);
-        //    //string output1 = (string) returnObject[0];
-        //    //string[] instructionsModified1 = (string[]) returnObject[1];
-
-        //    //returnObject = Day7_Intcode(instructionsModified1, inputSignal);
-        //    //string output2 = (string)returnObject[0];
-        //    //string[] instructionsModified2 = (string[])returnObject[1];
-        //    //return output2;
-        //}
-
-
-
-        //static string AmplifierSeries(string phaseSettingA, int phaseSettingB, int phaseSettingC, int phaseSettingD, int phaseSettingE) {
-        //static string AmplifierSeries(string[] instructions, string[] phaseSettings) {
-
-        //    string input = "0";
-
-        //    for (int i = 0; i < phaseSettings.Length; i++) {
-
-        //        // input = Amplifier(instructions, phaseSettings[i], input);
-        //        input = new Amplifier(instructions, phaseSettings[i], input).Run();
-        //    }
-
-        //    return input;
-        //}
-
-        static object[] CalculateMaximumOutput(string[] instructions, int startPhaseSetting) {
+        static object[] CalculateMaximumOutput(string[] instructions, int startPhaseSetting, bool feedbackMode) {
 
             int maxSignal = int.MinValue;
             string[] maxPhaseSettings = new string[] { };
@@ -777,48 +736,19 @@ namespace AdventOfCode2019 {
                                 if (isUnique) {
 
                                     AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
-                                    string output = amplifiers.Run("0");
-                                    // output = AmplifierSeries(instructions, phaseSettings);
-                                    int outputValue = Convert.ToInt32(output);
+                                    string output;
 
-                                    if (outputValue > maxSignal) {
-                                        maxSignal = outputValue;
-                                        maxPhaseSettings = phaseSettings;
+                                    if (!feedbackMode) {
+                                        output = amplifiers.Run("0");
                                     }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            return new object[] { maxSignal, maxPhaseSettings };
-        }
-
-
-        static object[] CalculateMaximumOutputPart2(string[] instructions, int startPhaseSetting) {
-
-            int maxSignal = int.MinValue;
-            string[] maxPhaseSettings = new string[] { };
-
-            for (int a = startPhaseSetting; a < startPhaseSetting + 5; a++) {
-                for (int b = startPhaseSetting; b < startPhaseSetting + 5; b++) {
-                    for (int c = startPhaseSetting; c < startPhaseSetting + 5; c++) {
-                        for (int d = startPhaseSetting; d < startPhaseSetting + 5; d++) {
-                            for (int e = startPhaseSetting; e < startPhaseSetting + 5; e++) {
-
-                                // if this collection of phaseSettings unique, i.e., each setting only used once?
-                                string[] phaseSettings = new string[] { a.ToString(), b.ToString(), c.ToString(), d.ToString(), e.ToString() };
-                                HashSet<string> phaseSettingsSet = new HashSet<string>(phaseSettings);
-                                bool isUnique = phaseSettings.Length == phaseSettingsSet.Count;
-
-                                if (isUnique) {
-                                    //string output = AmplifierSeries(instructions, phaseSettings);
-                                    AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
-                                    string output = amplifiers.RunFeedbackLoop("0");
+                                    else {
+                                        output = amplifiers.RunFeedbackLoop("0");
+                                    }
                                     int outputValue = Convert.ToInt32(output);
 
-                                    if (outputValue > maxSignal) {
+                                    //if (outputValue > maxSignal) {
+                                    if ((outputValue > maxSignal) && outputValue != -2) {
+
                                         maxSignal = outputValue;
                                         maxPhaseSettings = phaseSettings;
                                     }
@@ -838,6 +768,7 @@ namespace AdventOfCode2019 {
             string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day7_input.txt";
             content = System.IO.File.ReadAllText(fileName);
             string[] phaseSettings;
+            string[] instructions = content.Split(",");
 
             // Test cases for part1.
             //content = "3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0"; // Max thruster signal 43210 (from phase setting sequence 4,3,2,1,0)
@@ -848,15 +779,15 @@ namespace AdventOfCode2019 {
             // --
             //content = "3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0"; // Max thruster signal 65210 (from phase setting sequence 1,0,4,3,2)
             //phaseSettings = new string[] { "1", "0", "4", "3", "2" };
-
-            string[] instructions = content.Split(",");
+            //instructions = content.Split(",");
 
             // Calculate maximum output based on algorithm defined in day 7 part 1.
-            object[] outputs = CalculateMaximumOutput(instructions, 0);
+            object[] outputs = CalculateMaximumOutput(instructions, 0, false);
             int maxSignal = (int)outputs[0];
             string[] maxPhaseSettings = (string[])outputs[1];
 
             // Spit out summary.
+            Console.WriteLine("Day 7, Part 1:");
             Console.WriteLine("maximum signal: " + maxSignal.ToString());
             Console.Write("maximum phase settings: ");
             foreach (string phaseSetting in maxPhaseSettings) {
@@ -867,28 +798,30 @@ namespace AdventOfCode2019 {
             // **********************
             // Test cases for part 2.
             // **********************
-            content = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"; // Max thruster signal 139629729 (from phase setting sequence 9,8,7,6,5)
-            phaseSettings = new string[] { "9", "8", "7", "6", "5" };
-
-            instructions = content.Split(",");
+            //content = "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"; // Max thruster signal 139629729 (from phase setting sequence 9,8,7,6,5)
+            //phaseSettings = new string[] { "9", "8", "7", "6", "5" };
+            //content = "3,52,1001,52,-5,52,3,53,1,52,56,54,1007,54,5,55,1005,55,26,1001,54,-5,54,1105,1,12,1,53,54,53,1008,54,0,55,1001,55,1,55,2,53,55,53,4,53,1001,56,-1,56,1005,56,6,99,0,0,0,0,10";  // Max thruster signal 18216 (from phase setting sequence 9,7,8,5,6)
+            //phaseSettings = new string[] { "9", "7", "8", "5", "6" };
+            //instructions = content.Split(",");
 
             // Test phase: just try one series.
-            AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
-            string outputTest = amplifiers.RunFeedbackLoop("0");
-            Console.WriteLine("Output of part 2 test: " + outputTest);
+            //AmplifierSeries amplifiers = new AmplifierSeries(instructions, phaseSettings);
+            //string outputTest = amplifiers.RunFeedbackLoop("0");
+            //Console.WriteLine("Output of part 2 test: " + outputTest);
 
-            //    // Calculate maximum output based on algorithm defined in day 7 part 2. 
-            //    outputs = CalculateMaximumOutputPart2(instructions, 5);
-            //    maxSignal = (int)outputs[0];
-            //    maxPhaseSettings = (string[])outputs[1];
+            // Calculate maximum output based on algorithm defined in day 7 part 2.
+            outputs = CalculateMaximumOutput(instructions, 5, true);
+            maxSignal = (int)outputs[0];
+            maxPhaseSettings = (string[])outputs[1];
 
-            //    // Spit out summary.
-            //    Console.WriteLine("maximum signal: " + maxSignal.ToString());
-            //    Console.Write("maximum phase settings: ");
-            //    foreach (string phaseSetting in maxPhaseSettings) {
-            //        Console.Write(" " + phaseSetting);
-            //    }
-            //    Console.WriteLine("");
+            // Spit out summary.
+            Console.WriteLine("Day 7, Part 2:");
+            Console.WriteLine("maximum signal: " + maxSignal.ToString());
+            Console.Write("maximum phase settings: ");
+            foreach (string phaseSetting in maxPhaseSettings) {
+                Console.Write(" " + phaseSetting);
+            }
+            Console.WriteLine("");
         }
 
         static void Day8() {
@@ -1191,6 +1124,107 @@ namespace AdventOfCode2019 {
             Console.WriteLine("Day 8, Part 2:");
             Console.WriteLine("\tInput: " + input);
             Console.WriteLine("\tOutput: " + output);
+        }
+
+
+        public static int gcd(int aInput, int bInput) {
+
+            int a = Math.Abs(aInput);
+            int b = Math.Abs(bInput);
+
+            if (a == 0 || b == 0) {
+                return 1;
+            }
+
+            while (a != b)
+                if (a < b) b = b - a;
+                else a = a - b;
+            //since at this point a=b, the gcd can be either of them
+            //it is necessary to pass the gcd to the main function
+            //Console.WriteLine(aInput + ";" + bInput + ": " + a);
+            return (a);
+        }
+
+
+        static void Day10() {
+
+            string contentRaw;
+            string[] content;
+            int bestRow;
+            int bestCol;
+            
+            // Main content to run through the program.
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day10_input.txt";
+            content = System.IO.File.ReadAllLines(fileName);
+
+            // Test cases for part1.
+            //contentRaw = ".#..#\n.....\n#####\n....#\n...##"; // 3,4 because it can detect 8 asteroids
+            //contentRaw = ".##.#\n..#..\n#####\n..#.#\n..###";
+            contentRaw = "#.........\n...#......\n...#..#...\n.####....#\n..#.#.#...\n.....#....\n..###.#.##\n.......#..\n....#...#.\n...#..#..#";
+            //contentRaw = "......#.#.\n#..#.#....\n..#######.\n.#.#.###..\n.#..#.....\n..#....#.#\n#..#....#.\n.##.#..###\n##...#..#.\n.#....####"; // Best is 5,8 with 33 other asteroids detected
+            //contentRaw = "#.#...#.#.\n.###....#.\n.#....#...\n##.#.#.#.#\n....#.#.#.\n.##..###.#\n..#...##..\n..##....##\n......#...\n.####.###."; // Best is 1,2 with 35 other asteroids detected
+            //contentRaw = ".#..#..###\n####.###.#\n....###.#.\n..###.##.#\n##.##.#.#.\n....###..#\n..#.#..#.#\n#..#.#.###\n.##...##.#\n.....#.#.."; // Best is 6,3 with 41 other asteroids detected
+            //contentRaw = ".#..##.###...#######\n##.############..##.\n.#.######.########.#\n.###.#######.####.#.\n#####.##.#.##.###.##\n..#####..#.#########\n####################\n#.####....###.#.#.##\n##.#################\n#####.##.###..####..\n..######..##.#######\n####.##.####...##..#\n.#####..#.######.###\n##...#.##########...\n#.##########.#######\n.####.#.###.###.#.##\n....##.##.###..#####\n.#.#.###########.###\n#.#.#.#####.####.###\n###.##.####.##.#..##"; // Best is 11,13 with 210 other asteroids detected:
+            // Test data for Part 2.
+            //contentRaw = ".#....#####...#..\n##...##.#####..##\n##...#...#.#####.\n..#.....#...###..\n..#.#.....#....##";
+            content = contentRaw.Split("\n");
+
+            // Create asteroidMap.
+            AsteroidMap asteroidMap = new AsteroidMap(content, null);
+            asteroidMap.PrintOut();
+
+            // Part 1.
+            Console.WriteLine("Day 10, Part 1:");
+            asteroidMap.BestLocationForStation(out bestRow, out bestCol);
+            AsteroidMap visibilityMap = asteroidMap.VisibilityMap(bestRow, bestCol);
+            visibilityMap.PrintOut();
+
+            // Part 2.
+            Console.WriteLine("Day 10, Part 2:");
+            Console.WriteLine("Total amount of asteroids: " + asteroidMap.AsteroidCount());
+            List<Asteroid> asteroids = new List<Asteroid>();
+
+            //asteroidMap.BestLocationForStation(out bestRow, out bestCol);
+
+            //AsteroidMap visibilityMap = asteroidMap.VisibilityMap(bestRow, bestCol);
+            //visibilityMap.PrintOut();
+
+            // Logic for Part2:
+            // Until all asteroids are destroyed:
+            // 12 o'clock. any visible asteroid where col = 0 and row is negative.
+            // Between 12 and 6: all visible asteroids that have a positive col: destroy in ascending row/col order.
+            // 6 o'clock. any visible asteroid where col = 0 and row is positive.
+            // Between 6 adn 12: all visibile asteroids that have a negative col: destroy in ascending row/col order.
+
+            //List<Asteroid> asteroids12;
+            //List<Asteroid> asteroids12to6;
+            //List<Asteroid> asteroids6;
+            //List<Asteroid> asteroids6to12;
+            //visibilityMap.ListOfVisibleAsteroids(out asteroids12, out asteroids12to6, out asteroids6, out asteroids6to12);
+
+            int asteroidCount = asteroidMap.AsteroidCount();
+
+            while (asteroidCount > 1) {
+
+                // Get the current list of visibile asteroids in the right order, and add them to our list.
+                List<Asteroid> asteroidsThisWave = visibilityMap.ListOfVisibleAsteroids();
+                asteroids.AddRange(asteroidsThisWave);
+
+                // Destroy all visibile asteroids, and reset invisibility asteroids to be plain asteroids.
+                visibilityMap.DestroyVisibileAndReset();
+
+                // Reset the count of remaining asteroids.
+                asteroidCount = visibilityMap.AsteroidCount();
+
+                // Figure out the next wave of visibile and invisible asteroids. 
+                visibilityMap = visibilityMap.VisibilityMap(bestRow, bestCol);
+                visibilityMap.PrintOut();
+            }
+
+            // Print out list of asteroids destroyed in order.
+            for (int i= 0; i < asteroids.Count; i++) { 
+                Console.WriteLine("asteroid " + (i+1) + ": value: " + asteroids[i].col + "," + asteroids[i].row);
+            }
         }
     }
 }

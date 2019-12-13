@@ -10,7 +10,8 @@ namespace AdventOfCode2019 {
         string inputSignal = int.MinValue.ToString();
         string outputSignal = int.MinValue.ToString();
         bool processedPhaseSetting = false;
-        AmplifierSeries amplifierSeries = null;
+        AmplifierSeries amplifierSeries;
+        int instructionPointer = 0;
 
         public int runCount = 0;
         public bool currentlyRunning = false;
@@ -43,35 +44,16 @@ namespace AdventOfCode2019 {
             this.currentlyRunning = true;
             this.inputSignal = inputSignal;
             this.outputSignal = this.IntcodeProgram();
-            this.currentlyRunning = false;
+            //this.currentlyRunning = false;
             this.runCount++;
            
             return this.outputSignal;
         }
+
         private string IntcodeProgram() {
 
-            // Opcodes(like 1, 2, or 99) mark the beginning of an instruction. The values used immediately after an opcode, if any, are called the instruction's
-            // parameters. For example, in the instruction 1,2,3,4, 1 is the opcode; 2, 3, and 4 are the parameters. The instruction 99 contains only an opcode
-            // and has no parameters.
-
-            //string[] instructions = (string[])instructionsInput.Clone();
-            //string output = "";
-            int i = 0;
-
-            //instructions[1] = input;
-            //instructions[3] = input2;
-            //i += 2;
-
-            //// Display the file contents.
-            //Console.WriteLine("Contents of file = ");
-            //foreach (string opCode in instructions) {
-            //    Console.WriteLine("\t" + opCode);
-            //}
-            //int numberOfOpCodes = instructions.Length;
-            //Console.WriteLine("Total number of opCodes: " + numberOfOpCodes.ToString());
-
+            int i = instructionPointer;
             bool keepGoing = true;
-            //int processedInputCount = 0;
 
             while (keepGoing) {
 
@@ -145,17 +127,15 @@ namespace AdventOfCode2019 {
                         value1 = this.GetValue(instructions, (i + 1), parameterMode1);
                         this.outputSignal = value1.ToString();
 
-                        // If we are in feedback loop mode, tell our AmplifierSeries parent that we changed our output.
+                        i += 2;
+
+                        // Experimental Approach.
                         int setting = Convert.ToInt32(this.phaseSetting);
                         if (setting >= 5 && setting <= 9) {
-                            this.amplifierSeries.AmplifierChangedOutput(this, this.outputSignal);
+                            this.instructionPointer = i;
+                            return this.outputSignal;
                         }
 
-                        //if (this.phaseSetting in { 5..9}) {
-
-                        //}
-
-                        i += 2;
                         break;
 
                     case 5:
@@ -221,26 +201,31 @@ namespace AdventOfCode2019 {
                     case 99:
 
                         keepGoing = false;
+                        this.currentlyRunning = false;
+
+                        // Experimental Approach.
+                        setting = Convert.ToInt32(this.phaseSetting);
+                        if (setting >= 5 && setting <= 9) {
+                            this.instructionPointer = i;
+                            return "-1";
+                        }
+
+
                         break;
 
                     default:
-                        Console.WriteLine("ERROR: illegal opcode: " + opCode);
+
+                        // This might actually happen.  If so, bail!  The return value of -2 is special for this state.
+                        setting = Convert.ToInt32(this.phaseSetting);
+                        if (setting >= 5 && setting <= 9) {
+                            this.instructionPointer = i;
+                            return "-2";
+                        }
+
                         break;
                 }
             }
 
-            //Console.WriteLine("Final list:");
-            //foreach (string opCode in instructions) {
-            //    Console.WriteLine("\t" + opCode);
-            //}
-
-            //Console.WriteLine("Phase Setting: " + phaseSetting);
-            //Console.WriteLine("Input: " + inputSignal);
-            //Console.WriteLine("Output: " + output);
-            //Console.WriteLine("Final value in position 0: " + instructions[0]);
-
-            // object[] returnObject = new object[] { output, instructions };
-            //return returnObject;
             return this.outputSignal;
         }
     }

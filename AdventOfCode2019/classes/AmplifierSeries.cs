@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace AdventOfCode2019 {
+
     public class AmplifierSeries {
 
         string[] instructions;
@@ -25,61 +26,41 @@ namespace AdventOfCode2019 {
             // Run through them.
             for (int i = 0; i < this.amplifiers.Count; i++) {
                 input = this.amplifiers[i].Run(input);
-                // input = Amplifier(instructions, phaseSettings[i], input);
-                //input = new Amplifier(instructions, phaseSettings[i], input).Run();
             }
 
             return input;
         }
 
-        public void AmplifierChangedOutput(Amplifier amplifier, string outputValue) {
-
-            int nextAmplifier = -1; // whichAmplifierChanged++;
-            //if (nextAmplifier == 5) nextAmplifier = 0;
-
-            for (int i=0; i<this.amplifiers.Count; i++) {
-                if (this.amplifiers[i] == amplifier) {
-                    nextAmplifier = i++;
-                }
-            }
-
-            if (nextAmplifier == 5) nextAmplifier = 0;
-            if (nextAmplifier == -1) Console.WriteLine("ERROR: AmplifierChangedOutput: bad Amplifier id!");
-
-            this.amplifiers[nextAmplifier].ChangeInputValue(outputValue);
+        public void Assert(bool f, string warning) {
+            if (!f) Console.WriteLine(warning);
         }
 
         public string RunFeedbackLoop(string inputSignal) {
 
-            string input = inputSignal;
-            string output;
-
-            Console.WriteLine("Begin Part 2.");
-
-            for (int loopCount = 0; loopCount < 10; loopCount++) {
-
-                // Run through them.
-                for (int i = 0; i < this.amplifiers.Count; i++) {
-
-                    Console.WriteLine("\tStarting loop " + loopCount.ToString() + " amplifier " + i.ToString() + " ...");
-
-                    output = this.amplifiers[i].Run(input);
-                   
-                    Console.WriteLine("\tFinished loop " + loopCount.ToString() + " amplifier " + i.ToString() + " - input: " + input + "; output: " + output);
-
-                    input = output;
-
-                    // input = Amplifier(instructions, phaseSettings[i], input);
-                    //input = new Amplifier(instructions, phaseSettings[i], input).Run();
-                }
-
-                
+            // Assert that we have all amplifiers waiting to go.
+            for (int i = 0; i < this.amplifiers.Count; i++) {
+                this.Assert((!(this.amplifiers[i].currentlyRunning)), "ERROR! Amplifier " + i + " is running!");
             }
 
-            Console.WriteLine("End of Part 2: " + input);
+            string outputSignal = "-1";
+            int currentAmplifier = 0;
+            bool keepGoing = true;
 
-            return input;
+            while (keepGoing) {
+
+                string returnValue = this.amplifiers[currentAmplifier].Run(inputSignal);
+
+                // special case!  If return value = -2, and error occurred.
+                if (returnValue == "-2") return returnValue;
+
+                if (returnValue != "-1") outputSignal = returnValue;
+                inputSignal = outputSignal;
+                keepGoing = this.amplifiers[currentAmplifier].currentlyRunning;
+                currentAmplifier++;
+                if (currentAmplifier == this.amplifiers.Count) currentAmplifier = 0;
+            }
+
+            return outputSignal;
         }
-
     }
 }
