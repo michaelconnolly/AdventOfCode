@@ -13,10 +13,11 @@ namespace AdventOfCode2019 {
             //Day4();
             //Day5();
             //Day6();
-            Day7();
+            //Day7();
             //Day8();
             //Day9();
             //Day10();
+            Day11();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -869,7 +870,7 @@ namespace AdventOfCode2019 {
             visibleLayer.PrintOutJustWhite();
         }
 
-        static void SetValue(string[] instructions, string value, long index, int parameterMode, long relativeBase) {
+        public static void SetValue(string[] instructions, string value, long index, int parameterMode, long relativeBase) {
 
             long indexToUse = index;
 
@@ -880,7 +881,7 @@ namespace AdventOfCode2019 {
             instructions[indexToUse] = value;
         }
 
-        static long GetValue(string[] instructions, long index, int parameterMode, long relativeBase) {
+        public static long GetValue(string[] instructions, long index, int parameterMode, long relativeBase) {
 
             long parameterInt = Convert.ToInt64(instructions[index]);
 
@@ -898,7 +899,7 @@ namespace AdventOfCode2019 {
                 // The address a relative mode parameter refers to is itself plus the current relative base.When the relative base is 0, relative mode 
                 // parameters and position mode parameters with the same value refer to the same address.
                 long address = relativeBase + parameterInt;
-                return Convert.ToInt32(instructions[address]);
+                return Convert.ToInt64(instructions[address]);
             }
             else {
                 Console.WriteLine("ERROR!  Unknown parameter mode!");
@@ -970,7 +971,7 @@ namespace AdventOfCode2019 {
                         break;
 
                     case 3:
-                       
+
                         // Opcode 3 takes a single integer as input and saves it to the address given by its only parameter.For example, the instruction 3,50 would take an input value and store it at address 50.
                         // We should never get a parameterMode1 == 1 for case 3.
 
@@ -1152,7 +1153,7 @@ namespace AdventOfCode2019 {
             string[] content;
             int bestRow;
             int bestCol;
-            
+
             // Main content to run through the program.
             string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day10_input.txt";
             content = System.IO.File.ReadAllLines(fileName);
@@ -1160,14 +1161,14 @@ namespace AdventOfCode2019 {
             // Test cases for part1.
             //contentRaw = ".#..#\n.....\n#####\n....#\n...##"; // 3,4 because it can detect 8 asteroids
             //contentRaw = ".##.#\n..#..\n#####\n..#.#\n..###";
-            contentRaw = "#.........\n...#......\n...#..#...\n.####....#\n..#.#.#...\n.....#....\n..###.#.##\n.......#..\n....#...#.\n...#..#..#";
+            //contentRaw = "#.........\n...#......\n...#..#...\n.####....#\n..#.#.#...\n.....#....\n..###.#.##\n.......#..\n....#...#.\n...#..#..#";
             //contentRaw = "......#.#.\n#..#.#....\n..#######.\n.#.#.###..\n.#..#.....\n..#....#.#\n#..#....#.\n.##.#..###\n##...#..#.\n.#....####"; // Best is 5,8 with 33 other asteroids detected
             //contentRaw = "#.#...#.#.\n.###....#.\n.#....#...\n##.#.#.#.#\n....#.#.#.\n.##..###.#\n..#...##..\n..##....##\n......#...\n.####.###."; // Best is 1,2 with 35 other asteroids detected
             //contentRaw = ".#..#..###\n####.###.#\n....###.#.\n..###.##.#\n##.##.#.#.\n....###..#\n..#.#..#.#\n#..#.#.###\n.##...##.#\n.....#.#.."; // Best is 6,3 with 41 other asteroids detected
             //contentRaw = ".#..##.###...#######\n##.############..##.\n.#.######.########.#\n.###.#######.####.#.\n#####.##.#.##.###.##\n..#####..#.#########\n####################\n#.####....###.#.#.##\n##.#################\n#####.##.###..####..\n..######..##.#######\n####.##.####...##..#\n.#####..#.######.###\n##...#.##########...\n#.##########.#######\n.####.#.###.###.#.##\n....##.##.###..#####\n.#.#.###########.###\n#.#.#.#####.####.###\n###.##.####.##.#..##"; // Best is 11,13 with 210 other asteroids detected:
             // Test data for Part 2.
             //contentRaw = ".#....#####...#..\n##...##.#####..##\n##...#...#.#####.\n..#.....#...###..\n..#.#.....#....##";
-            content = contentRaw.Split("\n");
+            //content = contentRaw.Split("\n");
 
             // Create asteroidMap.
             AsteroidMap asteroidMap = new AsteroidMap(content, null);
@@ -1196,12 +1197,6 @@ namespace AdventOfCode2019 {
             // 6 o'clock. any visible asteroid where col = 0 and row is positive.
             // Between 6 adn 12: all visibile asteroids that have a negative col: destroy in ascending row/col order.
 
-            //List<Asteroid> asteroids12;
-            //List<Asteroid> asteroids12to6;
-            //List<Asteroid> asteroids6;
-            //List<Asteroid> asteroids6to12;
-            //visibilityMap.ListOfVisibleAsteroids(out asteroids12, out asteroids12to6, out asteroids6, out asteroids6to12);
-
             int asteroidCount = asteroidMap.AsteroidCount();
 
             while (asteroidCount > 1) {
@@ -1222,9 +1217,37 @@ namespace AdventOfCode2019 {
             }
 
             // Print out list of asteroids destroyed in order.
-            for (int i= 0; i < asteroids.Count; i++) { 
-                Console.WriteLine("asteroid " + (i+1) + ": value: " + asteroids[i].col + "," + asteroids[i].row);
+            for (int i = 0; i < asteroids.Count; i++) {
+                Console.WriteLine("asteroid " + (i + 1) + ": value: " + asteroids[i].col + "," + asteroids[i].row);
             }
+
+            // The Elves are placing bets on which will be the 200th asteroid to be vaporized. Win the bet by determining 
+            // which asteroid that will be; what do you get if you multiply its X coordinate by 100 and then add its Y 
+            // coordinate ? (For example, 8,2 becomes 802.)
+            int x = asteroids[199].col;
+            int y = asteroids[199].row;
+            int myBet = (x * 100) + y;
+            Console.WriteLine("Answer: " + myBet);
+        }
+
+
+        static void Day11() {
+
+            string content;
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day11_input.txt";
+            content = System.IO.File.ReadAllText(fileName);
+            string[] instructions = content.Split(",");
+
+            // Part 1.
+            RobotPainter robotPainter = new RobotPainter(instructions);
+            Dictionary<string,string> robotCommands = robotPainter.RunTheRobot("0");
+            Console.WriteLine("Unique coordinates count: " + robotCommands.Keys.Count);
+
+            // Part 2.
+            robotPainter = new RobotPainter(instructions);
+            robotCommands = robotPainter.RunTheRobot("1");
+            Console.WriteLine("Unique coordinates count: " + robotCommands.Keys.Count);
+            robotPainter.Paint(robotCommands);
         }
     }
 }
