@@ -17,7 +17,8 @@ namespace AdventOfCode2019 {
             //Day8();
             //Day9();
             //Day10();
-            Day11();
+            //Day11();
+            Day12();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -1240,7 +1241,7 @@ namespace AdventOfCode2019 {
 
             // Part 1.
             RobotPainter robotPainter = new RobotPainter(instructions);
-            Dictionary<string,string> robotCommands = robotPainter.RunTheRobot("0");
+            Dictionary<string, string> robotCommands = robotPainter.RunTheRobot("0");
             Console.WriteLine("Unique coordinates count: " + robotCommands.Keys.Count);
 
             // Part 2.
@@ -1249,5 +1250,203 @@ namespace AdventOfCode2019 {
             Console.WriteLine("Unique coordinates count: " + robotCommands.Keys.Count);
             robotPainter.Paint(robotCommands);
         }
+
+        // I needed an LCM function, so i found this on the internet.  
+        // Seemed like a poor use of my time to implement something standard like this.
+        public static long lcm_of_array_elements(long[] element_array) {
+            long lcm_of_array_elements = 1;
+            int divisor = 2;
+
+            while (true) {
+
+                int counter = 0;
+                bool divisible = false;
+                for (int i = 0; i < element_array.Length; i++) {
+
+                    // lcm_of_array_elements (n1, n2, ... 0) = 0. 
+                    // For negative number we convert into 
+                    // positive and calculate lcm_of_array_elements. 
+                    if (element_array[i] == 0) {
+                        return 0;
+                    }
+                    else if (element_array[i] < 0) {
+                        element_array[i] = element_array[i] * (-1);
+                    }
+                    if (element_array[i] == 1) {
+                        counter++;
+                    }
+
+                    // Divide element_array by devisor if complete 
+                    // division i.e. without remainder then replace 
+                    // number with quotient; used for find next factor 
+                    if (element_array[i] % divisor == 0) {
+                        divisible = true;
+                        element_array[i] = element_array[i] / divisor;
+                    }
+                }
+
+                // If divisor able to completely divide any number 
+                // from array multiply with lcm_of_array_elements 
+                // and store into lcm_of_array_elements and continue 
+                // to same divisor for next factor finding. 
+                // else increment divisor 
+                if (divisible) {
+                    lcm_of_array_elements = lcm_of_array_elements * divisor;
+                }
+                else {
+                    divisor++;
+                }
+
+                // Check if all element_array is 1 indicate  
+                // we found all factors and terminate while loop. 
+                if (counter == element_array.Length) {
+                    return lcm_of_array_elements;
+                }
+            }
+        }
+
+        static void Day12() {
+
+            int totalSteps;
+            List<Moon> moons = new List<Moon>();
+
+            // My inputs:
+            //< x = -10, y = -13, z = 7 >
+            // < x = 1, y = 2, z = 1 >
+            // < x = -15, y = -3, z = 13 >
+            //   < x = 3, y = 7, z = -4 >
+            Moon moon1 = new Moon(-10, -13, 7, moons);
+            Moon moon2 = new Moon(1, 2, 1, moons);
+            Moon moon3 = new Moon(-15, -3, 13, moons);
+            Moon moon4 = new Moon(3, 7, -4, moons);
+            totalSteps = 1000;
+
+            // Test Data 1:
+            // <x=-1, y=0, z=2>
+            // < x = 2, y = -10, z = -7 >
+            // < x = 4, y = -8, z = 8 >
+            // < x = 3, y = 5, z = -1 >
+            //Moon moon1 = new Moon(-1, 0, 2, moons);
+            //Moon moon2 = new Moon(2, -10, -7, moons);
+            //Moon moon3 = new Moon(4, -8, 8, moons);
+            //Moon moon4 = new Moon(3, 5, -1, moons);
+            //totalSteps = 10;
+
+            // Test Data 2:
+            // <x=-8, y=-10, z=0>
+            // < x = 5, y = 5, z = 10 >
+            // < x = 2, y = -7, z = 3 >
+            // < x = 9, y = -8, z = -3 >
+            //Moon moon1 = new Moon(-8, -10, 0, moons);
+            //Moon moon2 = new Moon(5, 5, 10, moons);
+            //Moon moon3 = new Moon(2, -7, 3, moons);
+            //Moon moon4 = new Moon(9, -8, -3, moons);
+            //totalSteps = 100;
+
+            // Create copies for part2.
+            List<Moon> moons2 = new List<Moon>();
+            foreach (Moon moon in moons) {
+                Moon moonNew = new Moon(moon.positionX, moon.positionY, moon.positionZ, moons2);
+            }
+            List<Moon> moons2x = new List<Moon>();
+            foreach (Moon moon in moons) {
+                Moon moonNew = new Moon(moon.positionX, moon.positionY, moon.positionZ, moons2x);
+            }
+            List<Moon> moons2y = new List<Moon>();
+            foreach (Moon moon in moons) {
+                Moon moonNew = new Moon(moon.positionX, moon.positionY, moon.positionZ, moons2y);
+            }
+            List<Moon> moons2z = new List<Moon>();
+            foreach (Moon moon in moons) {
+                Moon moonNew = new Moon(moon.positionX, moon.positionY, moon.positionZ, moons2z);
+            }
+
+            // Part1!
+            Moon.PrintOutMoons(moons, 0);
+            for (int i = 0; i < totalSteps; i++) {
+                Moon.ApplyGravity(moons);
+                Moon.ApplyVelocity(moons);
+                //Moon.PrintOutMoons(moons, (i + 1));
+                //Console.WriteLine("Total energy in system: " + Moon.TotalEnergy(moons));
+            }
+
+            Console.WriteLine("Part 1:");
+            Moon.PrintOutMoons(moons, totalSteps);
+            int totalEnergy = Moon.TotalEnergy(moons);
+            Console.WriteLine("Total energy in system: " + totalEnergy);
+
+            // Part 2!  Brute Force!
+            //bool keepGoing = true;
+            //long stepCount = 1;
+            //while (keepGoing) {
+            //    Moon.ApplyGravity(moons2);
+            //    Moon.ApplyVelocity(moons2);
+
+            //    if (Moon.BackToInitialStates(moons2)) {
+            //        keepGoing = false;
+            //    }
+            //    else {
+            //        stepCount++;
+            //    }
+            //}
+
+            // Part 2: New Math!
+            // Note: i died on the hill trying to do this brute force, and after 48 hours running, i gave up that i could get this to work.
+            // after strugging for a weekend, i gave up and went to reddit for a hint on how to do this.  So, public disclosure that
+            // i needed help with this one. 
+            bool keepGoing = true;
+            long stepCountX = 1;
+            while (keepGoing) {
+                Moon.ApplyGravity(moons2x);
+                Moon.ApplyVelocity(moons2x);
+
+                if (Moon.BackToInitialStatesX(moons2x)) {
+                    keepGoing = false;
+                }
+                else {
+                    stepCountX++;
+                }
+            }
+            keepGoing = true;
+            long stepCountY = 1;
+            while (keepGoing) {
+                Moon.ApplyGravity(moons2y);
+                Moon.ApplyVelocity(moons2y);
+
+                if (Moon.BackToInitialStatesY(moons2y)) {
+                    keepGoing = false;
+                }
+                else {
+                    stepCountY++;
+                }
+            }
+            keepGoing = true;
+            long stepCountZ = 1;
+            while (keepGoing) {
+                Moon.ApplyGravity(moons2z);
+                Moon.ApplyVelocity(moons2z);
+
+                if (Moon.BackToInitialStatesZ(moons2z)) {
+                    keepGoing = false;
+                }
+                else {
+                    stepCountZ++;
+                }
+            }
+
+            Console.Write("Part 2:");
+           // Console.WriteLine("Steps required to return to initial state: " + stepCount);
+
+            stepCountX++;
+            stepCountY++;
+            stepCountZ++;
+            long[] myList = { stepCountX, stepCountY, stepCountZ };
+            Console.WriteLine("stepCountX: " + stepCountX);
+            Console.WriteLine("stepCountY: " + stepCountY);
+            Console.WriteLine("stepCountZ: " + stepCountZ);
+
+            Console.WriteLine("Steps required to return to initial state: " + lcm_of_array_elements(myList));
+        }
     }
 }
+
