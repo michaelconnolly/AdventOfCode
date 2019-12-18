@@ -18,7 +18,8 @@ namespace AdventOfCode2019 {
             //Day9();
             //Day10();
             //Day11();
-            Day12();
+            //Day12();
+            Day13();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -1446,6 +1447,37 @@ namespace AdventOfCode2019 {
             Console.WriteLine("stepCountZ: " + stepCountZ);
 
             Console.WriteLine("Steps required to return to initial state: " + lcm_of_array_elements(myList));
+        }
+
+        static void Day13() {
+
+            string content;
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day13_input.txt";
+            content = System.IO.File.ReadAllText(fileName);
+
+            // if the last character is a \n, get rid of it.
+            int length = content.Length;
+            if (content.EndsWith('\n')) {
+                content = content.Substring(0, length - 1);
+            }
+
+            string[] instructions = content.Split(",");
+
+            ArcadeCabinet ac = new ArcadeCabinet(instructions);
+            Dictionary<string, string> tiles = ac.PlayTheGame(interactiveMode:false);
+
+            // Part 1.
+            int countBlockTiles = 0;
+            foreach (string key in tiles.Keys) {
+                if (tiles[key] == "2") countBlockTiles++;
+            }
+
+            Console.WriteLine("Part 1: how many unique tiles are on the screen? " + countBlockTiles);
+
+            // Part 2.
+            ArcadeCabinet ac2 = new ArcadeCabinet(instructions);
+            ac2.MakeItPlayForFree();
+            ac2.PlayTheGame(interactiveMode:true);
         }
     }
 }
