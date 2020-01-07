@@ -19,7 +19,8 @@ namespace AdventOfCode2019 {
             //Day10();
             //Day11();
             //Day12();
-            Day13();
+            //Day13();
+            Day14();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -1436,7 +1437,7 @@ namespace AdventOfCode2019 {
             }
 
             Console.Write("Part 2:");
-           // Console.WriteLine("Steps required to return to initial state: " + stepCount);
+            // Console.WriteLine("Steps required to return to initial state: " + stepCount);
 
             stepCountX++;
             stepCountY++;
@@ -1464,7 +1465,7 @@ namespace AdventOfCode2019 {
             string[] instructions = content.Split(",");
 
             ArcadeCabinet ac = new ArcadeCabinet(instructions);
-            Dictionary<string, string> tiles = ac.PlayTheGame(interactiveMode:false);
+            Dictionary<string, string> tiles = ac.PlayTheGame(interactiveMode: false);
 
             // Part 1.
             int countBlockTiles = 0;
@@ -1477,7 +1478,144 @@ namespace AdventOfCode2019 {
             // Part 2.
             ArcadeCabinet ac2 = new ArcadeCabinet(instructions);
             ac2.MakeItPlayForFree();
-            ac2.PlayTheGame(interactiveMode:true);
+            ac2.PlayTheGame(interactiveMode: true);
+        }
+
+        public static int OrderEnough(int requiredAmount, int stepAmount) {
+
+            int accumulatedAmount = 0;
+
+            while (accumulatedAmount < requiredAmount) {
+                accumulatedAmount += stepAmount;
+                //stepCount++;
+            }
+            return accumulatedAmount;
+
+        }
+
+        public static long TargetAmount(long desiredamount, long minimumOrder) {
+
+            if (desiredamount == 0) {
+                return 0;
+            }
+
+            long accumulatedamount = minimumOrder;
+
+            while (accumulatedamount < desiredamount) {
+                accumulatedamount += minimumOrder;
+            }
+            return accumulatedamount;
+
+        }
+
+        public static void Assert(bool f, string warning) {
+            if (!f) Console.WriteLine(warning);
+        }
+
+        static void Day14() {
+
+            //string[] content;
+            //string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day14_input.txt";
+            //content = System.IO.File.ReadAllLines(fileName);
+
+            // Test Data.
+            //string[] content = { "1 A, 2 B, 3 C => 2 D" };
+            //string[] content = { "10 ORE => 10 A", "1 ORE => 1 B", "7 A, 1 B => 1 C", "7 A, 1 C => 1 D", "7 A, 1 D => 1 E", "7 A, 1 E => 1 FUEL" }; // Answer: 31
+            //string[] content = { "10 A, 10 B => 1 FUEL", "2 ORE => 1 A", "1 ORE => 1 B" }; // 30
+            //string[] content = { "10 C, 10 D => 1 FUEL", "2 ORE => 1 A", "1 ORE => 1 B", "5 A => 1 C", "1 B => 1 D" }; // 110
+            //string[] content = {"9 ORE => 2 A", "8 ORE => 3 B","7 ORE => 5 C","3 A, 4 B => 1 AB","5 B, 7 C => 1 BC","4 C, 1 A => 1 CA","2 AB, 3 BC, 4 CA => 1 FUEL" }; // Answer 165
+            string[] content = { "157 ORE => 5 NZVS", "165 ORE => 6 DCFZ", "44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL", "12 HKGWZ, 1 GPVTF, 8 PSHF => 9 QDVJ", "179 ORE => 7 PSHF", "177 ORE => 5 HKGWZ", "7 DCFZ, 7 PSHF => 2 XJWVT", "165 ORE => 2 GPVTF", "3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT" }; // 13312
+            //string[] content = { "2 VPVL, 7 FWMGM, 2 CXFTF, 11 MNCFX => 1 STKFG","17 NVRVD, 3 JNWZP => 8 VPVL","53 STKFG, 6 MNCFX, 46 VJHF, 81 HVMC, 68 CXFTF, 25 GNMV => 1 FUEL","22 VJHF, 37 MNCFX => 5 FWMGM","139 ORE => 4 NVRVD","144 ORE => 7 JNWZP","5 MNCFX, 7 RFSQX, 2 FWMGM, 2 VPVL, 19 CXFTF => 3 HVMC","5 VJHF, 7 MNCFX, 9 VPVL, 37 CXFTF => 6 GNMV","145 ORE => 6 MNCFX","1 NVRVD => 8 CXFTF","1 VJHF, 6 MNCFX => 4 RFSQX","176 ORE => 6 VJHF" }; // 180697 
+            //string[] content = { "171 ORE => 8 CNZTR",
+            //    "7 ZLQW, 3 BMBT, 9 XCVML, 26 XMNCP, 1 WPTQ, 2 MZWV, 1 RJRHP => 4 PLWSL",
+            //    "114 ORE => 4 BHXH",
+            //    "14 VRPVC => 6 BMBT",
+            //    "6 BHXH, 18 KTJDG, 12 WPTQ, 7 PLWSL, 31 FHTLT, 37 ZDVW => 1 FUEL",
+            //    "6 WPTQ, 2 BMBT, 8 ZLQW, 18 KTJDG, 1 XMNCP, 6 MZWV, 1 RJRHP => 6 FHTLT",
+            //    "15 XDBXC, 2 LTCX, 1 VRPVC => 6 ZLQW",
+            //    "13 WPTQ, 10 LTCX, 3 RJRHP, 14 XMNCP, 2 MZWV, 1 ZLQW => 1 ZDVW",
+            //    "5 BMBT => 4 WPTQ",
+            //    "189 ORE => 9 KTJDG",
+            //    "1 MZWV, 17 XDBXC, 3 XCVML => 2 XMNCP",
+            //    "12 VRPVC, 27 CNZTR => 2 XDBXC",
+            //    "15 KTJDG, 12 BHXH => 5 XCVML",
+            //    "3 BHXH, 2 VRPVC => 7 MZWV",
+            //    "121 ORE => 7 VRPVC",
+            //    "7 XCVML => 6 RJRHP",
+            //    "5 BHXH, 4 VRPVC => 5 LTCX"}; // 2210736 
+
+            //string[] content = { "10 A, 10 D => 1 FUEL", "2 ORE => 3 C", "1 ORE => 1 D", "1 C, 2 D => 1 B", "1 B, 2 C => 3 A" }; // 110
+
+
+
+            // Output our input so we can eyeball it.
+            //Console.WriteLine("------------------");
+            //foreach (string line in content) {
+            //    Console.WriteLine(line);
+            //}
+            //Console.WriteLine("------------------");
+
+            NanoFactory factory = new NanoFactory(content);
+            foreach (NanoFactoryRecipe recipe in factory.recipes) {
+                recipe.PrintOut();
+            }
+
+            // PART ONE.
+            Dictionary<string, long> materialBag = new Dictionary<string, long>();
+            long oreCost = factory.ProduceMaterial("FUEL", 1, materialBag);
+            Console.WriteLine("Part1: ORE count: " + oreCost);
+            factory.PrintCollection(materialBag, null);
+
+            // PART TWO.
+            // The 13312 ORE - per - FUEL example could produce 82892753 FUEL.
+            // The 180697 ORE - per - FUEL example could produce 5586022 FUEL.
+            // The 2210736 ORE - per - FUEL example could produce 460664 FUEL.
+            long oreBinAmount = 1000000000000;
+
+
+            // Hokey Method.
+            //long fuelCount = (long)Math.Ceiling((0.99999) * ((double)oreBinAmount / (double)oreCost));
+            ////long fuelCount = (long)Math.Floor( ((double)oreBinAmount / (double)oreCost));
+            //oreBinAmount -= (oreCost * fuelCount);
+            //Console.WriteLine("Initial total fuel produced: " + fuelCount);
+            //Console.WriteLine("Initial total ore left: " + oreBinAmount);
+
+            factory.RemoveFromCollection("FUEL", 1, materialBag);
+            //factory.MultiplyCollection(materialBag, fuelCount);
+            factory.PrintCollection(materialBag, null);
+
+
+            if (true) {
+                long tickCount = 1000;
+                long tickSize = oreBinAmount / tickCount;
+            //long tickSize = 10000000000;
+                long nextMessage = oreBinAmount - tickSize;
+            long fuelCount = 0;
+            bool shouldContinue = true;
+            //Dictionary<string, long> materialBag2 = new Dictionary<string, long>();
+
+            while (shouldContinue) {
+
+                long currentOreCost = factory.ProduceMaterial("FUEL", 1, materialBag);
+                if (currentOreCost > oreBinAmount) {
+                    shouldContinue = false;
+                }
+                else {
+                    oreBinAmount -= currentOreCost;
+                    fuelCount += 1;
+                    factory.RemoveFromCollection("FUEL", 1, materialBag);
+
+                        if (oreBinAmount < nextMessage) {
+                            Console.WriteLine("Fuel: " + fuelCount + ", Ore: " + oreBinAmount);
+                            nextMessage -= tickSize;
+                        }
+                    }
+            }
+
+            Console.WriteLine("Total Fuel Produced: " + fuelCount);
+            factory.PrintCollection(materialBag, null);
+
+            }
         }
     }
 }

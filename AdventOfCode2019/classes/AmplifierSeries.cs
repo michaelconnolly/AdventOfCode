@@ -31,15 +31,11 @@ namespace AdventOfCode2019 {
             return input;
         }
 
-        public void Assert(bool f, string warning) {
-            if (!f) Console.WriteLine(warning);
-        }
-
         public string RunFeedbackLoop(string inputSignal) {
 
             // Assert that we have all amplifiers waiting to go.
             for (int i = 0; i < this.amplifiers.Count; i++) {
-                this.Assert((!(this.amplifiers[i].currentlyRunning)), "ERROR! Amplifier " + i + " is running!");
+                Program.Assert((!(this.amplifiers[i].currentlyRunning)), "ERROR! Amplifier " + i + " is running!");
             }
 
             string outputSignal = "-1";
