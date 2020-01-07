@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AdventOfCode2019 {
 
@@ -12,11 +11,6 @@ namespace AdventOfCode2019 {
         public NanoFactoryRecipe(string recipe) {
 
             this.ParseRecipe(recipe);
-
-            //1 A, 2 B, 3 C => 2 D
-           
-
-
         }
 
         public void ParseRecipe(string recipe) {
