@@ -1488,7 +1488,7 @@ namespace AdventOfCode2019 {
         static void Day14() {
 
             string[] content;
-            string fileName = "D:\\dev\\AdventOfCode\\AdventOfCode2019\\day14_input.txt";
+            string fileName = "c:\\dev\\AdventOfCode\\AdventOfCode2019\\day14_input.txt";
             content = System.IO.File.ReadAllLines(fileName);
 
             // Test Data.
@@ -1553,6 +1553,22 @@ namespace AdventOfCode2019 {
 
             Console.WriteLine("Total Fuel Produced: " + fuelCount);
             factory.PrintCollection(materialBag, null);
+        }
+
+
+        static void Day15() {
+
+            string content;
+            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
+            content = System.IO.File.ReadAllText(fileName);
+
+            // if the last character is a \n, get rid of it.
+            int length = content.Length;
+            if (content.EndsWith('\n')) {
+                content = content.Substring(0, length - 1);
+            }
+
+            string[] instructions = content.Split(",");
         }
     }
 }
