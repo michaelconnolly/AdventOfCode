@@ -20,7 +20,8 @@ namespace AdventOfCode2019 {
             //Day11();
             //Day12();
             //Day13();
-            Day14();
+            //Day14();
+            Day15();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -1559,7 +1560,7 @@ namespace AdventOfCode2019 {
         static void Day15() {
 
             string content;
-            string fileName = "C:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
+            string fileName = "d:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
             content = System.IO.File.ReadAllText(fileName);
 
             // if the last character is a \n, get rid of it.
@@ -1569,6 +1570,11 @@ namespace AdventOfCode2019 {
             }
 
             string[] instructions = content.Split(",");
+
+            RepairDroid repairDroid = new RepairDroid(instructions);
+            Dictionary<string, string> tiles = repairDroid.FindTheOxygenSystem();
+
+            //repairDroid.Print();
         }
     }
 }
