@@ -1560,7 +1560,7 @@ namespace AdventOfCode2019 {
         static void Day15() {
 
             string content;
-            string fileName = "d:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
+            string fileName = "c:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
             content = System.IO.File.ReadAllText(fileName);
 
             // if the last character is a \n, get rid of it.

@@ -6,11 +6,11 @@ namespace AdventOfCode2019 {
 
     public class RepairDroid {
 
-        const int NORTH = 1;
-        const int SOUTH = 2;
-        const int WEST = 3;
-        const int EAST = 4;
-        const int DEFAULT_DIRECTION = NORTH;
+        public const int NORTH = 1;
+        public const int SOUTH = 2;
+        public const int WEST = 3;
+        public const int EAST = 4;
+        public const int DEFAULT_DIRECTION = NORTH;
 
         const int FAILURE_WALL = 0;
         const int SUCCESSFUL_MOVE = 1;
@@ -25,16 +25,16 @@ namespace AdventOfCode2019 {
 
         public string GAME_OVER = "-89";
         public string UPDATE_DISPLAY = "-1";
-        string JOYSTICK_CENTER = "0";
-        string JOYSTICK_LEFT = "-1";
-        string JOYSTICK_RIGHT = "1";
-        public string CurrentScore = "0";
+        //string JOYSTICK_CENTER = "0";
+        //string JOYSTICK_LEFT = "-1";
+        //string JOYSTICK_RIGHT = "1";
+        //public string CurrentScore = "0";
 
-        int maximumX, maximumY;
-        int minimumX, minimumY;
+        //int maximumX, maximumY;
+        //int minimumX, minimumY;
 
-        int currentColPaddle = -1;
-        int currentColBall = -1;
+        //int currentColPaddle = -1;
+        //int currentColBall = -1;
 
         public RepairDroid(string[] instructionsInput) {
 
@@ -55,32 +55,32 @@ namespace AdventOfCode2019 {
         //    this.instructions[0] = "2";
         //}
 
-        public void DrawScreen() {
+        //public void DrawScreen() {
 
 
-        }
+        //}
 
-        public void CalculateScreenSize(Dictionary<string, string> robotCommands) {
+        //public void CalculateScreenSize(Dictionary<string, string> robotCommands) {
 
-            this.maximumX = int.MinValue;
-            this.maximumY = int.MinValue;
-            this.minimumX = int.MaxValue;
-            this.minimumY = int.MaxValue;
+        //    this.maximumX = int.MinValue;
+        //    this.maximumY = int.MinValue;
+        //    this.minimumX = int.MaxValue;
+        //    this.minimumY = int.MaxValue;
 
-            foreach (string key in robotCommands.Keys) {
+        //    foreach (string key in robotCommands.Keys) {
 
-                string[] coordinates = key.Split(',');
-                int x = Convert.ToInt32(coordinates[0]);
-                int y = Convert.ToInt32(coordinates[1]);
-                if (x > maximumX) maximumX = x;
-                if (y > maximumY) maximumY = y;
-                if (x < minimumX) minimumX = x;
-                if (y < minimumY) minimumY = y;
-            }
+        //        string[] coordinates = key.Split(',');
+        //        int x = Convert.ToInt32(coordinates[0]);
+        //        int y = Convert.ToInt32(coordinates[1]);
+        //        if (x > maximumX) maximumX = x;
+        //        if (y > maximumY) maximumY = y;
+        //        if (x < minimumX) minimumX = x;
+        //        if (y < minimumY) minimumY = y;
+        //    }
 
-            this.maximumX++;
-            this.maximumY++;
-        }
+        //    this.maximumX++;
+        //    this.maximumY++;
+        //}
 
         //public char DrawThisTile(char tileId) {
 
@@ -124,64 +124,64 @@ namespace AdventOfCode2019 {
         //    this.CalculateScreenSize()
         //}
 
-        public void PrintScreen(Dictionary<string, string> robotCommands) {
+        //public void PrintScreen(Dictionary<string, string> robotCommands) {
 
-            this.CalculateScreenSize(robotCommands);
+        //    this.CalculateScreenSize(robotCommands);
 
-            Console.WriteLine("\n");
+        //    Console.WriteLine("\n");
 
-            Dictionary<string, string> robotCommandsFormatted = new Dictionary<string, string>();
-            foreach (string key in robotCommands.Keys) {
-                string[] coordinates = key.Split(',');
-                int x = Convert.ToInt32(coordinates[0]) + (-(this.minimumX));
-                int y = Convert.ToInt32(coordinates[1]) + (-(this.minimumY));
-                string newKey = x.ToString() + "," + y.ToString();
-                robotCommandsFormatted[newKey] = robotCommands[key];
-            }
+        //    Dictionary<string, string> robotCommandsFormatted = new Dictionary<string, string>();
+        //    foreach (string key in robotCommands.Keys) {
+        //        string[] coordinates = key.Split(',');
+        //        int x = Convert.ToInt32(coordinates[0]) + (-(this.minimumX));
+        //        int y = Convert.ToInt32(coordinates[1]) + (-(this.minimumY));
+        //        string newKey = x.ToString() + "," + y.ToString();
+        //        robotCommandsFormatted[newKey] = robotCommands[key];
+        //    }
 
-            int realMaximumX = this.maximumX + (-(this.minimumX));
-            int realMaximumY = this.maximumY + (-(this.minimumY));
+        //    int realMaximumX = this.maximumX + (-(this.minimumX));
+        //    int realMaximumY = this.maximumY + (-(this.minimumY));
 
-           // Console.WriteLine("SCORE: " + this.CurrentScore);
+        //   // Console.WriteLine("SCORE: " + this.CurrentScore);
 
-            char[][] rows = new char[(realMaximumY)][];
+        //    char[][] rows = new char[(realMaximumY)][];
 
-            for (int row=0; row<realMaximumY; row++) {
+        //    for (int row=0; row<realMaximumY; row++) {
 
-                char[] rowData = new char[realMaximumX];
-                rows[row] = rowData;
-            }
+        //        char[] rowData = new char[realMaximumX];
+        //        rows[row] = rowData;
+        //    }
 
-            foreach (string key in robotCommandsFormatted.Keys) {
+        //    foreach (string key in robotCommandsFormatted.Keys) {
 
-                string[] coordinates = key.Split(',');
-                int x = Convert.ToInt32(coordinates[0]);
-                int y = Convert.ToInt32(coordinates[1]);
-                string rawChar = (string)robotCommandsFormatted[key];
-                char actualChar = rawChar.ToCharArray()[0];
-                rows[y][x] = actualChar; // this.DrawThisTile(actualChar);
+        //        string[] coordinates = key.Split(',');
+        //        int x = Convert.ToInt32(coordinates[0]);
+        //        int y = Convert.ToInt32(coordinates[1]);
+        //        string rawChar = (string)robotCommandsFormatted[key];
+        //        char actualChar = rawChar.ToCharArray()[0];
+        //        rows[y][x] = actualChar; // this.DrawThisTile(actualChar);
 
-                //// Where is the paddle and ball?
-                //if (actualChar == '3') {
-                //    this.currentColPaddle = x;
-                //}
-                //else if  (actualChar == '4') {
-                //    this.currentColBall = x;
-                //}
-            }
+        //        //// Where is the paddle and ball?
+        //        //if (actualChar == '3') {
+        //        //    this.currentColPaddle = x;
+        //        //}
+        //        //else if  (actualChar == '4') {
+        //        //    this.currentColBall = x;
+        //        //}
+        //    }
 
-            foreach (char[] row in rows) {
+        //    foreach (char[] row in rows) {
 
-                string rowString = "";
-                foreach (char currentChar in row) {
-                    rowString += currentChar;
-                }
+        //        string rowString = "";
+        //        foreach (char currentChar in row) {
+        //            rowString += currentChar;
+        //        }
 
-                Console.WriteLine(rowString);
-            }
+        //        Console.WriteLine(rowString);
+        //    }
 
-            return;
-        }
+        //    return;
+        //}
 
         private void ConstructCoordinates(int xPos, int yPos, out int xPosNew, out int yPosNew, int direction) {
 
@@ -221,20 +221,15 @@ namespace AdventOfCode2019 {
             }
         }
 
-        private int PickDirection(int currentDirection) {
 
-            int newDirection = currentDirection + 1;
-            if (newDirection == 5) newDirection = 1;
-            return newDirection;
-        }
 
-      
+
 
         public Dictionary<string, string> FindTheOxygenSystem() {
 
-            int xPos = 0;
-            int yPos = 0;
-
+            //int xPos = 0;
+            //int yPos = 0;
+          
             int lastDirection = -1;
 
 
@@ -243,11 +238,15 @@ namespace AdventOfCode2019 {
             //bool calculatedScreenSize = false;
             this.currentlyRunning = true;
 
-            Dictionary<string, string> robotCommands = new Dictionary<string, string>();
+            //Dictionary<string, string> robotCommands = new Dictionary<string, string>();
+            RepairDroidMap map = new RepairDroidMap();
+            RepairDroidCoordinate currentLocation = map.CreateCoordinate(0, 0, 'D'); ;
+
 
             // In our map, mark where the Droid is for starters.
-            string outputPair = xPos + "," + yPos;
-            robotCommands[outputPair] = "D";
+            //string outputPair = xPos + "," + yPos;
+            //robotCommands[outputPair] = "D";
+            // map.CreateCoordinate(xPos, yPos, 'D');
 
             //string xPos, yPos, tileId;
 
@@ -261,25 +260,30 @@ namespace AdventOfCode2019 {
 
                 switch (output) {
 
-                    
+
 
                     case FOUND_OXYGEN_SYSTEM:
 
-                        int xPosNew;
-                        int yPosNew;
+                        //int xPosNew;
+                        //int yPosNew;
 
                         // Mark the spot we just moved from as a "." on the map.
-                        outputPair = xPos + "," + yPos;
-                        robotCommands[outputPair] = ".";
+                        //outputPair = xPos + "," + yPos;
+                        //robotCommands[outputPair] = ".";
+                       // map.CreateCoordinate(xPos, yPos, '.');
+                        currentLocation.item = '.';
 
                         // Move our current position.
-                        this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        xPos = xPosNew;
-                        yPos = yPosNew;
+                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
+                        //xPos = xPosNew;
+                        //yPos = yPosNew;
+                        currentLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
 
                         // Mark that position as a "O" for Oxygen.
-                        outputPair = xPos + "," + yPos;
-                        robotCommands[outputPair] = "O";
+                       // outputPair = xPos + "," + yPos;
+                        //robotCommands[outputPair] = "O";
+                       // map.CreateCoordinate(xPos, yPos, 'O');
+                        currentLocation.item = 'O';
 
 
                         keepGoing = false;
@@ -298,15 +302,21 @@ namespace AdventOfCode2019 {
                     case FAILURE_WALL:
 
                         // Mark the wall we just hit as a wall in our map.
-                        this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        outputPair = xPosNew + "," + yPosNew;
-                        robotCommands[outputPair] = "#";
+                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
+                        ////outputPair = xPosNew + "," + yPosNew;
+                        ////robotCommands[outputPair] = "#";
+                        //map.CreateCoordinate(xPosNew, yPosNew, '#');
+
+                        RepairDroidCoordinate neighbor = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
+                        neighbor.item = '#';
 
                         // Move to the next direction we want to try, amoeba-like, until we hit something interesting. 
-                        this.input = PickDirection(Convert.ToInt32(this.input)).ToString();
+                        //this.input = map.PickDirection(Convert.ToInt32(this.input)).ToString();
+                        //this.input = map.PickDirection(currentLocation, Convert.ToInt32(this.input), 1).ToString();
+                        this.input = map.PickDirection(currentLocation).ToString();
 
 
-                       
+
 
                         //string outputPair = xPos + "," + yPos;
                         //robotCommands[outputPair] = tileId;
@@ -317,17 +327,26 @@ namespace AdventOfCode2019 {
                     case SUCCESSFUL_MOVE:
 
                         // Mark the spot we just moved from as a "." on the map.
-                        outputPair = xPos + "," + yPos;
-                        robotCommands[outputPair] = ".";
+                        //outputPair = xPos + "," + yPos;
+                        //robotCommands[outputPair] = ".";
+                        //map.CreateCoordinate(xPos, yPos, '.');
+                        currentLocation.item = '.';
+
 
                         // Move our current position.
-                        this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        xPos = xPosNew;
-                        yPos = yPosNew;
+                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
+                        //xPos = xPosNew;
+                        //yPos = yPosNew;
+                        currentLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
+
 
                         // Mark that position as a "D" for Droid.
-                        outputPair = xPos + "," + yPos;
-                        robotCommands[outputPair] = "D";
+                        //outputPair = xPos + "," + yPos;
+                        //robotCommands[outputPair] = "D";
+                        //map.CreateCoordinate(xPos, yPos, 'D');
+                        currentLocation.item = 'D';
+
+                        this.input = map.PickDirection(currentLocation).ToString();
 
 
                         ////
@@ -343,7 +362,7 @@ namespace AdventOfCode2019 {
                         //xPos = xPosNew;
                         //yPos = yPosNew;
 
-                        this.input = DEFAULT_DIRECTION.ToString();
+                        //this.input = DEFAULT_DIRECTION.ToString();
                         break;
 
                     default:
@@ -352,7 +371,13 @@ namespace AdventOfCode2019 {
                 }
 
                 //CalculateScreenSize(robotCommands);
-                PrintScreen(robotCommands);
+                //PrintScreen(robotCommands);
+                map.Print();
+
+                if (input == "-99") {
+                    keepGoing = false;
+                    Console.WriteLine("STUCK!!!");
+                }
 
                 // Keep the console window open.
                 Console.WriteLine("");
@@ -428,13 +453,8 @@ namespace AdventOfCode2019 {
                 //    }
 
             }
-            return robotCommands;
+            return null; // robotCommands;
         }
-
-
-        //public void Assert(bool f, string warning) {
-        //    if (!f) Console.WriteLine(warning);
-        //}
 
         private string ContinueProgram() {
 
