@@ -5,9 +5,24 @@ using System.Text;
 namespace AdventOfCode2019 {
     public class RepairDroidMap {
 
-        int maximumX, maximumY;
-        int minimumX, minimumY;
+        //int maximumX, maximumY;
+        //int minimumX, minimumY;
         List<RepairDroidCoordinate> coordinates = new List<RepairDroidCoordinate>();
+        public RepairDroidCoordinate start = null;
+        public RepairDroidCoordinate end = null;
+
+        public RepairDroidCoordinate TeleportToBetterSpot() {
+
+            foreach (RepairDroidCoordinate coordinate in coordinates) {
+
+                int direction = PickDirection(coordinate);
+                if (direction != -99) {
+                    return coordinate;
+                }
+            }
+
+            return null;
+        }
 
         private int RotateDirection(int startDirection) {
 
@@ -74,84 +89,52 @@ namespace AdventOfCode2019 {
             return null;
         }
 
-        public void CalculateScreenSize() {
+        public void Print() {
 
-            this.maximumX = int.MinValue;
-            this.maximumY = int.MinValue;
-            this.minimumX = int.MaxValue;
-            this.minimumY = int.MaxValue;
-
-            //foreach (string key in robotCommands.Keys) {
-            foreach (RepairDroidCoordinate coordinate in this.coordinates) { 
-
-                //string[] coordinates = key.Split(',');
-                //int x = Convert.ToInt32(coordinates[0]);
-                //int y = Convert.ToInt32(coordinates[1]);
+            // Calculate screen size.
+            int maximumX = int.MinValue;
+            int maximumY = int.MinValue;
+            int minimumX = int.MaxValue;
+            int minimumY = int.MaxValue;
+            foreach (RepairDroidCoordinate coordinate in this.coordinates) {
                 if (coordinate.x > maximumX) maximumX = coordinate.x;
                 if (coordinate.y > maximumY) maximumY = coordinate.y;
                 if (coordinate.x < minimumX) minimumX = coordinate.x;
                 if (coordinate.y < minimumY) minimumY = coordinate.y;
             }
 
-            // why do i do this?
-            this.maximumX++;
-            this.maximumY++;
-        }
-
-
-        public void Print() {
-
-            this.CalculateScreenSize();
+            // why do i do this? I forget.
+            maximumX++;
+            maximumY++;
 
             Console.WriteLine("\n");
 
-            //Dictionary<string, string> robotCommandsFormatted = new Dictionary<string, string>();
-            //foreach (string key in robotCommands.Keys) {
+            // Remap all the relative values i have to something 0 based so i can easily print out.
             foreach (RepairDroidCoordinate coordinate in this.coordinates) { 
-                //string[] coordinates = key.Split(',');
-                //coordinate.xFormatted = Convert.ToInt32(coordinates[0]) + (-(this.minimumX));
-                //coordinate.yFormatted = Convert.ToInt32(coordinates[1]) + (-(this.minimumY));
 
-                coordinate.xFormatted = coordinate.x + (-(this.minimumX));
-                coordinate.yFormatted = coordinate.y + (-(this.minimumY));
-
-
-                //string newKey = x.ToString() + "," + y.ToString();
-                //robotCommandsFormatted[newKey] = robotCommands[key];
+                coordinate.xFormatted = coordinate.x + (-(minimumX));
+                coordinate.yFormatted = coordinate.y + (-(minimumY));
             }
+            int realMaximumX = maximumX + (-(minimumX));
+            int realMaximumY = maximumY + (-(minimumY));
 
-            int realMaximumX = this.maximumX + (-(this.minimumX));
-            int realMaximumY = this.maximumY + (-(this.minimumY));
-
-            // Console.WriteLine("SCORE: " + this.CurrentScore);
-
+            // Construct some big dumb arrays to store our printable map.
             char[][] rows = new char[(realMaximumY)][];
-
             for (int row = 0; row < realMaximumY; row++) {
-
-                char[] rowData = new char[realMaximumX];
-                rows[row] = rowData;
+                rows[row] = new char[realMaximumX];
             }
 
-           // foreach (string key in robotCommandsFormatted.Keys) {
+           // Map the characters we have stored for each coordinate to the big dumb array we are using to print to the screen. 
            foreach (RepairDroidCoordinate coordinate in this.coordinates) { 
 
-                //string[] coordinates = key.Split(',');
-                //int x = Convert.ToInt32(coordinates[0]);
-                //int y = Convert.ToInt32(coordinates[1]);
-                //string rawChar = (string)robotCommandsFormatted[key];
-                //char actualChar = rawChar.ToCharArray()[0];
-                rows[coordinate.yFormatted][coordinate.xFormatted] = coordinate.item; // this.DrawThisTile(actualChar);
-
-                //// Where is the paddle and ball?
-                //if (actualChar == '3') {
-                //    this.currentColPaddle = x;
-                //}
-                //else if  (actualChar == '4') {
-                //    this.currentColBall = x;
-                //}
+                // Special case: print the starting spot differently.
+                if (coordinate == this.start) {
+                    coordinate.item = 'X';
+                }
+                rows[coordinate.yFormatted][coordinate.xFormatted] = coordinate.item; 
             }
 
+            // Dump the big dumb arrays of characters to the screen. 
             foreach (char[] row in rows) {
 
                 string rowString = "";
@@ -164,7 +147,5 @@ namespace AdventOfCode2019 {
 
             return;
         }
-
-
     }
 }

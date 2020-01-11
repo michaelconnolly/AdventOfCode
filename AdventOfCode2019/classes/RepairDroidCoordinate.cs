@@ -21,6 +21,12 @@ namespace AdventOfCode2019 {
             this.map = map;
         }
 
+        public string description {
+            get {
+                return "(" + this.x + "," + this.y.ToString() + ") - (" + this.xFormatted + "," + this.yFormatted + ")";
+            }
+        }
+
 ///*        public RepairDroidCoordinate FindNeighbor(int direction) */{
 
 //            int xNeighbor = this.x;

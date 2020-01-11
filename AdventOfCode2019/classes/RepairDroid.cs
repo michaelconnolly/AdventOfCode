@@ -25,16 +25,8 @@ namespace AdventOfCode2019 {
 
         public string GAME_OVER = "-89";
         public string UPDATE_DISPLAY = "-1";
-        //string JOYSTICK_CENTER = "0";
-        //string JOYSTICK_LEFT = "-1";
-        //string JOYSTICK_RIGHT = "1";
-        //public string CurrentScore = "0";
 
-        //int maximumX, maximumY;
-        //int minimumX, minimumY;
-
-        //int currentColPaddle = -1;
-        //int currentColBall = -1;
+        public RepairDroidMap map;
 
         public RepairDroid(string[] instructionsInput) {
 
@@ -48,17 +40,14 @@ namespace AdventOfCode2019 {
             for (int index = 0; index < instructionsInput.Length; index++) {
                 instructions.SetValue(instructionsInput[index], index);
             }
+
+            // Initialize our map.
+            this.map = new RepairDroidMap();
+            RepairDroidCoordinate currentLocation = this.map.CreateCoordinate(0, 0, 'D'); ;
+            this.map.start = currentLocation;
         }
 
-        //public void MakeItPlayForFree() {
-
-        //    this.instructions[0] = "2";
-        //}
-
-        //public void DrawScreen() {
-
-
-        //}
+       
 
         //public void CalculateScreenSize(Dictionary<string, string> robotCommands) {
 
@@ -183,43 +172,43 @@ namespace AdventOfCode2019 {
         //    return;
         //}
 
-        private void ConstructCoordinates(int xPos, int yPos, out int xPosNew, out int yPosNew, int direction) {
+        //private void ConstructCoordinates(int xPos, int yPos, out int xPosNew, out int yPosNew, int direction) {
 
-            switch (direction) {
+        //    switch (direction) {
 
-                case NORTH:
+        //        case NORTH:
 
-                    xPosNew = xPos;
-                    yPosNew = yPos - 1;
-                    break;
+        //            xPosNew = xPos;
+        //            yPosNew = yPos - 1;
+        //            break;
 
-                case SOUTH:
+        //        case SOUTH:
 
-                    xPosNew = xPos;
-                    yPosNew = yPos + 1;
-                    break;
+        //            xPosNew = xPos;
+        //            yPosNew = yPos + 1;
+        //            break;
 
-                case WEST:
+        //        case WEST:
 
-                    xPosNew = xPos - 1;
-                    yPosNew = yPos;
-                    break;
+        //            xPosNew = xPos - 1;
+        //            yPosNew = yPos;
+        //            break;
 
-                case EAST:
+        //        case EAST:
 
-                    xPosNew = xPos + 1;
-                    yPosNew = yPos;
-                    break;
+        //            xPosNew = xPos + 1;
+        //            yPosNew = yPos;
+        //            break;
 
-                default:
+        //        default:
 
-                    xPosNew = xPos;
-                    yPosNew = yPos;
-                    Console.WriteLine("ERROR!");
-                    break;
+        //            xPosNew = xPos;
+        //            yPosNew = yPos;
+        //            Console.WriteLine("ERROR!");
+        //            break;
 
-            }
-        }
+        //    }
+        //}
 
 
 
@@ -230,7 +219,7 @@ namespace AdventOfCode2019 {
             //int xPos = 0;
             //int yPos = 0;
           
-            int lastDirection = -1;
+            //int lastDirection = -1;
 
 
             this.input = DEFAULT_DIRECTION.ToString();
@@ -238,17 +227,9 @@ namespace AdventOfCode2019 {
             //bool calculatedScreenSize = false;
             this.currentlyRunning = true;
 
-            //Dictionary<string, string> robotCommands = new Dictionary<string, string>();
             RepairDroidMap map = new RepairDroidMap();
             RepairDroidCoordinate currentLocation = map.CreateCoordinate(0, 0, 'D'); ;
-
-
-            // In our map, mark where the Droid is for starters.
-            //string outputPair = xPos + "," + yPos;
-            //robotCommands[outputPair] = "D";
-            // map.CreateCoordinate(xPos, yPos, 'D');
-
-            //string xPos, yPos, tileId;
+            map.start = currentLocation;
 
             while (keepGoing) {
 
@@ -257,202 +238,93 @@ namespace AdventOfCode2019 {
                 Console.WriteLine("\n");
                 Console.WriteLine("Tried moving " + this.input + ", got code " + output);
 
+                // What is the target of this attempted move? 
+                RepairDroidCoordinate targetLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
+
 
                 switch (output) {
 
-
-
+                   
                     case FOUND_OXYGEN_SYSTEM:
 
-                        //int xPosNew;
-                        //int yPosNew;
-
-                        // Mark the spot we just moved from as a "." on the map.
-                        //outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = ".";
-                       // map.CreateCoordinate(xPos, yPos, '.');
+                        // Mark the spot we are at now with a "." on the map.
                         currentLocation.item = '.';
 
                         // Move our current position.
-                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        //xPos = xPosNew;
-                        //yPos = yPosNew;
-                        currentLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
+                        currentLocation = targetLocation; //  currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
 
                         // Mark that position as a "O" for Oxygen.
-                       // outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = "O";
-                       // map.CreateCoordinate(xPos, yPos, 'O');
                         currentLocation.item = 'O';
 
+                        // Let's cache this one.
+                        map.end = currentLocation;
 
-                        keepGoing = false;
-                        //int xPosNew, yPosNew;
-
-                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        //xPos = xPosNew;
-                        //yPos = yPosNew;
-
-
-                        //outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = tileId;
+                        // Let's get out of here, yo!
+                        Console.WriteLine("FOUND IT!");
+                        //keepGoing = false;
 
                         break;
 
                     case FAILURE_WALL:
 
                         // Mark the wall we just hit as a wall in our map.
-                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        ////outputPair = xPosNew + "," + yPosNew;
-                        ////robotCommands[outputPair] = "#";
-                        //map.CreateCoordinate(xPosNew, yPosNew, '#');
-
-                        RepairDroidCoordinate neighbor = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
-                        neighbor.item = '#';
+                        //RepairDroidCoordinate neighbor = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
+                        targetLocation.item = '#';
 
                         // Move to the next direction we want to try, amoeba-like, until we hit something interesting. 
-                        //this.input = map.PickDirection(Convert.ToInt32(this.input)).ToString();
-                        //this.input = map.PickDirection(currentLocation, Convert.ToInt32(this.input), 1).ToString();
-                        this.input = map.PickDirection(currentLocation).ToString();
-
-
-
-
-                        //string outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = tileId;
-
+                       // this.input = map.PickDirection(currentLocation).ToString();
 
                         break;
 
                     case SUCCESSFUL_MOVE:
 
                         // Mark the spot we just moved from as a "." on the map.
-                        //outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = ".";
-                        //map.CreateCoordinate(xPos, yPos, '.');
                         currentLocation.item = '.';
 
-
                         // Move our current position.
-                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        //xPos = xPosNew;
-                        //yPos = yPosNew;
-                        currentLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
-
+                        currentLocation = targetLocation; // currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
 
                         // Mark that position as a "D" for Droid.
-                        //outputPair = xPos + "," + yPos;
-                        //robotCommands[outputPair] = "D";
-                        //map.CreateCoordinate(xPos, yPos, 'D');
                         currentLocation.item = 'D';
 
-                        this.input = map.PickDirection(currentLocation).ToString();
 
-
-                        ////
-                        /// TODO: if i just moved south, don't go north.  If i just moved west, going east is your last choice. 
-                        ///
-                        ////
-
-
-                        //// Set our p
-
-                        ////int xPosNew, yPosNew;
-                        //this.ConstructCoordinates(xPos, yPos, out xPosNew, out yPosNew, Convert.ToInt32(this.input));
-                        //xPos = xPosNew;
-                        //yPos = yPosNew;
-
-                        //this.input = DEFAULT_DIRECTION.ToString();
                         break;
 
                     default:
-                        Console.WriteLine("ERROR!");
+                        Console.WriteLine("ERROR! We got some super bogus output code.");
+                        Console.WriteLine("Press any key to continue...");
+                        System.Console.ReadKey();
                         break;
                 }
 
-                //CalculateScreenSize(robotCommands);
-                //PrintScreen(robotCommands);
-                map.Print();
+                // Figure out what direction to go to next.
+                this.input = map.PickDirection(currentLocation).ToString();
 
-                if (input == "-99") {
-                    keepGoing = false;
-                    Console.WriteLine("STUCK!!!");
+                // Are we stuck?  Let's teleport to some other spot that we haven't evaluated yet.
+                if (this.input == "-99") {
+
+                    // Mark the spot we are about to move away from as a "." on the map.
+                    currentLocation.item = '.';
+
+                    currentLocation = map.TeleportToBetterSpot();
+                    if (currentLocation == null) {
+                        Console.WriteLine("DONE: We navigated everything!");
+                        keepGoing = false;
+                    }
+                    else {
+                        this.input = map.PickDirection(currentLocation).ToString();
+                    }
                 }
+
+                // Print out the map so we can follow along.
+                map.Print();
 
                 // Keep the console window open.
                 Console.WriteLine("");
-                Console.WriteLine("Press any key to continue...");
-                System.Console.ReadKey();
-
-
-                //    if (output1 == FOUND_OXYGEN_SYSTEM.ToString()) { 
-                //    //if (output1 == GAME_OVER) {
-                //        keepGoing = false;
-                //    }
-
-
-                //    else {
-
-
-
-                //        xPos = output1;
-                //        yPos = this.ContinueProgram();
-                //        tileId = this.ContinueProgram();
-
-                //        if (xPos == "-1" && yPos == "0") {
-                //            this.CurrentScore = tileId;
-
-                //            if (!calculatedScreenSize) {
-                //                this.CalculateScreenSize(robotCommands);
-                //                calculatedScreenSize = true;
-                //            }
-
-                //        }
-                //        else {
-                //            string outputPair = xPos + "," + yPos;
-                //            robotCommands[outputPair] = tileId;
-                //        }
-                //    }
-
-                //    if (calculatedScreenSize) {
-
-                //        PrintScreen(robotCommands);
-
-                //        // If you want the game to play itself, use this code.
-                //        if (this.currentColBall != -1 && this.currentColPaddle != -1) {
-
-                //            if (this.currentColPaddle < this.currentColBall) {
-                //                this.input = "1";
-                //            }
-                //            else if (this.currentColPaddle > this.currentColBall) {
-                //                this.input = "-1";
-                //            }
-                //            else {
-                //                this.input = "0";
-                //            }
-                //        }
-
-                //        // If you want to manually control the joystick, uncomment this code.
-                //        //ConsoleKeyInfo consoleKey = Console.ReadKey();
-                //        //char pressedChar = consoleKey.KeyChar;
-                //        //switch (pressedChar) {
-                //        //    case ',':
-                //        //        this.input = "-1";
-                //        //        break;
-                //        //    case '.':
-                //        //        this.input = "1";
-                //        //        break;
-                //        //    case ' ':
-                //        //        this.input = "0";
-                //        //        break;
-                //        //    default:
-                //        //        this.input = "0";
-                //        //        break;
-
-                //        //}
-                //    }
-
+                //Console.WriteLine("Press any key to continue...");
+                //System.Console.ReadKey();
             }
+
             return null; // robotCommands;
         }
 
