@@ -11,10 +11,12 @@ namespace AdventOfCode2019 {
         public const int WEST = 3;
         public const int EAST = 4;
         public const int DEFAULT_DIRECTION = NORTH;
+        public string[] directionFriendly = new string[] { "ERROR!", "NORTH", "SOUTH", "WEST", "EAST" };
 
         const int FAILURE_WALL = 0;
         const int SUCCESSFUL_MOVE = 1;
         const int FOUND_OXYGEN_SYSTEM = 2;
+        public string[] returnCodeFriendly = new string[] { "FAILURE_WALL", "SUCCESSFUL_MOVE", "FOUND_OXYGEN_SYSTEM" };
 
         string[] instructions;
         long instructionPointer = 0;
@@ -47,30 +49,7 @@ namespace AdventOfCode2019 {
             this.map.start = currentLocation;
         }
 
-       
-
-        //public void CalculateScreenSize(Dictionary<string, string> robotCommands) {
-
-        //    this.maximumX = int.MinValue;
-        //    this.maximumY = int.MinValue;
-        //    this.minimumX = int.MaxValue;
-        //    this.minimumY = int.MaxValue;
-
-        //    foreach (string key in robotCommands.Keys) {
-
-        //        string[] coordinates = key.Split(',');
-        //        int x = Convert.ToInt32(coordinates[0]);
-        //        int y = Convert.ToInt32(coordinates[1]);
-        //        if (x > maximumX) maximumX = x;
-        //        if (y > maximumY) maximumY = y;
-        //        if (x < minimumX) minimumX = x;
-        //        if (y < minimumY) minimumY = y;
-        //    }
-
-        //    this.maximumX++;
-        //    this.maximumY++;
-        //}
-
+   
         //public char DrawThisTile(char tileId) {
 
         //    // 0 is an empty tile.No game object appears in this tile.
@@ -235,8 +214,9 @@ namespace AdventOfCode2019 {
 
                 int output = Convert.ToInt32(this.ContinueProgram());
 
-                Console.WriteLine("\n");
-                Console.WriteLine("Tried moving " + this.input + ", got code " + output);
+                Console.WriteLine("");
+                Console.WriteLine("Tried moving " + this.directionFriendly[System.Convert.ToInt32(this.input)] + ", got code " 
+                        + this.returnCodeFriendly[output]);
 
                 // What is the target of this attempted move? 
                 RepairDroidCoordinate targetLocation = currentLocation.FindNeighbor(Convert.ToInt32(this.input), true);
@@ -312,12 +292,13 @@ namespace AdventOfCode2019 {
                         keepGoing = false;
                     }
                     else {
+                        currentLocation.item = 'D';
                         this.input = map.PickDirection(currentLocation).ToString();
                     }
                 }
 
                 // Print out the map so we can follow along.
-                map.Print();
+                //map.Print();
 
                 // Keep the console window open.
                 Console.WriteLine("");

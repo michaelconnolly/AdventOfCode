@@ -1560,7 +1560,7 @@ namespace AdventOfCode2019 {
         static void Day15() {
 
             string content;
-            string fileName = "d:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
+            string fileName = "c:\\dev\\AdventOfCode\\AdventOfCode2019\\day15_input.txt";
             content = System.IO.File.ReadAllText(fileName);
 
             // if the last character is a \n, get rid of it.
@@ -1575,7 +1575,7 @@ namespace AdventOfCode2019 {
             Dictionary<string, string> tiles = repairDroid.FindTheOxygenSystem();
             Console.WriteLine("Start: " + repairDroid.map.start.description);
             Console.WriteLine("End: " + repairDroid.map.start.description);
-            //repairDroid.Print();
+            repairDroid.map.Print();
         }
     }
 }
