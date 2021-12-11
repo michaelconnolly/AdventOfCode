@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+
 
 // https://adventofcode.com/2021/
 
@@ -66,6 +68,24 @@ namespace AdventOfCode2021 {
             return returnValue;
         }
 
+
+        static string[] discardAllBut(string[] source, int index, char filter) {
+
+            ArrayList output = new ArrayList();
+
+            for (int i=0; i<source.Length; i++) {
+                if (source[i][index] == filter) {
+                    output.Add(source[i]);
+                }
+            }
+
+            // I am dumb and don't know how to quickly convert an array to a string[];
+            string[] realOutput = new string[output.Count];
+            for (int i=0; i<realOutput.Length; i++) {
+                realOutput[i] = (string) output[i];
+            }
+            return realOutput;
+        }
 
         static void Day1() {
 
@@ -202,6 +222,7 @@ namespace AdventOfCode2021 {
         static void Day3() {
 
             string fileName = dataFolderPath + "input_day_03.txt";
+            //string fileName = dataFolderPath + "input_day_03_test.txt";
             string[] lines = System.IO.File.ReadAllLines(fileName);
             int lengthOfInputFile = lines.Length;
 
@@ -209,7 +230,7 @@ namespace AdventOfCode2021 {
             Console.WriteLine("Size of input array: " + lengthOfInputFile);
 
             // Day 3, Part 1.
-          
+
             // Each bit in the gamma rate can be determined by finding the most common bit in the corresponding 
             // position of all numbers in the diagnostic report.
             // The epsilon rate is calculated in a similar way; rather than use the most common bit, 
@@ -220,8 +241,8 @@ namespace AdventOfCode2021 {
 
             string gammaValue = "";
             string epsilonValue = "";
-         
-            for (int i= 0; i<lengthOfInputValue; i++) {
+
+            for (int i = 0; i < lengthOfInputValue; i++) {
 
                 int countOfZeros = countValuePerColumn(lines, i, '0');
                 if ((countOfZeros) > (lengthOfInputFile / 2)) {
@@ -246,53 +267,67 @@ namespace AdventOfCode2021 {
             Console.WriteLine(", product: " + (gammaRate * epsilonRate));
 
             // Day 3, Part 2.
-
+            int oxygenGeneratorRating = 0;
+            int co2scrubberRating = 0;
+            int lifeSupportRating;
+          
             // To find oxygen generator rating, determine the most common value(0 or 1) in the current bit position, 
             // and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with
             // a 1 in the position being considered.
+            string[] newLines = (string[])lines.Clone();
+            bool foundIt = false;
+            int lengthOfRemainder = lengthOfInputFile;
+            for (int currentBit = 0; currentBit < lengthOfInputValue; currentBit++) {
 
-            //// Day 2, Part 2.
-            //currentHorizontal = 0;
-            //currentDepth = 0;
-            //int currentAim = 0;
-            //foreach (string line in lines) {
+                int count = countValuePerColumn(newLines, currentBit, '0');
+                if (count > (lengthOfRemainder / 2)) {
+                    newLines = discardAllBut(newLines, currentBit, '0');
+                }
+                else {
+                    newLines = discardAllBut(newLines, currentBit, '1');
+                }
 
-            //    string[] commandData = line.Split(' ');
-            //    string command = commandData[0];
-            //    int distance = readNumber(commandData, 1);
+                lengthOfRemainder = newLines.Length;
+                if (lengthOfRemainder == 1) {
+                    foundIt = true;
+                    oxygenGeneratorRating = convertBinaryToDecimal(newLines[0]);
+                    break;
+                }
+            }
+            if (!foundIt) throw new Exception();
 
-            //    switch (command) {
+            // To find CO2 scrubber rating, determine the least common value(0 or 1) in the current bit position,
+            // and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values
+            // with a 0 in the position being considered.
+            newLines = (string[])lines.Clone();
+            foundIt = false;
+            lengthOfRemainder = lengthOfInputFile;
+            for (int currentBit = 0; currentBit < lengthOfInputValue; currentBit++) {
 
-            //        case "forward":
-            //            // forward X does two things:
-            //            // It increases your horizontal position by X units.
-            //            // It increases your depth by your aim multiplied by X.
-            //            currentHorizontal += distance;
-            //            currentDepth += (currentAim * distance);
-            //            break;
+                int count = countValuePerColumn(newLines, currentBit, '0');
+                if (count <= (lengthOfRemainder / 2)) {
+                    newLines = discardAllBut(newLines, currentBit, '0');
+                }
+                else {
+                    newLines = discardAllBut(newLines, currentBit, '1');
+                }
 
-            //        case "down":
-            //            // down X increases your aim by X units.
-            //            currentAim += distance;
-            //            break;
+                lengthOfRemainder = newLines.Length;
+                if (lengthOfRemainder == 1) {
+                    foundIt = true;
+                    co2scrubberRating = convertBinaryToDecimal(newLines[0]);
+                    break;
+                }
+            }
+            if (!foundIt) throw new Exception();
 
-            //        case "up":
-            //            // up X decreases your aim by X units.
-            //            currentAim -= distance;
-            //            break;
+            // Finally, to find the life support rating, multiply the oxygen generator rating (23) by the CO2 scrubber rating (10) to get 230.
+            lifeSupportRating = oxygenGeneratorRating * co2scrubberRating;
 
-            //        default:
-
-            //            Console.WriteLine("error!");
-            //            throw new Exception();
-            //    }
-            //}
-
-            //Console.Write("2b: horizontal: " + currentHorizontal);
-            //Console.Write(", depth: " + currentDepth);
-            //Console.WriteLine(", product: " + (currentDepth * currentHorizontal));
+            Console.Write("3b: oxygenGeneratorRating: " + oxygenGeneratorRating);
+            Console.Write(", co2scrubberRating: " + co2scrubberRating);
+            Console.WriteLine(", lifeSupportRating: " + lifeSupportRating);
         }
-
     }
 }
 
