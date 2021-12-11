@@ -13,7 +13,8 @@ namespace AdventOfCode2021 {
         static void Main(string[] args) {
 
             //Day1();
-            Day2();
+            //Day2();
+            Day3();
 
             // Keep the console window open.
             Console.WriteLine("Press any key to exit.");
@@ -23,6 +24,46 @@ namespace AdventOfCode2021 {
 
         static int readNumber(string[] list, int index) {
             return Convert.ToInt32(list[index]);
+        }
+
+
+        static int countValuePerColumn(string[] list, int columnIndex, char charToCount) {
+
+            int totalCount = 0;
+
+            foreach (string rawValue in list) {
+
+                char currentChar = rawValue[columnIndex];
+                if (currentChar == charToCount) {
+                    totalCount++;
+                }
+            }
+
+            return totalCount;
+        }
+
+
+        static int convertBinaryToDecimal(string binaryNumber) {
+
+            int returnValue = 0;
+            int slot = 1;
+
+            for (int i = (binaryNumber.Length -1); i>=0; i--) {
+
+                if (binaryNumber[i] == '1') {
+
+                    if (slot == 1) {
+                        returnValue += 1;
+                    }
+                    else {
+                        returnValue += (int) Math.Pow(2, (slot-1));
+                    }
+                }
+
+                slot++;
+            }
+
+            return returnValue;
         }
 
 
@@ -155,8 +196,103 @@ namespace AdventOfCode2021 {
             Console.Write("2b: horizontal: " + currentHorizontal);
             Console.Write(", depth: " + currentDepth);
             Console.WriteLine(", product: " + (currentDepth * currentHorizontal));
-
         }
+
+
+        static void Day3() {
+
+            string fileName = dataFolderPath + "input_day_03.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            int lengthOfInputFile = lines.Length;
+
+            // Debug check.
+            Console.WriteLine("Size of input array: " + lengthOfInputFile);
+
+            // Day 3, Part 1.
+          
+            // Each bit in the gamma rate can be determined by finding the most common bit in the corresponding 
+            // position of all numbers in the diagnostic report.
+            // The epsilon rate is calculated in a similar way; rather than use the most common bit, 
+            // the least common bit from each position is used.
+
+            // Let's assume that the length of each line is the same as the first line.
+            int lengthOfInputValue = lines[0].Length;
+
+            string gammaValue = "";
+            string epsilonValue = "";
+         
+            for (int i= 0; i<lengthOfInputValue; i++) {
+
+                int countOfZeros = countValuePerColumn(lines, i, '0');
+                if ((countOfZeros) > (lengthOfInputFile / 2)) {
+
+                    gammaValue += '0';
+                    epsilonValue += '1';
+                }
+                else {
+                    gammaValue += '1';
+                    epsilonValue += '0';
+                }
+            }
+
+            int testValue = convertBinaryToDecimal("10110"); // Expect 22.
+            Console.WriteLine("Test case: expect 22: actual: " + testValue);
+
+            int gammaRate = convertBinaryToDecimal(gammaValue);
+            int epsilonRate = convertBinaryToDecimal(epsilonValue);
+
+            Console.Write("3a: gamma: " + gammaRate);
+            Console.Write(", epsilon: " + epsilonRate);
+            Console.WriteLine(", product: " + (gammaRate * epsilonRate));
+
+            // Day 3, Part 2.
+
+            // To find oxygen generator rating, determine the most common value(0 or 1) in the current bit position, 
+            // and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with
+            // a 1 in the position being considered.
+
+            //// Day 2, Part 2.
+            //currentHorizontal = 0;
+            //currentDepth = 0;
+            //int currentAim = 0;
+            //foreach (string line in lines) {
+
+            //    string[] commandData = line.Split(' ');
+            //    string command = commandData[0];
+            //    int distance = readNumber(commandData, 1);
+
+            //    switch (command) {
+
+            //        case "forward":
+            //            // forward X does two things:
+            //            // It increases your horizontal position by X units.
+            //            // It increases your depth by your aim multiplied by X.
+            //            currentHorizontal += distance;
+            //            currentDepth += (currentAim * distance);
+            //            break;
+
+            //        case "down":
+            //            // down X increases your aim by X units.
+            //            currentAim += distance;
+            //            break;
+
+            //        case "up":
+            //            // up X decreases your aim by X units.
+            //            currentAim -= distance;
+            //            break;
+
+            //        default:
+
+            //            Console.WriteLine("error!");
+            //            throw new Exception();
+            //    }
+            //}
+
+            //Console.Write("2b: horizontal: " + currentHorizontal);
+            //Console.Write(", depth: " + currentDepth);
+            //Console.WriteLine(", product: " + (currentDepth * currentHorizontal));
+        }
+
     }
 }
 
