@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.IO;
 
 
 // https://adventofcode.com/2021/
@@ -16,10 +18,12 @@ namespace AdventOfCode2021 {
 
             //Day1();
             //Day2();
-            Day3();
+            //Day3();
+            //Day4();
+            Day5();
 
             // Keep the console window open.
-            Console.WriteLine("Press any key to exit.");
+            Console.WriteLine("\nPress any key to exit.");
             System.Console.ReadKey();
         }
 
@@ -50,7 +54,7 @@ namespace AdventOfCode2021 {
             int returnValue = 0;
             int slot = 1;
 
-            for (int i = (binaryNumber.Length -1); i>=0; i--) {
+            for (int i = (binaryNumber.Length - 1); i >= 0; i--) {
 
                 if (binaryNumber[i] == '1') {
 
@@ -58,7 +62,7 @@ namespace AdventOfCode2021 {
                         returnValue += 1;
                     }
                     else {
-                        returnValue += (int) Math.Pow(2, (slot-1));
+                        returnValue += (int)Math.Pow(2, (slot - 1));
                     }
                 }
 
@@ -73,7 +77,7 @@ namespace AdventOfCode2021 {
 
             ArrayList output = new ArrayList();
 
-            for (int i=0; i<source.Length; i++) {
+            for (int i = 0; i < source.Length; i++) {
                 if (source[i][index] == filter) {
                     output.Add(source[i]);
                 }
@@ -81,11 +85,37 @@ namespace AdventOfCode2021 {
 
             // I am dumb and don't know how to quickly convert an array to a string[];
             string[] realOutput = new string[output.Count];
-            for (int i=0; i<realOutput.Length; i++) {
-                realOutput[i] = (string) output[i];
+            for (int i = 0; i < realOutput.Length; i++) {
+                realOutput[i] = (string)output[i];
             }
             return realOutput;
         }
+
+
+        //static string[] hackDiscardBlanks(string[] source) {
+
+        //    int blankCount = 0;
+        //    foreach (string line in source) {
+        //        if (line == "") {
+        //            blankCount++;
+        //        }
+        //    }
+
+        //    if (blankCount >0) {
+        //        string[] output = new string[source.Length - blankCount];
+        //        int currentIndex = 0;
+        //        foreach (string line in source) {
+        //            if (line != "") {
+        //                output[currentIndex] = line;
+        //                currentIndex++;
+
+        //            }
+        //        }
+        //        return output;
+        //    }
+
+        //    return source;
+        //}
 
         static void Day1() {
 
@@ -270,7 +300,7 @@ namespace AdventOfCode2021 {
             int oxygenGeneratorRating = 0;
             int co2scrubberRating = 0;
             int lifeSupportRating;
-          
+
             // To find oxygen generator rating, determine the most common value(0 or 1) in the current bit position, 
             // and keep only numbers with that bit in that position. If 0 and 1 are equally common, keep values with
             // a 1 in the position being considered.
@@ -327,6 +357,93 @@ namespace AdventOfCode2021 {
             Console.Write("3b: oxygenGeneratorRating: " + oxygenGeneratorRating);
             Console.Write(", co2scrubberRating: " + co2scrubberRating);
             Console.WriteLine(", lifeSupportRating: " + lifeSupportRating);
+        }
+
+
+        static void Day4() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_04.txt";
+            //string fileName = dataFolderPath + "input_day_04_test.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            // Day 4, Part 1.
+            Console.WriteLine("Starting 4a ...");
+            BingoFactory bingoFactory = new BingoFactory(lines);
+            bool foundWinner = false;
+
+            foreach (string calledNumber in bingoFactory.callableNumbers) {
+                foreach (BingoCard bingoCard in bingoFactory.bingoCards) {
+
+                    bool winner = bingoCard.callNumber(calledNumber);
+
+                    if (winner) {
+                        Console.Write("Winner! Card #" + bingoCard.id);
+                        Console.WriteLine(" , Score: " + bingoCard.getScore());
+                        foundWinner = true;
+                    }
+                }
+
+                // Debugging.
+                if (false) {
+                    Console.WriteLine("Called number: " + calledNumber);
+                    Console.WriteLine("");
+                    foreach (BingoCard bingoCard1 in bingoFactory.bingoCards) {
+                        bingoCard1.print();
+                    }
+                }
+
+                if (foundWinner)
+                    break;
+            }
+
+            // Day 4, Part 2.
+            Console.WriteLine("\nStarting 4b ...");
+            bingoFactory = new BingoFactory(lines);
+
+            foreach (string calledNumber in bingoFactory.callableNumbers) {
+                foreach (BingoCard bingoCard in bingoFactory.bingoCards) {
+
+                    bool winner = bingoCard.callNumber(calledNumber);
+
+                    // Debug
+                    if (false) {
+                        Console.WriteLine("Number: " + calledNumber + ", winner: " + winner + ", Open cards: " + bingoFactory.countOfOpenCards());
+                        Console.WriteLine("");
+                        foreach (BingoCard bingoCard1 in bingoFactory.bingoCards) {
+                            bingoCard1.print();
+                        }
+                    }
+
+                    if (bingoFactory.countOfOpenCards() == 0) {
+
+                        Console.Write("Last Winner! Card #" + bingoCard.id);
+                        Console.WriteLine(" , Score: " + bingoCard.getScore());
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        static void Day5() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_05.txt";
+            //string fileName = dataFolderPath + "input_day_05_test.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            // 5a.
+            OceanFloorMap map = new OceanFloorMap(lines);
+            map.plotStaightLinesOnly();
+            //map.print();
+            Console.WriteLine("\n5a: Amount of overlaps (2 or more): " + map.countOfOverlaps(2));
+
+            // 5b.
+            map = new OceanFloorMap(lines);
+            map.plotAllLines();
+            //map.print();
+            Console.WriteLine("\n5b: Amount of overlaps (2 or more): " + map.countOfOverlaps(2));
         }
     }
 }
