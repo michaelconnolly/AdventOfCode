@@ -22,7 +22,8 @@ namespace AdventOfCode2021 {
             //Day3();
             //Day4();
             //Day5();
-            Day6();
+            //Day6();
+            Day7();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -503,14 +504,14 @@ namespace AdventOfCode2021 {
                 }
 
                 long total = 0;
-                for (int i=0; i<9; i++) {
+                for (int i = 0; i < 9; i++) {
                     total += countofFishPerCohort[i];
                 }
                 return total;
             }
         }
-        
-        
+
+
         static void Day6() {
 
             // Load data.
@@ -521,7 +522,7 @@ namespace AdventOfCode2021 {
             // Fish data.
             List<LanternFish> lanternFishes = new List<LanternFish>();
             string[] fishData = lines[0].Split(',');
-            foreach(string aFish in fishData) {
+            foreach (string aFish in fishData) {
                 lanternFishes.Add(new LanternFish(aFish));
             }
 
@@ -532,6 +533,75 @@ namespace AdventOfCode2021 {
             // 6b.
             count = LetFishReproduce(lanternFishes, 256);
             Console.WriteLine("6b: count of LanternFish after 256 days: " + count);
+        }
+
+
+        static int CalculateCostOfMovingPositions(int start, int end) {
+
+            int moves = Math.Abs(start - end);
+            int costTotal = 0;
+            int costIncrement = 0;
+
+            for (int i=0; i<moves; i++) {
+                costIncrement++;
+                costTotal += costIncrement;
+            }
+
+            return costTotal;
+        }
+
+
+        static void Day7() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_07.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            string[] crabPositions = lines[0].Split(',');
+
+            // Let's figure out the max and min values, since the optional position is between them.
+            int maxPos = int.MinValue;
+            int minPos = int.MaxValue;
+            foreach (string position in crabPositions) {
+                int pos = Convert.ToInt32(position);
+                if (pos > maxPos) maxPos = pos;
+                if (pos < minPos) minPos = pos;
+            }
+
+            // 7a.
+            // Let's figure out the minimal amount of moves to get everyone on same position.
+            int bestPosition = -1;
+            int minFuelSpent = int.MaxValue;
+            for (int i = minPos; i <= maxPos; i++) {
+                int currentFuelSpent = 0;
+                foreach (string position in crabPositions) {
+                    int pos = Convert.ToInt32(position);
+                    currentFuelSpent += Math.Abs(i - pos);
+                }
+                if (currentFuelSpent < minFuelSpent) {
+                    bestPosition = i;
+                    minFuelSpent = currentFuelSpent;
+                }
+            }
+            Console.WriteLine("7a: best position: " + bestPosition + ", fuel spent:  " + minFuelSpent);
+
+            // 7b.
+            // Let's figure out the minimal amount of moves to get everyone on same position.
+            bestPosition = -1;
+            minFuelSpent = int.MaxValue;
+            for (int i = minPos; i <= maxPos; i++) {
+                int currentFuelSpent = 0;
+                foreach (string position in crabPositions) {
+                    int pos = Convert.ToInt32(position);
+                    //currentFuelSpent += Math.Abs(i - pos);
+                    currentFuelSpent += CalculateCostOfMovingPositions(i, pos);
+                }
+                if (currentFuelSpent < minFuelSpent) {
+                    bestPosition = i;
+                    minFuelSpent = currentFuelSpent;
+                }
+            }
+            Console.WriteLine("7b: best position: " + bestPosition + ", fuel spent:  " + minFuelSpent);
+
         }
     }
 }
