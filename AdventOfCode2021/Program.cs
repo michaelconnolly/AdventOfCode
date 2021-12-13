@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -20,7 +21,8 @@ namespace AdventOfCode2021 {
             //Day2();
             //Day3();
             //Day4();
-            Day5();
+            //Day5();
+            Day6();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -444,6 +446,92 @@ namespace AdventOfCode2021 {
             map.plotAllLines();
             //map.print();
             Console.WriteLine("\n5b: Amount of overlaps (2 or more): " + map.countOfOverlaps(2));
+        }
+
+
+        static long LetFishReproduce(System.Collections.Generic.List<LanternFish> lanternFishes, int days) {
+
+            bool simpleImplementation = false;
+
+            if (simpleImplementation) {
+
+                for (int i = 0; i < days; i++) {
+                    Console.WriteLine("day " + i + " ...");
+
+                    List<LanternFish> newFishes = new List<LanternFish>();
+                    foreach (LanternFish lanternFish in lanternFishes) {
+                        if (lanternFish.timer == 0) {
+                            lanternFish.timer = 6;
+                            newFishes.Add(new LanternFish("8"));
+                        }
+                        else {
+                            lanternFish.timer--;
+                        }
+                    }
+
+                    lanternFishes.AddRange(newFishes);
+                }
+
+                return lanternFishes.Count;
+            }
+
+            // Scalable implementaton.
+            else {
+
+                long[] countofFishPerCohort = new long[9];
+
+                // Map the amount of fish in each stage to our new summary array.
+                foreach (LanternFish fish in lanternFishes) {
+                    countofFishPerCohort[fish.timer]++;
+                }
+
+                for (int day = 0; day < days; day++) {
+
+                    Console.WriteLine("day " + day + " ...");
+
+                    // for any fish at timer=0, spawn and restart yourself.
+                    long countOfMatureFishAtZero = countofFishPerCohort[0];
+
+                    // drop the timer down for each cohort that is not at zero.
+                    for (int i = 1; i < 9; i++) {
+                        countofFishPerCohort[i - 1] = countofFishPerCohort[i];
+                    }
+
+                    // for any fish at timer=0, spawn and restart yourself.
+                    countofFishPerCohort[6] += countOfMatureFishAtZero;
+                    countofFishPerCohort[8] = countOfMatureFishAtZero;
+                }
+
+                long total = 0;
+                for (int i=0; i<9; i++) {
+                    total += countofFishPerCohort[i];
+                }
+                return total;
+            }
+        }
+        
+        
+        static void Day6() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_06.txt";
+            //string fileName = dataFolderPath + "input_day_06_test.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            // Fish data.
+            List<LanternFish> lanternFishes = new List<LanternFish>();
+            string[] fishData = lines[0].Split(',');
+            foreach(string aFish in fishData) {
+                lanternFishes.Add(new LanternFish(aFish));
+            }
+
+            // 6a.
+            long count = LetFishReproduce(lanternFishes, 80);
+            Console.WriteLine("6a: count of LanternFish after 80 days: " + count);
+
+            // 6b.
+            count = LetFishReproduce(lanternFishes, 256);
+            Console.WriteLine("6b: count of LanternFish after 256 days: " + count);
         }
     }
 }
