@@ -23,7 +23,8 @@ namespace AdventOfCode2021 {
             //Day4();
             //Day5();
             //Day6();
-            Day7();
+            //Day7();
+            Day8();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -542,7 +543,7 @@ namespace AdventOfCode2021 {
             int costTotal = 0;
             int costIncrement = 0;
 
-            for (int i=0; i<moves; i++) {
+            for (int i = 0; i < moves; i++) {
                 costIncrement++;
                 costTotal += costIncrement;
             }
@@ -601,8 +602,36 @@ namespace AdventOfCode2021 {
                 }
             }
             Console.WriteLine("7b: best position: " + bestPosition + ", fuel spent:  " + minFuelSpent);
+        }
 
+
+
+        static void Day8() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_08.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            Collection<SevenSegmentDisplay> displays = new Collection<SevenSegmentDisplay>();
+            foreach (string line in lines) {
+                string[] lineSegments = line.Split(" | ");
+                string[] tenValues = lineSegments[0].Split(' ');
+                string[] outputCodes = lineSegments[1].Split(' ');
+                displays.Add(new SevenSegmentDisplay(tenValues, outputCodes));
+            }
+
+            // 8a
+            int count = 0;
+            foreach (SevenSegmentDisplay display in displays) {
+                count += display.countOfUniqueLengthCodes;
+            }
+            Console.WriteLine("8a: count of output codes with unique lengths: " + count);
+
+            // 8b.
+            int total = 0;
+            foreach (SevenSegmentDisplay display in displays) {
+                total += display.outputValue;
+            }
+            Console.WriteLine("8b: " + total);
         }
     }
 }
-
