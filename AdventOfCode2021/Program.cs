@@ -24,7 +24,8 @@ namespace AdventOfCode2021 {
             //Day5();
             //Day6();
             //Day7();
-            Day8();
+            //Day8();
+            Day9();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -632,6 +633,100 @@ namespace AdventOfCode2021 {
                 total += display.outputValue;
             }
             Console.WriteLine("8b: " + total);
+        }
+
+
+        static string coordinate(int x, int y) {
+            return "(" + x + "," + y + ")";
+        }
+
+
+        static Collection<string> calculateBasin(int[,] map, int mapWidth, int mapHeight, int x, int y, Collection<string> basin) {
+
+            basin.Add(coordinate(x, y));
+
+            // Check up.
+            if ((y != 0) && (map[x, y - 1] != 9) && (!basin.Contains(coordinate(x, y - 1))))
+                calculateBasin(map, mapWidth, mapHeight, x, y - 1, basin);
+
+            // Check down.
+            if ((y != (mapHeight - 1) && (map[x, y + 1] != 9) && (!basin.Contains(coordinate(x, y + 1)))))
+                calculateBasin(map, mapWidth, mapHeight, x, y + 1, basin);
+
+            // Check left.
+            if ((x != 0) && (map[x - 1, y] != 9) && (!basin.Contains(coordinate(x - 1, y))))
+                calculateBasin(map, mapWidth, mapHeight, x - 1, y, basin);
+
+            // Check down.
+            if ((x != (mapWidth - 1) && (map[x + 1, y] != 9) && (!basin.Contains(coordinate(x + 1, y)))))
+                calculateBasin(map, mapWidth, mapHeight, x + 1, y, basin);
+
+            return basin;
+        }
+
+
+        static void Day9() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_09.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            int mapWidth = lines[0].Length;
+            int mapHeight = lines.Length;
+            int[,] map = new int[mapWidth, mapHeight];
+            for (int y = 0; y < mapHeight; y++) {
+                string currentRow = lines[y];
+                char[] currentRowValues = currentRow.ToCharArray();
+                for (int x = 0; x < mapWidth; x++) {
+                    map[x, y] = Convert.ToInt32(currentRowValues[x].ToString());
+                }
+            }
+
+            // 9a: find low points.
+            Collection<int> lowPoints = new Collection<int>();
+            Collection<Collection<string>> basins = new Collection<Collection<string>>();
+
+            for (int y = 0; y < mapHeight; y++) {
+                for (int x = 0; x < mapWidth; x++) {
+
+                    if (((y == 0) || (map[x, y] < map[x, y - 1])) &&  // above
+                        ((y == (mapHeight - 1)) || (map[x, y] < map[x, y + 1])) &&  // below
+                        ((x == 0) || (map[x, y] < map[x - 1, y])) &&  // left
+                        ((x == (mapWidth - 1)) || (map[x, y] < map[x + 1, y]))) {  // right
+
+                        lowPoints.Add(map[x, y]);
+
+                        basins.Add(calculateBasin(map, mapWidth, mapHeight, x, y, new Collection<string>()));
+                    }
+                }
+            }
+
+            // Calculate risk level.
+            int riskLevel = 0;
+            foreach (int lowPoint in lowPoints) riskLevel += (1 + lowPoint);
+            Console.WriteLine("9a: risklevel sum is " + riskLevel);
+
+            // Poor man's sorting algorithm: just find top 3.
+            int size1 = 0;
+            int size2 = 0;
+            int size3 = 0;
+            foreach (Collection<string> basin in basins) {
+                int count = basin.Count;
+                Console.WriteLine("9b: basin size: " + count);
+                if (count > size1) {
+                    size3 = size2;
+                    size2 = size1;
+                    size1 = count;
+                }
+                else if (count > size2) {
+                    size3 = size2;
+                    size2 = count;
+                }
+                else if (count > size3) {
+                    size3 = count;
+                }
+            }
+            Console.WriteLine("9b: product of top 3 basin sizes: " + (size1 * size2 * size3));
+            return;
         }
     }
 }
