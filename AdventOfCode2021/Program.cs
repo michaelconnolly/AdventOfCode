@@ -26,7 +26,8 @@ namespace AdventOfCode2021 {
             //Day7();
             //Day8();
             //Day9();
-            Day10();
+            //Day10();
+            Day11();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -824,6 +825,42 @@ namespace AdventOfCode2021 {
 
             autocorrectScores.Sort();
             Console.WriteLine("middle: " + autocorrectScores[(((autocorrectScores.Count + 1) / 2) - 1)]);
+        }
+
+
+        static void Day11() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_11.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+           
+            // iterations for 11a.
+            OctopusMap octopusMap = new OctopusMap(lines);
+            int iterations = 100;
+            int countOfFlashes = 0;
+            // octopusMap.print();
+            for (int i=0; i<iterations; i++) {
+                countOfFlashes += octopusMap.oneStep();
+                octopusMap.checkSynchronization(i);
+                //Console.WriteLine("\nEnd of iteration " + (i+1) + ": \n");
+                //octopusMap.print();
+            }
+            Console.WriteLine("11a: " + countOfFlashes);
+
+
+            // iterations for 11b.
+            octopusMap = new OctopusMap(lines);
+            iterations = 1000;
+            countOfFlashes = 0;
+            //octopusMap.print();
+            for (int i = 0; i < iterations; i++) {
+                countOfFlashes += octopusMap.oneStep();
+                octopusMap.checkSynchronization(i);
+                //Console.WriteLine("\nEnd of iteration " + (i+1) + ": \n");
+                //octopusMap.print();
+            }
+
+            Console.WriteLine("11b: " + (octopusMap.firstSynchronization + 1));
         }
     }
 }
