@@ -25,7 +25,8 @@ namespace AdventOfCode2021 {
             //Day6();
             //Day7();
             //Day8();
-            Day9();
+            //Day9();
+            Day10();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -727,6 +728,102 @@ namespace AdventOfCode2021 {
             }
             Console.WriteLine("9b: product of top 3 basin sizes: " + (size1 * size2 * size3));
             return;
+        }
+
+
+        static void Day10() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_10.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+
+            // Our "globals" for this exercise.
+            int totalErrorCheckingScore = 0;
+            List<long> autocorrectScores = new List<long>();
+
+            // Parse each line, find corrupt and incomplete lines.
+            foreach (string line in lines) {
+
+                bool corrupt = false;
+                Collection<char> expectedClosures = new Collection<char>();
+
+                for (int i = 0; i < line.Length; i++) {
+
+                    char currentChar = line[i];
+                    if (corrupt) break;
+
+                    switch (currentChar) {
+
+                        case '(':
+                            expectedClosures.Add(')');
+                            break;
+                        case '[':
+                            expectedClosures.Add(']');
+                            break;
+                        case '<':
+                            expectedClosures.Add('>');
+                            break;
+                        case '{':
+                            expectedClosures.Add('}');
+                            break;
+
+                        case ')':
+                        case ']':
+                        case '>':
+                        case '}':
+                            if (currentChar != expectedClosures[expectedClosures.Count - 1]) {
+                                corrupt = true;
+
+                                if (currentChar == ')') totalErrorCheckingScore += 3;
+                                if (currentChar == ']') totalErrorCheckingScore += 57;
+                                if (currentChar == '}') totalErrorCheckingScore += 1197;
+                                if (currentChar == '>') totalErrorCheckingScore += 25137;
+                            }
+                            else {
+                                expectedClosures.RemoveAt(expectedClosures.Count - 1);
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+
+                // cleanup for this line.
+                if (corrupt) {
+                    Console.WriteLine("line " + line + " is corrupt!");
+                }
+                else if (expectedClosures.Count > 0) {
+                    Console.WriteLine("line " + line + " is not complete.");
+
+                    long autocorrectScore = 0;
+                    for (int j = expectedClosures.Count - 1; j >= 0; j--) {
+                        if (expectedClosures[j] == ')') autocorrectScore = (autocorrectScore * 5) + 1;
+                        else if (expectedClosures[j] == ']') autocorrectScore = (autocorrectScore * 5) + 2;
+                        else if (expectedClosures[j] == '}') autocorrectScore = (autocorrectScore * 5) + 3;
+                        else if (expectedClosures[j] == '>') autocorrectScore = (autocorrectScore * 5) + 4;
+                        else throw new Exception();
+                    }
+                    autocorrectScores.Add(autocorrectScore);
+
+                }
+                else {
+                    Console.WriteLine("line " + line + " is OK.");
+                }
+
+
+            }
+
+            // 10a.
+            Console.WriteLine("10a: " + totalErrorCheckingScore);
+
+            // 10b.
+            foreach (long score in autocorrectScores) {
+                Console.WriteLine("autocorrect score: " + score);
+            }
+
+            autocorrectScores.Sort();
+            Console.WriteLine("middle: " + autocorrectScores[(((autocorrectScores.Count + 1) / 2) - 1)]);
         }
     }
 }
