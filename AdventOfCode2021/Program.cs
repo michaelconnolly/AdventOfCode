@@ -27,7 +27,8 @@ namespace AdventOfCode2021 {
             //Day8();
             //Day9();
             //Day10();
-            Day11();
+            //Day11();
+            Day12();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -833,13 +834,13 @@ namespace AdventOfCode2021 {
             // Load data.
             string fileName = dataFolderPath + "input_day_11.txt";
             string[] lines = System.IO.File.ReadAllLines(fileName);
-           
+
             // iterations for 11a.
             OctopusMap octopusMap = new OctopusMap(lines);
             int iterations = 100;
             int countOfFlashes = 0;
             // octopusMap.print();
-            for (int i=0; i<iterations; i++) {
+            for (int i = 0; i < iterations; i++) {
                 countOfFlashes += octopusMap.oneStep();
                 octopusMap.checkSynchronization(i);
                 //Console.WriteLine("\nEnd of iteration " + (i+1) + ": \n");
@@ -861,6 +862,160 @@ namespace AdventOfCode2021 {
             }
 
             Console.WriteLine("11b: " + (octopusMap.firstSynchronization + 1));
+        }
+
+
+        static int CountOfInstances(Collection<string> collection, string termToSearchFor) {
+
+            int count = 0;
+
+            foreach (string item in collection) {
+                if (item == termToSearchFor) count++;
+            }
+
+            return count;
+        }
+
+
+        static Collection<string> findChoices(string[,] paths, string node, Collection<string> previousChoices, string smallCaveTwice = null) {
+
+            Collection<string> newChoicesProposed = new Collection<string>();
+            Collection<string> newChoicesFinal = new Collection<string>();
+
+            // Find the raw choices.
+            for (int i = 0; i < (paths.Length / 2); i++) {
+                if (paths[i, 0] == node) newChoicesProposed.Add(paths[i, 1]);
+                else if (paths[i, 1] == node) newChoicesProposed.Add(paths[i, 0]);
+            }
+
+            foreach (string newChoice in newChoicesProposed) {
+                if (!(Char.IsLower(newChoice[0]) && previousChoices.Contains(newChoice))) {
+                    newChoicesFinal.Add(newChoice);
+                }
+                else if ((Char.IsLower(newChoice[0])) && (smallCaveTwice == newChoice) && (2 > CountOfInstances(previousChoices, smallCaveTwice))) {
+                    newChoicesFinal.Add(newChoice);
+                }
+            }
+
+            return newChoicesFinal;
+        }
+
+
+        static bool IsThisCollectionAlreadyHere(Collection<Collection<string>> allLegalPaths, Collection<string> proposedLegalPath) {
+
+            foreach (Collection<string> legitLegalPath in allLegalPaths) {
+
+                if (legitLegalPath.Count == proposedLegalPath.Count) {
+
+                    bool same = true;
+                    for (int i = 0; i < legitLegalPath.Count; i++) {
+                        if (legitLegalPath[i] != proposedLegalPath[i]) {
+                            same = false;
+                            break;
+                        }
+                    }
+                    if (same) return same;
+                }
+            }
+            return false;
+        }
+
+
+        static Collection<Collection<string>> FindLegalPaths(string[,] paths, Collection<string> pathSoFar, Collection<Collection<string>> allLegalPaths, string smallCaveTwice = null) {
+
+            string currentNode = pathSoFar[pathSoFar.Count - 1];
+            Collection<string> nextChoices = findChoices(paths, currentNode, pathSoFar, smallCaveTwice);
+
+            foreach (string nextChoice in nextChoices) {
+
+                // to be safe, make a copy.
+                Collection<string> legalPath = new Collection<string>();
+                foreach (string node in pathSoFar) legalPath.Add(node);
+                legalPath.Add(nextChoice);
+
+                // did we reach the end.
+                if (nextChoice == "end") {
+
+                    if (!IsThisCollectionAlreadyHere(allLegalPaths, legalPath)) {
+                        allLegalPaths.Add(legalPath);
+                    }
+                }
+                else {
+
+                    allLegalPaths = FindLegalPaths(paths, legalPath, allLegalPaths, smallCaveTwice);
+                }
+            }
+
+            return allLegalPaths;
+        }
+
+
+        static void Day12() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_12.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            string[,] paths = new string[lines.Length, 2];
+            for (int i = 0; i < lines.Length; i++) {
+                string[] currentPath = lines[i].Split('-');
+                paths[i, 0] = currentPath[0];
+                paths[i, 1] = currentPath[1];
+            }
+
+            // 12a.
+            Collection<string> pathSoFar = new Collection<string>();
+            Collection<Collection<string>> allLegalPaths = new Collection<Collection<string>>();
+            pathSoFar.Add("start");
+            allLegalPaths = FindLegalPaths(paths, pathSoFar, allLegalPaths);
+            Console.WriteLine("12a: count of legal paths: " + allLegalPaths.Count);
+
+            // Debugging.
+            if (false) {
+                foreach (Collection<string> path in allLegalPaths) {
+                    foreach (string step in path) {
+                        Console.Write(step);
+                        Console.Write(",");
+                    }
+                    Console.WriteLine("");
+                }
+            }
+
+            // 12b.
+            pathSoFar = new Collection<string>();
+            allLegalPaths = new Collection<Collection<string>>();
+            pathSoFar.Add("start");
+
+            // Figure out which small caves exist.
+            Collection<string> smallCaves = new Collection<string>();
+            for (int i = 0; i < (paths.Length / 2); i++) {
+                string first = paths[i, 0];
+                string second = paths[i, 1];
+                if (first != "start" && first != "end" && Char.IsLower(first[0])) {
+                    if (!smallCaves.Contains(first)) smallCaves.Add(first);
+                }
+                if (second != "start" && second != "end" && Char.IsLower(second[0])) {
+                    if (!smallCaves.Contains(second)) smallCaves.Add(second);
+                }
+            }
+
+            foreach (string smallCave in smallCaves) {
+                allLegalPaths = FindLegalPaths(paths, pathSoFar, allLegalPaths, smallCave);
+            }
+
+            Console.WriteLine("12b: count of legal paths: " + allLegalPaths.Count);
+
+            // Debug.
+            if (false) {
+                foreach (Collection<string> path in allLegalPaths) {
+                    foreach (string step in path) {
+                        Console.Write(step);
+                        Console.Write(",");
+                    }
+                    Console.WriteLine("");
+                }
+            }
+
+            return;
         }
     }
 }
