@@ -28,7 +28,8 @@ namespace AdventOfCode2021 {
             //Day9();
             //Day10();
             //Day11();
-            Day12();
+            //Day12();
+            Day13();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -1016,6 +1017,33 @@ namespace AdventOfCode2021 {
             }
 
             return;
+        }
+
+
+        static void Day13() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_13.txt";
+            string[] lines = System.IO.File.ReadAllLines(fileName);
+            FoldablePaper paper = new FoldablePaper(lines);
+            //paper.print();
+
+            // 13a.
+            if (paper.folds.Count == 0) throw new Exception();
+            string[] firstFold = paper.folds[0];
+            paper.doFold(firstFold);
+            int count = paper.getDotCount();
+           // paper.print();
+            Console.WriteLine("13a: " + count);
+
+            // 13b.
+            paper = new FoldablePaper(lines);
+            foreach (string[] fold in paper.folds) {
+                paper.doFold(fold);
+            //    paper.print();
+            }
+            Console.WriteLine("13b:");
+            paper.print();
         }
     }
 }
