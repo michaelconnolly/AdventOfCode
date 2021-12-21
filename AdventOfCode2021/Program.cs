@@ -29,7 +29,8 @@ namespace AdventOfCode2021 {
             //Day10();
             //Day11();
             //Day12();
-            Day13();
+            //Day13();
+            Day14();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -1033,17 +1034,47 @@ namespace AdventOfCode2021 {
             string[] firstFold = paper.folds[0];
             paper.doFold(firstFold);
             int count = paper.getDotCount();
-           // paper.print();
+            // paper.print();
             Console.WriteLine("13a: " + count);
 
             // 13b.
             paper = new FoldablePaper(lines);
             foreach (string[] fold in paper.folds) {
                 paper.doFold(fold);
-            //    paper.print();
+                //    paper.print();
             }
             Console.WriteLine("13b:");
             paper.print();
+        }
+
+
+        static void Day14() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_14.txt";
+            string[] lines = File.ReadAllLines(fileName);
+
+            // 14a.
+            PolymerFactory polymerFactory = new PolymerFactory(lines);
+            polymerFactory.print();
+
+            for (int i = 0; i < 10; i++) {
+                polymerFactory.iterate();
+                polymerFactory.print();
+                Console.WriteLine("14a: after " + (i + 1) + " iterations: " + polymerFactory.GetTemplateLength());
+                Console.WriteLine("14a: most common minus least common: " + polymerFactory.MostCommonMinusLeastCommon());
+                Console.WriteLine("");
+            }
+         
+            // 14b.
+            polymerFactory = new PolymerFactory(lines);
+            for (int i = 0; i < 40; i++) {
+                polymerFactory.iterate();
+                polymerFactory.print();
+                Console.WriteLine("14b: after " + (i + 1) + " iterations: " + polymerFactory.GetTemplateLength());
+                Console.WriteLine("14b: most common minus least common: " + polymerFactory.MostCommonMinusLeastCommon());
+                Console.WriteLine("");
+            }
         }
     }
 }
