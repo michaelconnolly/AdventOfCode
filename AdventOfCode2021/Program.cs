@@ -30,7 +30,8 @@ namespace AdventOfCode2021 {
             //Day11();
             //Day12();
             //Day13();
-            Day14();
+            //Day14();
+            Day15();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -1065,7 +1066,7 @@ namespace AdventOfCode2021 {
                 Console.WriteLine("14a: most common minus least common: " + polymerFactory.MostCommonMinusLeastCommon());
                 Console.WriteLine("");
             }
-         
+
             // 14b.
             polymerFactory = new PolymerFactory(lines);
             for (int i = 0; i < 40; i++) {
@@ -1076,5 +1077,34 @@ namespace AdventOfCode2021 {
                 Console.WriteLine("");
             }
         }
+
+
+        static void Day15() {
+
+            // Load data.
+            string fileName = dataFolderPath + "input_day_15_test4.txt";
+            string[] lines = File.ReadAllLines(fileName);
+
+            // 15a.
+            RiskLevelMap riskLevelMap = new RiskLevelMap(lines);
+
+            //int cheapPath = riskLevelMap.FindCheapestPath(new Collection<Coordinate>(), new Coordinate(0, 0));
+            //int cheapPath = riskLevelMap.FindCheapestPathBackwards();
+
+            Collection<Coordinate> coordinates = new Collection<Coordinate>();
+            //coordinates.Add(new Coordinate(0, 0));
+
+
+            //int cheapPath = riskLevelMap.FindCheapestPath2(new Coordinate(0, 0), 0, coordinates, 1);
+
+            int cheapPath = riskLevelMap.MyLastTry(new Coordinate(0, 0), coordinates);
+
+            Console.WriteLine("15a: cheapest path: " + cheapPath);
+            Console.WriteLine("15a: iterations: " + riskLevelMap.iterations);
+            Console.WriteLine("15a: paceCarCost: " + riskLevelMap.paceCarCost);
+        }
     }
+
+
+
 }

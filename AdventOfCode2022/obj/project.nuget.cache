@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PkSyoKg9VM5KCmleU+af5Ycor44B2tg6oFd8br/dPG08WMFu2g4i6D9X5aStwHSsCIViTYaLJiq2j537Ia4G/Q==",
+  "success": true,
+  "projectFilePath": "C:\\dev\\AdventOfCode\\AdventOfCode2022\\AdventOfCode2022.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mc\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.29\\microsoft.netcore.app.host.win-x64.3.1.29.nupkg.sha512"
+  ],
+  "logs": []
+}
