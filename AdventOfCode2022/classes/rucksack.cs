@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace AdventOfCode2022 {
 
-    internal class rucksack {
+    internal class Rucksack {
 
         public string compartment1;
         public string compartment2;
 
-        public rucksack(string line) {
+        public Rucksack(string line) {
 
             this.compartment1 = line.Substring(0, ((line.Length / 2)));
             this.compartment2 = line.Substring(line.Length / 2);
@@ -55,7 +55,7 @@ namespace AdventOfCode2022 {
         public int score() {
 
             string badItem = this.badItem();
-            return rucksack.ConvertStringToInt(badItem);
+            return Rucksack.ConvertStringToInt(badItem);
         }
 
         public Dictionary<string, int> contents() {

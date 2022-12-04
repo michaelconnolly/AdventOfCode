@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode2022.classes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,8 @@ namespace AdventOfCode2022 {
 
             //Day1();
             //Day2();
-            Day3();
+            //Day3();
+            Day4();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -79,7 +81,7 @@ namespace AdventOfCode2022 {
             int totalScore2 = 0;
 
             foreach (string line in lines) {
-                rpsHand hand = new rpsHand(line);
+                RpsHand hand = new RpsHand(line);
                 totalScore += hand.score();
                 totalScore2 += hand.score2();
                 hand.print();
@@ -106,7 +108,7 @@ namespace AdventOfCode2022 {
  
             foreach (string line in lines) {
 
-                rucksack rucksack = new rucksack(line);
+                Rucksack rucksack = new Rucksack(line);
                 totalScore += rucksack.score();
                 rucksack.print();
             }
@@ -123,9 +125,9 @@ namespace AdventOfCode2022 {
 
                 // Figure out, in each group of 3, what is the one item that is common amongst all three.  
 
-                rucksack rucksack1 = new rucksack(lines[(i * 3) + 0]);
-                rucksack rucksack2 = new rucksack(lines[(i * 3) + 1]);
-                rucksack rucksack3 = new rucksack(lines[(i * 3) + 2]);
+                Rucksack rucksack1 = new Rucksack(lines[(i * 3) + 0]);
+                Rucksack rucksack2 = new Rucksack(lines[(i * 3) + 1]);
+                Rucksack rucksack3 = new Rucksack(lines[(i * 3) + 2]);
 
                 Dictionary<string, int> contents1 = rucksack1.contents();
                 Dictionary<string, int> contents2 = rucksack2.contents();
@@ -136,7 +138,7 @@ namespace AdventOfCode2022 {
                 foreach (string key in contents1.Keys) {
 
                     if ((contents2.ContainsKey(key)) && (contents3.ContainsKey(key))) {
-                        totalScore2 += rucksack.ConvertStringToInt(key);
+                        totalScore2 += Rucksack.ConvertStringToInt(key);
                         foundIt = true;
                         break;
                     }
@@ -146,6 +148,40 @@ namespace AdventOfCode2022 {
             }
 
             Console.WriteLine("total score 2: " + totalScore2);
+        }
+
+        static void Day4() {
+
+            string fileName = dataFolderPath + "input_04.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input array: " + lines.Length);
+            
+            // each line is a pair of section ranges, looking like [2-4,6-8];
+          
+            int countOfWithins = 0;
+            int countOfOverlaps = 0;
+
+            foreach (string line in lines) {
+
+                string[] ranges = line.Split(",");
+                SectionRange range1 = new SectionRange(ranges[0]);
+                SectionRange range2 = new SectionRange(ranges[1]);
+                range1.print();
+                range2.print();
+
+                if (range1.isWithin(range2) || range2.isWithin(range1)) {
+                    countOfWithins++;
+                    Console.WriteLine("*** within!");
+                }
+                if (range1.overlaps(range2)) {
+                    countOfOverlaps++;
+                    Console.WriteLine("*** overlap!");
+                }
+            }
+
+            // I have your answer for you.
+            Console.WriteLine("total withins " + countOfWithins);
+            Console.WriteLine("total overlaps: " + countOfOverlaps);
         }
     }
 }

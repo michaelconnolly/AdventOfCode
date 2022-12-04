@@ -2,12 +2,12 @@
 
 namespace AdventOfCode2022 {
 
-    internal class rpsHand {
+    internal class RpsHand {
 
         public char choice1;
         public char choice2;
 
-        public rpsHand(string line) {
+        public RpsHand(string line) {
 
             string[] hand = line.Split(" ");
             choice1 = hand[0][0];
