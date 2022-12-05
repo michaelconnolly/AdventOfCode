@@ -15,7 +15,8 @@ namespace AdventOfCode2022 {
             //Day1();
             //Day2();
             //Day3();
-            Day4();
+            //Day4();
+            Day5();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -182,6 +183,35 @@ namespace AdventOfCode2022 {
             // I have your answer for you.
             Console.WriteLine("total withins " + countOfWithins);
             Console.WriteLine("total overlaps: " + countOfOverlaps);
+        }
+
+        static void Day5() {
+
+            string fileName = dataFolderPath + "input_05.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input array: " + lines.Length);
+
+            // there are two sections in the input file, delimited by a blank line.
+            // section 1: each column is a stack of crates, with the bottom row being an integer (column id)
+            // section 2: a set of commands to move the top most crate from a column to another column
+
+            //   Part One.
+            CrateController crateController = new CrateController(lines);
+            crateController.print();
+            crateController.ExecuteCommands();
+            crateController.print();
+
+            // I have your answer for you.
+            Console.WriteLine("top crates: " + crateController.TopCrates());
+
+            //   Part Two.
+            crateController = new CrateController(lines);
+            crateController.print();
+            crateController.ExecuteCommands2();
+            crateController.print();
+
+            // I have your answer for you.
+            Console.WriteLine("top crates: " + crateController.TopCrates());
         }
     }
 }
