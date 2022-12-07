@@ -16,7 +16,8 @@ namespace AdventOfCode2022 {
             //Day2();
             //Day3();
             //Day4();
-            Day5();
+            //Day5();
+            Day6();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -212,6 +213,20 @@ namespace AdventOfCode2022 {
 
             // I have your answer for you.
             Console.WriteLine("top crates: " + crateController.TopCrates());
+        }
+
+        static void Day6() {
+
+            string fileName = dataFolderPath + "input_06.txt";
+            string line = File.ReadAllText(fileName);
+            Console.WriteLine("Size of input string: " + line.Length);
+
+            DataStream dataStream = new DataStream(line);
+            dataStream.Print();
+          
+            // I have your answer for you.
+            Console.WriteLine("start marker: " + dataStream.StartMarker());
+            Console.WriteLine("message marker: " + dataStream.MessageMarker());
         }
     }
 }
