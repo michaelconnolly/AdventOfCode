@@ -17,7 +17,8 @@ namespace AdventOfCode2022 {
             //Day3();
             //Day4();
             //Day5();
-            Day6();
+            //Day6();
+            Day7();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -227,6 +228,22 @@ namespace AdventOfCode2022 {
             // I have your answer for you.
             Console.WriteLine("start marker: " + dataStream.StartMarker());
             Console.WriteLine("message marker: " + dataStream.MessageMarker());
+        }
+
+        static void Day7() {
+
+            string fileName = dataFolderPath + "input_07.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            FileSystem fileSystem = new FileSystem(lines);
+            fileSystem.ParseCommands();
+
+            // I have your answer for you.
+            long size = fileSystem.root.size;
+            Console.WriteLine("root size: " + size);
+            Console.WriteLine("question one: " + fileSystem.QuestionOne());
+            Console.WriteLine("question two: " + fileSystem.QuestionTwo());
         }
     }
 }
