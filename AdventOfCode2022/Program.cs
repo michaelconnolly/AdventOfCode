@@ -18,7 +18,8 @@ namespace AdventOfCode2022 {
             //Day4();
             //Day5();
             //Day6();
-            Day7();
+            //Day7();
+            Day8();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -244,6 +245,20 @@ namespace AdventOfCode2022 {
             Console.WriteLine("root size: " + size);
             Console.WriteLine("question one: " + fileSystem.QuestionOne());
             Console.WriteLine("question two: " + fileSystem.QuestionTwo());
+        }
+
+        static void Day8() {
+
+            string fileName = dataFolderPath + "input_08.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            TreeMatrix treeMatrix = new TreeMatrix(lines);
+            treeMatrix.Print();
+            
+            //// I have your answer for you.
+            Console.WriteLine("visible tree count: " + treeMatrix.VisibleCount());
+            Console.WriteLine("best scenic score: " + treeMatrix.CheckScenicScore());
         }
     }
 }
