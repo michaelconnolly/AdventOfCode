@@ -19,7 +19,8 @@ namespace AdventOfCode2022 {
             //Day5();
             //Day6();
             //Day7();
-            Day8();
+            //Day8();
+            Day9();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -260,5 +261,27 @@ namespace AdventOfCode2022 {
             Console.WriteLine("visible tree count: " + treeMatrix.VisibleCount());
             Console.WriteLine("best scenic score: " + treeMatrix.CheckScenicScore());
         }
+
+        static void Day9() {
+
+            string fileName = dataFolderPath + "input_09.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            RopeMap ropeMap = new RopeMap(lines, 1);
+            ropeMap.ExecuteCommands();
+            ropeMap.Print();
+
+            // I have your answer for you.
+            Console.WriteLine("Q1: visited count: " + ropeMap.VisitedCount());
+  
+            ropeMap = new RopeMap(lines, 9);
+            ropeMap.ExecuteCommands();
+            ropeMap.Print();
+
+            // I have your answer for you.
+            Console.WriteLine("Q2: visited count: " + ropeMap.VisitedCount());
+        }
+
     }
 }
