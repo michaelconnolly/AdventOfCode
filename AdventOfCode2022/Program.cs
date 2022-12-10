@@ -20,7 +20,8 @@ namespace AdventOfCode2022 {
             //Day6();
             //Day7();
             //Day8();
-            Day9();
+            //Day9();
+            Day10();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -283,5 +284,21 @@ namespace AdventOfCode2022 {
             Console.WriteLine("Q2: visited count: " + ropeMap.VisitedCount());
         }
 
+        static void Day10() {
+
+            string fileName = dataFolderPath + "input_10.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            VideoSignal videoSignal = new VideoSignal(lines);
+            videoSignal.RunInstructions();
+
+            //// I have your answer for you.
+            Console.WriteLine("final value: " + videoSignal.registerX);
+            Console.WriteLine("question one: " + videoSignal.QuestionOne());
+
+            videoSignal = new VideoSignal(lines);
+            videoSignal.RunInstructions(true);
+        }
     }
 }
