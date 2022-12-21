@@ -21,7 +21,11 @@ namespace AdventOfCode2022 {
             //Day7();
             //Day8();
             //Day9();
-            Day10();
+            //Day10();
+            //Day11(); // not completed part 2.
+            //Day12(); // test data complete; not completed part 1 & 2.
+            //Day13(); // test data complete; not completed part 1 & 2.
+            Day14();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -111,7 +115,7 @@ namespace AdventOfCode2022 {
             // that one thing has a score.  Tell me the score.
 
             int totalScore = 0;
- 
+
             foreach (string line in lines) {
 
                 Rucksack rucksack = new Rucksack(line);
@@ -161,9 +165,9 @@ namespace AdventOfCode2022 {
             string fileName = dataFolderPath + "input_04.txt";
             string[] lines = File.ReadAllLines(fileName);
             Console.WriteLine("Size of input array: " + lines.Length);
-            
+
             // each line is a pair of section ranges, looking like [2-4,6-8];
-          
+
             int countOfWithins = 0;
             int countOfOverlaps = 0;
 
@@ -227,7 +231,7 @@ namespace AdventOfCode2022 {
 
             DataStream dataStream = new DataStream(line);
             dataStream.Print();
-          
+
             // I have your answer for you.
             Console.WriteLine("start marker: " + dataStream.StartMarker());
             Console.WriteLine("message marker: " + dataStream.MessageMarker());
@@ -257,7 +261,7 @@ namespace AdventOfCode2022 {
 
             TreeMatrix treeMatrix = new TreeMatrix(lines);
             treeMatrix.Print();
-            
+
             //// I have your answer for you.
             Console.WriteLine("visible tree count: " + treeMatrix.VisibleCount());
             Console.WriteLine("best scenic score: " + treeMatrix.CheckScenicScore());
@@ -275,7 +279,7 @@ namespace AdventOfCode2022 {
 
             // I have your answer for you.
             Console.WriteLine("Q1: visited count: " + ropeMap.VisitedCount());
-  
+
             ropeMap = new RopeMap(lines, 9);
             ropeMap.ExecuteCommands();
             ropeMap.Print();
@@ -299,6 +303,81 @@ namespace AdventOfCode2022 {
 
             videoSignal = new VideoSignal(lines);
             videoSignal.RunInstructions(true);
+        }
+
+        static void Day11() {
+
+            string fileName = dataFolderPath + "input_11_test.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            //// Question One.
+            MonkeyManager monkeyManager = new MonkeyManager(lines);
+            monkeyManager.Print();
+            monkeyManager.StartMonkeyRounds(20);
+            monkeyManager.Print();
+
+            //// I have your answer for you.
+            Console.WriteLine("question one: " + monkeyManager.AnswerTheQuestion());
+
+            //// Question Two.
+            monkeyManager = new MonkeyManager(lines);
+            monkeyManager.Print();
+            monkeyManager.StartMonkeyRounds(20, true);
+            monkeyManager.Print();
+            Console.WriteLine("question two: " + monkeyManager.AnswerTheQuestion());
+        }
+
+
+        static void Day12() {
+
+            string fileName = dataFolderPath + "input_12.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            HillMap hillMap = new HillMap(lines);
+            hillMap.Print();
+            int shortestPath = hillMap.FindShortestPath(0, hillMap.start, hillMap.CreateHistoryMap(),
+                hillMap.CreatePreCalcBestPath(null));
+
+            Console.WriteLine("shortest path: " + shortestPath);
+        }
+
+
+
+
+        static void Day13() {
+
+            string fileName = dataFolderPath + "input_13.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            SignalPacketManager signalPacketManager = new SignalPacketManager(lines);
+            signalPacketManager.Print();
+
+            int value = signalPacketManager.QuestionOne();
+            Console.WriteLine("question one: " + value);
+        }
+
+        static void Day14() {
+
+            string fileName = dataFolderPath + "input_14.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            // Question One.
+            SandManager sandManager = new SandManager(lines);
+            sandManager.Print();
+            int value = sandManager.initiateSandPouring();
+            Console.WriteLine("question one: " + value);
+
+            // Question Two.
+            sandManager = new SandManager(lines, true);
+            sandManager.Print();
+            value = sandManager.initiateSandPouring();
+            sandManager.Print();
+
+            Console.WriteLine("question two: " + value);
         }
     }
 }
