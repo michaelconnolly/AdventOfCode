@@ -12,20 +12,22 @@ namespace AdventOfCode2022 {
 
         static void Main(string[] args) {
 
-            //Day1();
-            //Day2();
-            //Day3();
-            //Day4();
-            //Day5();
-            //Day6();
-            //Day7();
-            //Day8();
-            //Day9();
-            //Day10();
+            //Day1(); // completed.
+            //Day2(); // completed.
+            //Day3(); // completed.
+            //Day4(); // completed.
+            //Day5(); // completed.
+            //Day6(); // completed.
+            //Day7(); // completed.
+            //Day8(); // completed.
+            //Day9(); // completed.
+            //Day10(); // completed.
             //Day11(); // not completed part 2.
             //Day12(); // test data complete; not completed part 1 & 2.
             //Day13(); // test data complete; not completed part 1 & 2.
-            Day14();
+            //Day14(); // completed.
+            //Day15(); // completed part 1; not completed part 2.
+            Day16();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -379,5 +381,40 @@ namespace AdventOfCode2022 {
 
             Console.WriteLine("question two: " + value);
         }
+
+        static void Day15() {
+
+            string fileName = dataFolderPath + "input_15_test.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            // Question One.
+            //SensorBeaconManager sensorBeaconManager = new SensorBeaconManager(lines, 2000000);
+            SensorBeaconManager sensorBeaconManager = new SensorBeaconManager(lines, 10);
+            sensorBeaconManager.Print();
+            long value = sensorBeaconManager.QuestionOne();
+            Console.WriteLine("question one: " + value);
+
+            // Question Two.
+            sensorBeaconManager = new SensorBeaconManager(lines, -1, 0, 20);
+            value = sensorBeaconManager.QuestionTwo();
+            Console.WriteLine("question one: " + value);
+
+        }
+
+        static void Day16() {
+
+            string fileName = dataFolderPath + "input_16.txt";
+            string[] lines = File.ReadAllLines(fileName);
+            Console.WriteLine("Size of input: " + lines.Length);
+
+            // Question One.
+            ValveManager valveManager = new ValveManager(lines);
+            valveManager.Print();
+            int pressureReleased = valveManager.QuestionOne();
+            //int bestPath = valveManager.StartPass();
+            Console.WriteLine("question one: " + pressureReleased);
+        }
+
     }
 }
