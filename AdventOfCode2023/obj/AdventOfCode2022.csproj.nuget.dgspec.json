@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\AdventOfCode\\AdventOfCode2022\\AdventOfCode2022.csproj": {}
+    "C:\\dev\\AdventOfCode\\AdventOfCode2023\\AdventOfCode2022.csproj": {}
   },
   "projects": {
-    "C:\\dev\\AdventOfCode\\AdventOfCode2022\\AdventOfCode2022.csproj": {
+    "C:\\dev\\AdventOfCode\\AdventOfCode2023\\AdventOfCode2022.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\AdventOfCode\\AdventOfCode2022\\AdventOfCode2022.csproj",
+        "projectUniqueName": "C:\\dev\\AdventOfCode\\AdventOfCode2023\\AdventOfCode2022.csproj",
         "projectName": "AdventOfCode2022",
-        "projectPath": "C:\\dev\\AdventOfCode\\AdventOfCode2022\\AdventOfCode2022.csproj",
+        "projectPath": "C:\\dev\\AdventOfCode\\AdventOfCode2023\\AdventOfCode2022.csproj",
         "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\AdventOfCode\\AdventOfCode2022\\obj\\",
+        "outputPath": "C:\\dev\\AdventOfCode\\AdventOfCode2023\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

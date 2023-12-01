@@ -1,0 +1,14 @@
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.exe
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.deps.json
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.runtimeconfig.json
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.runtimeconfig.dev.json
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.dll
+C:\dev\AdventOfCode\AdventOfCode2023\bin\Debug\netcoreapp3.1\AdventOfCode2023.pdb
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.csproj.AssemblyReference.cache
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.AssemblyInfoInputs.cache
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.AssemblyInfo.cs
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.csproj.CoreCompileInputs.cache
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.dll
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.pdb
+C:\dev\AdventOfCode\AdventOfCode2023\obj\Debug\netcoreapp3.1\AdventOfCode2023.genruntimeconfig.cache
