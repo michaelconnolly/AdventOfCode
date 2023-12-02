@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-
 namespace AdventOfCode2023 {
 
     class Program {
@@ -12,18 +11,24 @@ namespace AdventOfCode2023 {
 
         static void Main(string[] args) {
 
-            Day01();
+            //Day01();
+            Day02();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
             System.Console.ReadKey();
         }
 
+        static string[] GetInputData(string fileName) {
+
+            string[] lines = File.ReadAllLines(dataFolderPath + fileName);
+            Console.WriteLine("Size of input array: " + lines.Length);
+            return lines;
+        }
+
         static void Day01() {
 
-            string fileName = dataFolderPath + "input_01.txt";
-            string[] lines = File.ReadAllLines(fileName);
-            Console.WriteLine("Size of input array: " + lines.Length);
+            string[] lines = GetInputData("input_01.txt");
 
             CalibrationDocument calibrationDoc = new CalibrationDocument(lines);
 
@@ -34,6 +39,22 @@ namespace AdventOfCode2023 {
 
             calibrationValuesTotal = calibrationDoc.GetCalibrationValuesTotal(true);
             Console.WriteLine("Day 1b: Calibration values total: " + calibrationValuesTotal.ToString());
+        }
+
+        static void Day02() {
+
+            string[] lines = GetInputData("input_02.txt");
+         
+            CubeBagGameManager cubeBagGameManager = new CubeBagGameManager(lines);
+            CubeBagGameSet constraintSet = new CubeBagGameSet(12, 13, 14);
+            cubeBagGameManager.print();
+
+            int idSum = cubeBagGameManager.GetIdSumWithConstraint(constraintSet);
+            Console.WriteLine("Day 2a: sum of id's that meet constraints: " + idSum);
+
+            Console.WriteLine("**************************************************************************");
+            idSum = cubeBagGameManager.GetMinimalSetPowerSum();
+            Console.WriteLine("Day 2b: sum of each game's minimal set power: " + idSum);
         }
     }
 }
