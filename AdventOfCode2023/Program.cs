@@ -12,7 +12,8 @@ namespace AdventOfCode2023 {
         static void Main(string[] args) {
 
             //Day01();
-            Day02();
+            //Day02();
+            Day03();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -55,6 +56,20 @@ namespace AdventOfCode2023 {
             Console.WriteLine("**************************************************************************");
             idSum = cubeBagGameManager.GetMinimalSetPowerSum();
             Console.WriteLine("Day 2b: sum of each game's minimal set power: " + idSum);
+        }
+
+        static void Day03() {
+
+            string[] lines = GetInputData("input_03.txt");
+
+            EngineSchematic engineSchematic = new EngineSchematic(lines);
+            engineSchematic.print();
+
+            int sum = engineSchematic.GetSumOfPartNumbers();
+            Console.WriteLine("Day 3a: sum of part numbers: " + sum);
+
+            sum = engineSchematic.GetSumofGearRatios();
+            Console.WriteLine("Day 3b: sum of gear ratios: " + sum);
         }
     }
 }
