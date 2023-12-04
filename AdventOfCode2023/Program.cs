@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 
 namespace AdventOfCode2023 {
@@ -13,7 +11,8 @@ namespace AdventOfCode2023 {
 
             //Day01();
             //Day02();
-            Day03();
+            //Day03();
+            Day04();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -70,6 +69,19 @@ namespace AdventOfCode2023 {
 
             sum = engineSchematic.GetSumofGearRatios();
             Console.WriteLine("Day 3b: sum of gear ratios: " + sum);
+        }
+
+        static void Day04() {
+
+            string[] lines = GetInputData("input_04.txt");
+
+            ScratchCardManager scratchCardManager = new ScratchCardManager(lines);
+ 
+            int sum = scratchCardManager.GetSumOfCardsPoints();
+            Console.WriteLine("Day 4a: sum of all card points: " + sum);
+
+            sum = scratchCardManager.GetSumOfCardsAfterCopying();
+            Console.WriteLine("Day 4b: sum of all cards after copying: " + sum);
         }
     }
 }
