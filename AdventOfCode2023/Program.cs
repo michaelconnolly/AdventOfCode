@@ -12,7 +12,9 @@ namespace AdventOfCode2023 {
             //Day01();
             //Day02();
             //Day03();
-            Day04();
+            //Day04();
+            //Day05();
+            Day06();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -44,7 +46,7 @@ namespace AdventOfCode2023 {
         static void Day02() {
 
             string[] lines = GetInputData("input_02.txt");
-         
+
             CubeBagGameManager cubeBagGameManager = new CubeBagGameManager(lines);
             CubeBagGameSet constraintSet = new CubeBagGameSet(12, 13, 14);
             cubeBagGameManager.print();
@@ -76,12 +78,40 @@ namespace AdventOfCode2023 {
             string[] lines = GetInputData("input_04.txt");
 
             ScratchCardManager scratchCardManager = new ScratchCardManager(lines);
- 
+
             int sum = scratchCardManager.GetSumOfCardsPoints();
             Console.WriteLine("Day 4a: sum of all card points: " + sum);
 
             sum = scratchCardManager.GetSumOfCardsAfterCopying();
             Console.WriteLine("Day 4b: sum of all cards after copying: " + sum);
+        }
+
+        static void Day05() {
+
+            string[] lines = GetInputData("input_05.txt");
+
+            Almanac almanac = new Almanac(lines);
+            almanac.print();
+
+            long value = almanac.GetLowestLocationFromInitialSeeds();
+            Console.WriteLine("Day 5a: lowest location from initial seeds: " + value);
+            value = almanac.GetLowestLocationFromInitialSeeds(true);
+            Console.WriteLine("Day 5b: lowest location from initial seeds (range): " + value);
+        }
+
+        static void Day06() {
+
+            string[] lines = GetInputData("input_06.txt");
+
+            BoatRaceManager boatRaceManager = new BoatRaceManager(lines);
+            boatRaceManager.print();
+
+            long value = boatRaceManager.CalculateProductOfAllCountOfWinningOptions();
+            Console.WriteLine("Day 6a: product of all winning options count: " + value);
+
+            value = boatRaceManager.CalculateCountOfOfWinningOptionsOneRace();
+            Console.WriteLine("Day 6a: product of all winning options count: " + value);
+
         }
     }
 }

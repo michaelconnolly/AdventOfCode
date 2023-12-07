@@ -5,4 +5,15 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="classes\AlmanacFertilizer.cs" />
+    <Compile Remove="classes\AlmanacHumidity.cs" />
+    <Compile Remove="classes\AlmanacLight.cs" />
+    <Compile Remove="classes\AlmanacLocation.cs" />
+    <Compile Remove="classes\AlmanacSeed.cs" />
+    <Compile Remove="classes\AlmanacSoil.cs" />
+    <Compile Remove="classes\AlmanacTemperature.cs" />
+    <Compile Remove="classes\AlmanacWater.cs" />
+  </ItemGroup>
+
 </Project>
