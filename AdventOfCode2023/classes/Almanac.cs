@@ -115,7 +115,8 @@ namespace AdventOfCode2023 {
         public long GetLowestLocationFromInitialSeeds(bool fSeedsAsRange = false) {
 
             long lowestLocation = int.MaxValue;
-            Collection<string> seedsToUse = new Collection<string>();
+            //Collection<string> seedsToUse = new Collection<string>();
+            HashSet<string> seedsToUse = new HashSet<string>();
 
             if (!fSeedsAsRange) {
                 foreach (string seed in this.seeds) {
@@ -125,19 +126,26 @@ namespace AdventOfCode2023 {
             else {
                 //Console.WriteLine("ERROR!");
 
+                Console.WriteLine("seed to soil map: ");
+                foreach (string seed in this.seedsToSoilMap) {
+                    Console.WriteLine(seed);
+                }
+                Console.WriteLine("***");
+
                 for (int i=0; i<this.seeds.Length; i=i+2) {
 
                     long start = Convert.ToInt64(this.seeds[i + 0]);
                     long length = Convert.ToInt64(this.seeds[i + 1]);
 
+                    Console.WriteLine("Pre-processing seeds for seed " + i + ": " + (length));
                     for (int j=0; j<length; j++) {
                         seedsToUse.Add((start + j).ToString());
                     }
                 }
                 Console.Write("seeds: ");
-                for (int i=0; i<seedsToUse.Count; i++) {
-                    Console.Write(seedsToUse[i] + ", ");
-                }
+                //for (int i=0; i<seedsToUse.Count; i++) {
+                //    Console.Write(seedsToUse[i] + ", ");
+                //}
                 Console.WriteLine("");
                 Console.WriteLine("seed count: " + seedsToUse.Count);
             }

@@ -14,7 +14,8 @@ namespace AdventOfCode2023 {
             //Day03();
             //Day04();
             //Day05();
-            Day06();
+            //Day06();
+            Day07();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -112,6 +113,20 @@ namespace AdventOfCode2023 {
             value = boatRaceManager.CalculateCountOfOfWinningOptionsOneRace();
             Console.WriteLine("Day 6a: product of all winning options count: " + value);
 
+        }
+
+        static void Day07() {
+
+            string[] lines = GetInputData("input_07.txt");
+
+           CamelCardManager camelCardManager = new CamelCardManager(lines);
+            camelCardManager.print();
+
+            int value = camelCardManager.GetTotalWinnings(usePartTwoRules:false);
+            Console.WriteLine("Day 7a: total winnings: " + value);
+
+            value = camelCardManager.GetTotalWinnings(usePartTwoRules:true);
+            Console.WriteLine("Day 7b: total winnings: " + value);
         }
     }
 }
