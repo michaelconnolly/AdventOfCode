@@ -15,7 +15,9 @@ namespace AdventOfCode2023 {
             //Day04();
             //Day05();
             //Day06();
-            Day07();
+            //Day07();
+            //Day08();
+            Day09();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -119,14 +121,47 @@ namespace AdventOfCode2023 {
 
             string[] lines = GetInputData("input_07.txt");
 
-           CamelCardManager camelCardManager = new CamelCardManager(lines);
+            CamelCardManager camelCardManager = new CamelCardManager(lines);
             camelCardManager.print();
 
-            int value = camelCardManager.GetTotalWinnings(usePartTwoRules:false);
+            int value = camelCardManager.GetTotalWinnings(usePartTwoRules: false);
             Console.WriteLine("Day 7a: total winnings: " + value);
 
-            value = camelCardManager.GetTotalWinnings(usePartTwoRules:true);
+            value = camelCardManager.GetTotalWinnings(usePartTwoRules: true);
             Console.WriteLine("Day 7b: total winnings: " + value);
+        }
+
+        static void Day08() {
+
+            DateTime start = DateTime.Now;
+            string[] lines = GetInputData("input_08.txt");
+
+            DesertMap desertMap = new DesertMap(lines);
+            desertMap.print();
+
+            long value = desertMap.StepCount();
+            Console.WriteLine("Day 8a: step count: " + value);
+
+            DateTime beginPartTwo = DateTime.Now;
+            value = desertMap.StepCountPartTwo();
+            DateTime endPartTwo = DateTime.Now;
+            Console.WriteLine("Day 8b: step count: " + value);
+            Console.WriteLine("Execution Time: " + (endPartTwo - beginPartTwo).ToString());
+        }
+
+        static void Day09() {
+
+            DateTime start = DateTime.Now;
+            string[] lines = GetInputData("input_09.txt");
+
+            OasisSensor oasisSensor = new OasisSensor(lines);
+            oasisSensor.print();
+
+            long value = oasisSensor.GetSumOfNextValues();
+            Console.WriteLine("Day 9a: step count: " + value);
+
+            value = oasisSensor.GetSumOfPreviousValues();
+            Console.WriteLine("Day 9b: step count: " + value);
         }
     }
 }
