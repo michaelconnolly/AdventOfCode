@@ -17,7 +17,9 @@ namespace AdventOfCode2023 {
             //Day06();
             //Day07();
             //Day08();
-            Day09();
+            // Day09();
+            //Day10();
+            Day11();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -162,6 +164,37 @@ namespace AdventOfCode2023 {
 
             value = oasisSensor.GetSumOfPreviousValues();
             Console.WriteLine("Day 9b: step count: " + value);
+        }
+
+        static void Day10() {
+
+            string[] lines = GetInputData("input_10_test1.txt");
+
+            PipeMap pipeMap = new PipeMap(lines);
+            pipeMap.print();
+
+            int count = pipeMap.GetStepCountOfFurthestPointFromStart();
+            Console.WriteLine("Day 10a: step count: " + count);
+
+            // PART TWO NOT FINISHED.
+            count = pipeMap.CalculateEnclosedTiles();
+            Console.WriteLine("Day 10b: enclosed tile count: " + count);
+
+        }
+
+        static void Day11() {
+
+            string[] lines = GetInputData("input_11.txt");
+
+            GalaxyMap galaxyMap = new GalaxyMap(lines, 2);
+            galaxyMap.print();
+            long count = galaxyMap.GetSumOfAllDistanceLengths();
+            Console.WriteLine("Day 11a: distance sum: " + count);
+
+            GalaxyMap galaxyMap2 = new GalaxyMap(lines, 1000000);
+            galaxyMap2.print();
+            count = galaxyMap2.GetSumOfAllDistanceLengths();
+            Console.WriteLine("Day 11b: distance sum: " + count);
         }
     }
 }
