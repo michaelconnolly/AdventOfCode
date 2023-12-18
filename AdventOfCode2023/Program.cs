@@ -19,7 +19,8 @@ namespace AdventOfCode2023 {
             //Day08();
             // Day09();
             //Day10();
-            Day11();
+            //Day11();
+            Day12();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -195,6 +196,17 @@ namespace AdventOfCode2023 {
             galaxyMap2.print();
             count = galaxyMap2.GetSumOfAllDistanceLengths();
             Console.WriteLine("Day 11b: distance sum: " + count);
+        }
+
+        static void Day12() {
+
+            string[] lines = GetInputData("input_12_test3.txt");
+
+            SpringMap springMap = new SpringMap(lines);
+            springMap.print();
+            
+            long sum = springMap.GetSumOfEachRowsComboOptions();
+            Console.WriteLine("Day 12a: combo sum: " + sum);
         }
     }
 }
