@@ -20,7 +20,8 @@ namespace AdventOfCode2023 {
             // Day09();
             //Day10();
             //Day11();
-            Day12();
+            //Day12(); // not done
+            Day13();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -204,9 +205,24 @@ namespace AdventOfCode2023 {
 
             SpringMap springMap = new SpringMap(lines);
             springMap.print();
-            
+
             long sum = springMap.GetSumOfEachRowsComboOptions();
             Console.WriteLine("Day 12a: combo sum: " + sum);
+        }
+
+
+        static void Day13() {
+
+            string[] lines = GetInputData("input_13.txt");
+
+            MirrorMapManager mirrorMapManager = new MirrorMapManager(lines);
+            mirrorMapManager.print();
+
+            long sum = mirrorMapManager.GetSumOfAllPoints();
+            Console.WriteLine("Day 13a: combo sum: " + sum);
+
+            sum = mirrorMapManager.GetSumOfAllPoints2();
+            Console.WriteLine("Day 13b: combo sum: " + sum);
         }
     }
 }
