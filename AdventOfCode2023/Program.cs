@@ -17,11 +17,13 @@ namespace AdventOfCode2023 {
             //Day06();
             //Day07();
             //Day08();
-            // Day09();
+            //Day09();
             //Day10();
             //Day11();
             //Day12(); // not done
-            Day13();
+            //Day13();
+            //Day14();
+            Day15();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -33,6 +35,15 @@ namespace AdventOfCode2023 {
             string[] lines = File.ReadAllLines(dataFolderPath + fileName);
             Console.WriteLine("Size of input array: " + lines.Length);
             return lines;
+        }
+
+
+        static string GetInputDataAll(string fileName) {
+
+            string line = File.ReadAllText(dataFolderPath + fileName);
+            Console.WriteLine("Size of input text: " + line.Length);
+            line = line.Trim('\n');
+            return line;
         }
 
         static void Day01() {
@@ -223,6 +234,57 @@ namespace AdventOfCode2023 {
 
             sum = mirrorMapManager.GetSumOfAllPoints2();
             Console.WriteLine("Day 13b: combo sum: " + sum);
+        }
+
+        static void Day14() {
+
+            string[] lines = GetInputData("input_14.txt");
+
+            RollingRockMap rollingRockMap = new RollingRockMap(lines);
+            rollingRockMap.print();
+
+            rollingRockMap.TiltNorthOrSouth(Direction.North);
+            rollingRockMap.print();
+            long sum = rollingRockMap.CalculateLoad();
+            Console.WriteLine("Day 14a: total load north: " + sum);
+
+            // Part Two.
+            rollingRockMap = new RollingRockMap(lines);
+            rollingRockMap.print();
+
+            long iterations = 1000000000;
+            for (long i = 0; i < iterations; i++) {
+                rollingRockMap.TiltNorthOrSouth(Direction.North);
+                //rollingRockMap.print();
+                rollingRockMap.TiltWestOrEast(Direction.West);
+                //rollingRockMap.print();
+                rollingRockMap.TiltNorthOrSouth(Direction.South);
+                //rollingRockMap.print();
+                rollingRockMap.TiltWestOrEast(Direction.East);
+                //rollingRockMap.print(); 
+            }
+            rollingRockMap.print();
+
+            sum = rollingRockMap.CalculateLoad();
+            Console.WriteLine("Day 14b: total load north: " + sum);
+
+
+
+
+        }
+
+        static void Day15() {
+
+            string line = GetInputDataAll("input_15.txt");
+
+            HashManager hashManager = new HashManager(line);
+            hashManager.print();
+
+            long sum = hashManager.SumOfHashResults();
+            Console.WriteLine("Day 15a: sum of hash results: " + sum);
+
+            sum = hashManager.TotalFocusingPower();
+            Console.WriteLine("Day 15b: total focusing power: " + sum);
         }
     }
 }
