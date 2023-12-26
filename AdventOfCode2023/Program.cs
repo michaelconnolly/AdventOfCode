@@ -23,7 +23,8 @@ namespace AdventOfCode2023 {
             //Day12(); // not done
             //Day13();
             //Day14();
-            Day15();
+            //Day15();
+            Day16();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -285,6 +286,63 @@ namespace AdventOfCode2023 {
 
             sum = hashManager.TotalFocusingPower();
             Console.WriteLine("Day 15b: total focusing power: " + sum);
+        }
+
+        static void Day16() {
+
+            string[] lines = GetInputData("input_16.txt");
+
+            BeamMirrorMap beamMirrorMap = new BeamMirrorMap(lines);
+            Beam initialBeam = new Beam(0, 0, BeamDirection.Right);
+            beamMirrorMap.ProcessBeam(initialBeam);
+            beamMirrorMap.print();
+            long sum = beamMirrorMap.SumOfEnergizedMirrors();
+      
+            Console.WriteLine("Day 16a: sum of energized mirrors: " + sum);
+
+            // Let's do part two.
+            int height = lines.Length;
+            int width = lines[0].Length;
+            long best = 0;
+            long current = 0;
+
+            // left and right edges
+            for (int y=0; y < height; y++) {
+
+                // left edge.
+                beamMirrorMap = new BeamMirrorMap(lines);
+                initialBeam = new Beam(0, y, BeamDirection.Right);
+                beamMirrorMap.ProcessBeam(initialBeam);
+                current = beamMirrorMap.SumOfEnergizedMirrors();
+                if (current > best) { best = current; }
+
+                // right edge.
+                beamMirrorMap = new BeamMirrorMap(lines);
+                initialBeam = new Beam(width-1, y, BeamDirection.Left);
+                beamMirrorMap.ProcessBeam(initialBeam);
+                current = beamMirrorMap.SumOfEnergizedMirrors();
+                if (current > best) { best = current; }
+            }
+
+            // top and bottom edges
+            for (int x = 0; x < width; x++) {
+
+                // top edge.
+                beamMirrorMap = new BeamMirrorMap(lines);
+                initialBeam = new Beam(x, 0, BeamDirection.Down);
+                beamMirrorMap.ProcessBeam(initialBeam);
+                current = beamMirrorMap.SumOfEnergizedMirrors();
+                if (current > best) { best = current; }
+
+                // bottom edge.
+                beamMirrorMap = new BeamMirrorMap(lines);
+                initialBeam = new Beam(x, height-1, BeamDirection.Up);
+                beamMirrorMap.ProcessBeam(initialBeam);
+                current = beamMirrorMap.SumOfEnergizedMirrors();
+                if (current > best) { best = current; }
+            }
+
+            Console.WriteLine("Day 16b: best way to energized mirrors: " + best);
         }
     }
 }
