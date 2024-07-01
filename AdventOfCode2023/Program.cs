@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AdventOfCode2023.classes;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AdventOfCode2023 {
@@ -24,7 +26,8 @@ namespace AdventOfCode2023 {
             //Day13();
             //Day14();
             //Day15();
-            Day16();
+            //Day16();
+            Day17();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -297,7 +300,7 @@ namespace AdventOfCode2023 {
             beamMirrorMap.ProcessBeam(initialBeam);
             beamMirrorMap.print();
             long sum = beamMirrorMap.SumOfEnergizedMirrors();
-      
+
             Console.WriteLine("Day 16a: sum of energized mirrors: " + sum);
 
             // Let's do part two.
@@ -307,7 +310,7 @@ namespace AdventOfCode2023 {
             long current = 0;
 
             // left and right edges
-            for (int y=0; y < height; y++) {
+            for (int y = 0; y < height; y++) {
 
                 // left edge.
                 beamMirrorMap = new BeamMirrorMap(lines);
@@ -318,7 +321,7 @@ namespace AdventOfCode2023 {
 
                 // right edge.
                 beamMirrorMap = new BeamMirrorMap(lines);
-                initialBeam = new Beam(width-1, y, BeamDirection.Left);
+                initialBeam = new Beam(width - 1, y, BeamDirection.Left);
                 beamMirrorMap.ProcessBeam(initialBeam);
                 current = beamMirrorMap.SumOfEnergizedMirrors();
                 if (current > best) { best = current; }
@@ -336,13 +339,31 @@ namespace AdventOfCode2023 {
 
                 // bottom edge.
                 beamMirrorMap = new BeamMirrorMap(lines);
-                initialBeam = new Beam(x, height-1, BeamDirection.Up);
+                initialBeam = new Beam(x, height - 1, BeamDirection.Up);
                 beamMirrorMap.ProcessBeam(initialBeam);
                 current = beamMirrorMap.SumOfEnergizedMirrors();
                 if (current > best) { best = current; }
             }
 
             Console.WriteLine("Day 16b: best way to energized mirrors: " + best);
+        }
+
+        static void Day17() {
+
+            string[] lines = GetInputData("input_17_test.txt");
+
+            CityBlockMap cityBlockMap = new CityBlockMap(lines);
+            cityBlockMap.print();
+
+            Dictionary<int, CityBlock> history = new Dictionary<int, CityBlock>();
+            CityBlockCoordinate start = new CityBlockCoordinate(cityBlockMap.cityBlocks[0, 0], CityBlockFacing.Right);
+            
+            DateTime begin = DateTime.Now;
+            int sum = cityBlockMap.LeastHeatLoss(start, history, 0, 0, true);
+            DateTime finished = DateTime.Now;
+            Console.WriteLine("execution time: " + finished.Subtract(begin).TotalMilliseconds);
+            
+            Console.WriteLine("Day 17a: sum of least heat loss: " + sum);
         }
     }
 }
