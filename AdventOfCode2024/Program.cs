@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AdventOfCode2024 {
 
@@ -14,6 +11,10 @@ namespace AdventOfCode2024 {
         static void Main(string[] args) {
 
             Day01();
+
+            // Keep the console window open.
+            Console.WriteLine("\nPress any key to exit.");
+            System.Console.ReadKey();
         }
 
         static string[] GetInputData(string fileName) {
@@ -33,17 +34,11 @@ namespace AdventOfCode2024 {
 
         static void Day01() {
 
-            //string[] lines = GetInputData("input_01.txt");
-
-            //CalibrationDocument calibrationDoc = new CalibrationDocument(lines);
-
-            //int calibrationValuesTotal = calibrationDoc.GetCalibrationValuesTotal();
-            //Console.WriteLine("Day 1a: Calibration values total: " + calibrationValuesTotal.ToString());
-
-            //Console.WriteLine("**************************************************************************");
-
-            //calibrationValuesTotal = calibrationDoc.GetCalibrationValuesTotal(true);
-            //Console.WriteLine("Day 1b: Calibration values total: " + calibrationValuesTotal.ToString());
+            string[] lines = GetInputData("input_01.txt");
+            LocationLists locationLists = new LocationLists(lines);
+           
+            Console.WriteLine("Distance score: " + locationLists.DistanceSum());
+            Console.WriteLine("Similarity score: " + locationLists.SimilaritySum());          
         }
     }
 }
