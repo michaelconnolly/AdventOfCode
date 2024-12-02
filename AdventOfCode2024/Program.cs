@@ -10,7 +10,8 @@ namespace AdventOfCode2024 {
 
         static void Main(string[] args) {
 
-            Day01();
+            //Day01();
+            Day02();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -36,9 +37,19 @@ namespace AdventOfCode2024 {
 
             string[] lines = GetInputData("input_01.txt");
             LocationLists locationLists = new LocationLists(lines);
-           
+
             Console.WriteLine("Distance score: " + locationLists.DistanceSum());
-            Console.WriteLine("Similarity score: " + locationLists.SimilaritySum());          
+            Console.WriteLine("Similarity score: " + locationLists.SimilaritySum());
+        }
+
+        static void Day02() {
+
+            string[] lines = GetInputData("input_02.txt");
+            SafetyReportManager safetyReportManager = new SafetyReportManager(lines);
+
+            Console.WriteLine("Safe count: " + safetyReportManager.SafeCount());
+            Console.WriteLine("Safe count (with problem dampener): " + safetyReportManager.SafeCountWithDampener());
+
         }
     }
 }
