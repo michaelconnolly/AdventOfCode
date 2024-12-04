@@ -11,7 +11,8 @@ namespace AdventOfCode2024 {
         static void Main(string[] args) {
 
             //Day01();
-            Day02();
+            //Day02();
+            Day03();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -50,6 +51,15 @@ namespace AdventOfCode2024 {
             Console.WriteLine("Safe count: " + safetyReportManager.SafeCount());
             Console.WriteLine("Safe count (with problem dampener): " + safetyReportManager.SafeCountWithDampener());
 
+        }
+
+        static void Day03() {
+
+            string input = GetInputDataAll("input_03.txt");
+            MathProgram multiplicationProgram = new MathProgram(input);
+
+            Console.WriteLine("Product sums: " + multiplicationProgram.ProductSums());
+            Console.WriteLine("Product sums (supporting disables): " + multiplicationProgram.ProductSumsWithDisables());
         }
     }
 }
