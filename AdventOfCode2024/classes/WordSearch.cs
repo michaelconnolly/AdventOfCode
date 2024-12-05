@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace AdventOfCode2024 {
 
@@ -14,6 +10,24 @@ namespace AdventOfCode2024 {
         public WordSearch(string[] input) {
 
             this.puzzle = input;
+        }
+
+        public int FindX() {
+
+            int count = 0;
+            char charToFind = 'A';
+
+            for (int row = 0; row < puzzle.Length; row++) {
+                for (int col = 0; col < puzzle[row].Length; col++) {
+
+                    char c = puzzle[row][col];
+                    if (c == charToFind) {
+                        count += (this.IsFullXHere(row, col));
+                    }
+                }
+            }
+
+            return count;
         }
 
 
@@ -27,8 +41,6 @@ namespace AdventOfCode2024 {
                     char c = puzzle[row][col];
                     if (c == word[0]) {
                         count += (this.IsFullWordHere(row, col, word));
-                            //count++;
-                       // }
                     }
                 }
             }
@@ -61,46 +73,15 @@ namespace AdventOfCode2024 {
             return found;
         }
 
-
-
         public int IsFullWordHere(int row, int col, string word) {
 
             int count = 0;
-
-            if (false) {
-                // Downwards.
-                bool found = true;
-                for (int i = 0; i < word.Length; i++) {
-                    int rowMod = i;
-                    int colMod = 0;
-                    if (!(this.IsCellLegal(row + rowMod, col + colMod)) ||
-                        (puzzle[row + rowMod][col + colMod] != word[rowMod])) {
-                        found = false;
-                        break;
-                    }
-                }
-                if (found) { count++; }
-
-                // Upwards.
-                found = true;
-                for (int i = 0; i < word.Length; i++) {
-                    int rowMod = -i;
-                    int colMod = 0;
-                    if (!(this.IsCellLegal(row + rowMod, col + colMod)) ||
-                        (puzzle[row + rowMod][col + colMod] != word[i])) {
-                        found = false;
-                        break;
-                    }
-                }
-                if (found) { count++; }
-               }
 
             // Downwards;
             if (this.IsFullWordHereDirection(row, col, word, 1, 0)) { count++; }
 
             // Upwards;
             if (this.IsFullWordHereDirection(row, col, word, -1, 0)) { count++; }
-
 
             // Rightwards;
             if (this.IsFullWordHereDirection(row, col, word, 0, 1)) { count++; }
@@ -109,12 +90,47 @@ namespace AdventOfCode2024 {
             if (this.IsFullWordHereDirection(row, col, word, 0, -1)) { count++; }
 
             // Diagonal
-            if (this.IsFullWordHereDirection(row, col, word, 1, 1)) {count++; }
+            if (this.IsFullWordHereDirection(row, col, word, 1, 1)) { count++; }
             if (this.IsFullWordHereDirection(row, col, word, -1, -1)) { count++; }
             if (this.IsFullWordHereDirection(row, col, word, 1, -1)) { count++; }
             if (this.IsFullWordHereDirection(row, col, word, -1, 1)) { count++; }
 
             return count;
+        }
+
+
+        public int IsFullXHere(int row, int col) {
+
+            //int count = 0;
+
+            // Assumptions:
+            // i have been handed a cell that we found the middle char, 'A'.
+            // Figure out if the left-to-right diagonal is MAS or SAM
+            // Figure out if the right-to-left diagonal is MAS or SAM
+
+            if (this.puzzle[row][col] != 'A') { return 0; }
+
+            // If we are not at least one row in and one column in from edge, bail.
+            if (col < 1 || col > this.puzzle[0].Length - 2) { return 0; }
+            if (row < 1 || row > this.puzzle.Length - 2) { return 0; }
+
+            bool passedLeft = false;
+            if (((this.puzzle[row - 1][col - 1] == 'M') &&
+                (this.puzzle[row + 1][col + 1] == 'S')) ||
+                ((this.puzzle[row - 1][col - 1] == 'S') &&
+                (this.puzzle[row + 1][col + 1] == 'M'))) {
+                passedLeft = true;
+            }
+
+            bool passedRight = false;
+            if (((this.puzzle[row - 1][col + 1] == 'M') &&
+                (this.puzzle[row + 1][col - 1] == 'S')) ||
+                ((this.puzzle[row - 1][col + 1] == 'S') &&
+                (this.puzzle[row + 1][col - 1] == 'M'))) {
+                passedRight = true;
+            }
+
+            return (passedLeft && passedRight ? 1 : 0);
         }
     }
 }

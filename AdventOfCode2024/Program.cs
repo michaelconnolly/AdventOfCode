@@ -69,6 +69,8 @@ namespace AdventOfCode2024 {
             WordSearch wordSearch = new WordSearch(input);
      
             Console.WriteLine("Word count: " + wordSearch.FindWord("XMAS"));
+            Console.WriteLine("X count: " + wordSearch.FindX());
+
         }
     }
 }
