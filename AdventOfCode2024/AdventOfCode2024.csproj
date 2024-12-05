@@ -48,6 +48,7 @@
     <Compile Include="classes\MathProgram.cs" />
     <Compile Include="classes\SafetyReport.cs" />
     <Compile Include="classes\SafetyReportManager.cs" />
+    <Compile Include="classes\WordSearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

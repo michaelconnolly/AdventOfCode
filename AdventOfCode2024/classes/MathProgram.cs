@@ -135,6 +135,6 @@ namespace AdventOfCode2024 {
             }
 
             return sum;
-        }
+        }   
     }
 }

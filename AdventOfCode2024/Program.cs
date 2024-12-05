@@ -12,7 +12,8 @@ namespace AdventOfCode2024 {
 
             //Day01();
             //Day02();
-            Day03();
+            //Day03();
+            Day04();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -60,6 +61,14 @@ namespace AdventOfCode2024 {
 
             Console.WriteLine("Product sums: " + multiplicationProgram.ProductSums());
             Console.WriteLine("Product sums (supporting disables): " + multiplicationProgram.ProductSumsWithDisables());
+        }
+
+        static void Day04() {
+
+            string[] input = GetInputData("input_04.txt");
+            WordSearch wordSearch = new WordSearch(input);
+     
+            Console.WriteLine("Word count: " + wordSearch.FindWord("XMAS"));
         }
     }
 }

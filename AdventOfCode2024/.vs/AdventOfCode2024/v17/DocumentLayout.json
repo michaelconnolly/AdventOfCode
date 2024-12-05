@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\mathprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\mathprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\wordsearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\wordsearch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\mathproblem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\mathproblem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\safetyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\safetyreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\safetyreportmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\safetyreportmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,77 +26,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MathProblem.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\MathProblem.cs",
-              "RelativeDocumentMoniker": "classes\\MathProblem.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\MathProblem.cs",
-              "RelativeToolTip": "classes\\MathProblem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T18:20:21.283Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MathProgram.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\MathProgram.cs",
-              "RelativeDocumentMoniker": "classes\\MathProgram.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\MathProgram.cs",
-              "RelativeToolTip": "classes\\MathProgram.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAwwIkAAAAJAAAAAAAAAA==",
+              "Title": "WordSearch.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\WordSearch.cs",
+              "RelativeDocumentMoniker": "classes\\WordSearch.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\WordSearch.cs",
+              "RelativeToolTip": "classes\\WordSearch.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAiwEQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T16:32:34.695Z",
+              "WhenOpened": "2024-12-04T14:22:48.258Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SafetyReport.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SafetyReport.cs",
-              "RelativeDocumentMoniker": "classes\\SafetyReport.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SafetyReport.cs",
-              "RelativeToolTip": "classes\\SafetyReport.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAcwFYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:42:20.54Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SafetyReportManager.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SafetyReportManager.cs",
-              "RelativeDocumentMoniker": "classes\\SafetyReportManager.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SafetyReportManager.cs",
-              "RelativeToolTip": "classes\\SafetyReportManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-02T14:40:39.104Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\App.config",
-              "RelativeDocumentMoniker": "App.config",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\App.config",
-              "RelativeToolTip": "App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-12-01T21:28:28.611Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAcwDsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAiwEMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-01T00:33:17.465Z",
               "EditorCaption": ""
