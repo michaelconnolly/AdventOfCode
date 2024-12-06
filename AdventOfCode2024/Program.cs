@@ -13,7 +13,8 @@ namespace AdventOfCode2024 {
             //Day01();
             //Day02();
             //Day03();
-            Day04();
+            //Day04();
+            Day05();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -70,7 +71,18 @@ namespace AdventOfCode2024 {
      
             Console.WriteLine("Word count: " + wordSearch.FindWord("XMAS"));
             Console.WriteLine("X count: " + wordSearch.FindX());
+        }
 
+        static void Day05() {
+
+            string[] input = GetInputData("input_05.txt");
+            SafetyManualManager smm = new SafetyManualManager(input);
+
+            int sum = smm.SumOfMiddleNumbersCorrectlyOrdered();
+            Console.WriteLine("Sum of middle numbers correctly ordered: " + sum);
+
+            sum = smm.SumOfMiddleNumbersIncorrectlyOrderedThenFixed();
+            Console.WriteLine("Sum of middle numbers icorrectly ordered then fixed: " + sum);
         }
     }
 }

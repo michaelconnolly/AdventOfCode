@@ -46,6 +46,9 @@
     <Compile Include="classes\LocationLists.cs" />
     <Compile Include="classes\MathProblem.cs" />
     <Compile Include="classes\MathProgram.cs" />
+    <Compile Include="classes\SafetyManualManager.cs" />
+    <Compile Include="classes\PageOrderingRule.cs" />
+    <Compile Include="classes\SafetyManualPages.cs" />
     <Compile Include="classes\SafetyReport.cs" />
     <Compile Include="classes\SafetyReportManager.cs" />
     <Compile Include="classes\WordSearch.cs" />
