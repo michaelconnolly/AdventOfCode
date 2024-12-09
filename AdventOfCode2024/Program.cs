@@ -14,7 +14,8 @@ namespace AdventOfCode2024 {
             //Day02();
             //Day03();
             //Day04();
-            Day05();
+            //Day05();
+            Day06();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -83,6 +84,24 @@ namespace AdventOfCode2024 {
 
             sum = smm.SumOfMiddleNumbersIncorrectlyOrderedThenFixed();
             Console.WriteLine("Sum of middle numbers icorrectly ordered then fixed: " + sum);
+        }
+
+        static void Day06() {
+
+            string[] input = GetInputData("input_06_test.txt");
+            SecurityGuardMap sgm = new SecurityGuardMap(input);
+
+            sgm.ProcessMap(false);
+            int sum = sgm.CountOfPositionsVisited();
+            Console.WriteLine("Count of Positions Visited: " + sum);
+            sgm.Print();
+
+            sgm.ProcessMap(true);
+            sum = sgm.CountOfObstaclePositions();
+            Console.WriteLine("Count of Obstacle Positions: " + sum);
+            sgm.Print();
+
+            return;
         }
     }
 }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\Coordinate.cs" />
     <Compile Include="classes\LocationLists.cs" />
     <Compile Include="classes\MathProblem.cs" />
     <Compile Include="classes\MathProgram.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="classes\SafetyManualPages.cs" />
     <Compile Include="classes\SafetyReport.cs" />
     <Compile Include="classes\SafetyReportManager.cs" />
+    <Compile Include="classes\SecurityGuardMap.cs" />
+    <Compile Include="classes\SecurityGuardMapNode.cs" />
     <Compile Include="classes\WordSearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
