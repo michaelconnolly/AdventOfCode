@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdventOfCode2024.classes;
+using System;
 using System.IO;
 
 
@@ -15,7 +16,8 @@ namespace AdventOfCode2024 {
             //Day03();
             //Day04();
             //Day05();
-            Day06();
+            //Day06();
+            Day07();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -102,6 +104,16 @@ namespace AdventOfCode2024 {
             sgm.Print();
 
             return;
+        }
+
+        static void Day07() {
+
+            string[] input = GetInputData("input_07.txt");
+
+            MissingOperatorEvaluator moe = new MissingOperatorEvaluator(input);
+
+            Console.WriteLine("Total calibration value, two operators: " + moe.TotalCalibrationValue());
+            Console.WriteLine("Total calibration value, three operators: " + moe.TotalCalibrationValue2());
         }
     }
 }
