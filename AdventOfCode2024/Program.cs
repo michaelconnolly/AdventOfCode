@@ -17,7 +17,8 @@ namespace AdventOfCode2024 {
             //Day04();
             //Day05();
             //Day06();
-            Day07();
+            //Day07();
+            Day08();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -114,6 +115,21 @@ namespace AdventOfCode2024 {
 
             Console.WriteLine("Total calibration value, two operators: " + moe.TotalCalibrationValue());
             Console.WriteLine("Total calibration value, three operators: " + moe.TotalCalibrationValue2());
+        }
+
+        static void Day08() {
+
+            string[] input = GetInputData("input_08.txt");
+            AntennaMap antennaMap = new AntennaMap(input);
+
+            antennaMap.Print();
+            Console.WriteLine();
+            
+            // How many unique locations within the bounds of the map contain an antinode?
+            int count = antennaMap.CountOfAntinodeLocations();
+            Console.WriteLine("Count of antinode locations: " + count);
+            count = antennaMap.CountOfAntinodeLocations2();
+            Console.WriteLine("Count of antinode locations 2: " + count);
         }
     }
 }
