@@ -18,7 +18,8 @@ namespace AdventOfCode2024 {
             //Day05();
             //Day06();
             //Day07();
-            Day08();
+            //Day08();
+            Day09();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -72,7 +73,7 @@ namespace AdventOfCode2024 {
 
             string[] input = GetInputData("input_04.txt");
             WordSearch wordSearch = new WordSearch(input);
-     
+
             Console.WriteLine("Word count: " + wordSearch.FindWord("XMAS"));
             Console.WriteLine("X count: " + wordSearch.FindX());
         }
@@ -109,7 +110,7 @@ namespace AdventOfCode2024 {
 
         static void Day07() {
 
-            string[] input = GetInputData("input_07.txt");
+            string[] input = GetInputData("input_07_test2.txt");
 
             MissingOperatorEvaluator moe = new MissingOperatorEvaluator(input);
 
@@ -124,12 +125,33 @@ namespace AdventOfCode2024 {
 
             antennaMap.Print();
             Console.WriteLine();
-            
+
             // How many unique locations within the bounds of the map contain an antinode?
             int count = antennaMap.CountOfAntinodeLocations();
             Console.WriteLine("Count of antinode locations: " + count);
             count = antennaMap.CountOfAntinodeLocations2();
             Console.WriteLine("Count of antinode locations 2: " + count);
+        }
+
+        static void Day09() {
+
+            string input = GetInputDataAll("input_09.txt");
+            Console.WriteLine(input);
+            Console.WriteLine();
+
+            DiskMap diskMap = new DiskMap(input);
+
+            Console.WriteLine(diskMap.GetStartPosition());
+            Console.WriteLine();
+            //Console.WriteLine(diskMap.endingFileBlocks);
+            //Console.WriteLine();
+
+            Console.WriteLine(diskMap.Print2());
+            Console.WriteLine();
+
+            long checksum = diskMap.GetChecksum();
+            Console.WriteLine("Checksum: " +  checksum);
+          
         }
     }
 }
