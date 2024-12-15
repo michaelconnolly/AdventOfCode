@@ -135,6 +135,10 @@ namespace AdventOfCode2024 {
 
         static void Day09() {
 
+            // Note: day 9 was rough for me!  I didn't give up, and finally got both parts,
+            // but i'm walking away in disgust of my spaghetti code and refused to clean it up
+            // or look at it ever again.  On to day 10! 
+
             string input = GetInputDataAll("input_09.txt");
             Console.WriteLine(input);
             Console.WriteLine();
@@ -143,15 +147,18 @@ namespace AdventOfCode2024 {
 
             Console.WriteLine(diskMap.GetStartPosition());
             Console.WriteLine();
-            //Console.WriteLine(diskMap.endingFileBlocks);
-            //Console.WriteLine();
+          
+            Console.WriteLine(diskMap.Print1());
+            Console.WriteLine();
 
             Console.WriteLine(diskMap.Print2());
             Console.WriteLine();
 
             long checksum = diskMap.GetChecksum();
             Console.WriteLine("Checksum: " +  checksum);
-          
+
+            long checksum2 = diskMap.GetChecksum2();
+            Console.WriteLine("Checksum2: " + checksum2);
         }
     }
 }

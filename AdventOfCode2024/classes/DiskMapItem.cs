@@ -13,6 +13,7 @@ namespace AdventOfCode2024 {
         public int startPos;
         public int length;
         public List<int> finalPositions = new List<int>();
+        public List<int> finalPositions2 = new List<int>();
 
         public DiskMapItem(int id, int startPos, int length) {
             this.id = id;
