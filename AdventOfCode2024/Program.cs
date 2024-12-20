@@ -19,7 +19,8 @@ namespace AdventOfCode2024 {
             //Day06();
             //Day07();
             //Day08();
-            Day09();
+            //Day09();
+            Day10();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -147,7 +148,7 @@ namespace AdventOfCode2024 {
 
             Console.WriteLine(diskMap.GetStartPosition());
             Console.WriteLine();
-          
+
             Console.WriteLine(diskMap.Print1());
             Console.WriteLine();
 
@@ -155,10 +156,24 @@ namespace AdventOfCode2024 {
             Console.WriteLine();
 
             long checksum = diskMap.GetChecksum();
-            Console.WriteLine("Checksum: " +  checksum);
+            Console.WriteLine("Checksum: " + checksum);
 
             long checksum2 = diskMap.GetChecksum2();
             Console.WriteLine("Checksum2: " + checksum2);
+        }
+
+        static void Day10() {
+
+            string[] input = GetInputData("input_10.txt");
+            HikingGuide hikingGuide = new HikingGuide(input);
+
+            hikingGuide.Print();
+
+            Console.WriteLine("Count of trail heads: " + hikingGuide.TrailHeadCount());
+            Console.WriteLine("Count of trail ends: " + hikingGuide.TrailEndCount());
+
+            Console.WriteLine("Sum of all trailhead scores: " + hikingGuide.SumOfAllTrailHeadScores());
+            Console.WriteLine("Sum of all trailhead scores 2: " + hikingGuide.SumOfAllTrailHeadScores2());
         }
     }
 }

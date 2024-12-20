@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\diskmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\diskmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\hikingguide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\hikingguide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\diskmapitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\diskmapitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\hikinglocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\hikinglocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\securityguardmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\securityguardmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,28 +34,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DiskMapItem.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\DiskMapItem.cs",
-              "RelativeDocumentMoniker": "classes\\DiskMapItem.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\DiskMapItem.cs",
-              "RelativeToolTip": "classes\\DiskMapItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "SecurityGuardMap.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SecurityGuardMap.cs",
+              "RelativeDocumentMoniker": "classes\\SecurityGuardMap.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SecurityGuardMap.cs",
+              "RelativeToolTip": "classes\\SecurityGuardMap.cs",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAiwJcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T17:51:51.346Z",
+              "WhenOpened": "2024-12-16T06:38:02.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HikingLocation.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingLocation.cs",
+              "RelativeDocumentMoniker": "classes\\HikingLocation.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingLocation.cs",
+              "RelativeToolTip": "classes\\HikingLocation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T06:39:40.156Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DiskMap.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\DiskMap.cs",
-              "RelativeDocumentMoniker": "classes\\DiskMap.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\DiskMap.cs",
-              "RelativeToolTip": "classes\\DiskMap.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwBAAATAAAAAAAAAA==",
+              "Title": "HikingGuide.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingGuide.cs",
+              "RelativeDocumentMoniker": "classes\\HikingGuide.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingGuide.cs",
+              "RelativeToolTip": "classes\\HikingGuide.cs",
+              "ViewState": "AgIAALgAAAAAAAAAAAAQwMYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-10T17:51:28.108Z",
+              "WhenOpened": "2024-12-15T18:18:49.75Z",
               "EditorCaption": ""
             },
             {
@@ -60,9 +77,9 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs*",
-              "RelativeToolTip": "Program.cs*",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAcwKAAAAA5AAAAAAAAAA==",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAAK8AAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-01T00:33:17.465Z",
               "EditorCaption": ""

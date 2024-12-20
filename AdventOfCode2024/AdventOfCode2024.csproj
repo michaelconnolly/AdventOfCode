@@ -48,6 +48,8 @@
     <Compile Include="classes\Coordinate.cs" />
     <Compile Include="classes\DiskMap.cs" />
     <Compile Include="classes\DiskMapItem.cs" />
+    <Compile Include="classes\HikingGuide.cs" />
+    <Compile Include="classes\HikingLocation.cs" />
     <Compile Include="classes\LocationLists.cs" />
     <Compile Include="classes\MissingOperatorEvaluator.cs" />
     <Compile Include="classes\MathProblem.cs" />
