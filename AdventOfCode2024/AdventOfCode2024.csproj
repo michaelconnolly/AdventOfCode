@@ -45,9 +45,16 @@
   <ItemGroup>
     <Compile Include="classes\AntennaMap.cs" />
     <Compile Include="classes\AntennaNode.cs" />
+    <Compile Include="classes\ArcadeButton.cs" />
+    <Compile Include="classes\ArcadeMachine.cs" />
+    <Compile Include="classes\ArcadeManager.cs" />
     <Compile Include="classes\Coordinate.cs" />
+    <Compile Include="classes\CoordinateLong.cs" />
     <Compile Include="classes\DiskMap.cs" />
     <Compile Include="classes\DiskMapItem.cs" />
+    <Compile Include="classes\GardenManager.cs" />
+    <Compile Include="classes\GardenPlot.cs" />
+    <Compile Include="classes\GardenRegion.cs" />
     <Compile Include="classes\HikingGuide.cs" />
     <Compile Include="classes\HikingLocation.cs" />
     <Compile Include="classes\LocationLists.cs" />
@@ -55,6 +62,8 @@
     <Compile Include="classes\MathProblem.cs" />
     <Compile Include="classes\MathProgram.cs" />
     <Compile Include="classes\MissingOperatorProblem.cs" />
+    <Compile Include="classes\RobotGuard.cs" />
+    <Compile Include="classes\RobotGuardManager.cs" />
     <Compile Include="classes\SafetyManualManager.cs" />
     <Compile Include="classes\PageOrderingRule.cs" />
     <Compile Include="classes\SafetyManualPages.cs" />
@@ -62,6 +71,8 @@
     <Compile Include="classes\SafetyReportManager.cs" />
     <Compile Include="classes\SecurityGuardMap.cs" />
     <Compile Include="classes\SecurityGuardMapNode.cs" />
+    <Compile Include="classes\Stone.cs" />
+    <Compile Include="classes\StoneManager.cs" />
     <Compile Include="classes\WordSearch.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

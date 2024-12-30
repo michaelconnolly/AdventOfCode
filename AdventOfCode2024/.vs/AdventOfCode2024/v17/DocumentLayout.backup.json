@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\hikingguide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\hikingguide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\coordinate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\coordinate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\hikinglocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\hikinglocation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\robotguardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\robotguardmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\securityguardmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\securityguardmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\robotguard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\robotguard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\coordinatelong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\coordinatelong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,51 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SecurityGuardMap.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SecurityGuardMap.cs",
-              "RelativeDocumentMoniker": "classes\\SecurityGuardMap.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\SecurityGuardMap.cs",
-              "RelativeToolTip": "classes\\SecurityGuardMap.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAiwJcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:38:02.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "HikingLocation.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingLocation.cs",
-              "RelativeDocumentMoniker": "classes\\HikingLocation.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingLocation.cs*",
-              "RelativeToolTip": "classes\\HikingLocation.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:39:40.156Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HikingGuide.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingGuide.cs",
-              "RelativeDocumentMoniker": "classes\\HikingGuide.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\HikingGuide.cs*",
-              "RelativeToolTip": "classes\\HikingGuide.cs*",
-              "ViewState": "AgIAALgAAAAAAAAAAAAQwMYAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-15T18:18:49.75Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -79,9 +40,65 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs*",
               "RelativeToolTip": "Program.cs*",
-              "ViewState": "AgIAAJ4AAAAAAAAAAAApwK8AAABqAAAAAAAAAA==",
+              "ViewState": "AgIAAOIAAAAAAAAAAAAMwOoAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-01T00:33:17.465Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RobotGuard.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\RobotGuard.cs",
+              "RelativeDocumentMoniker": "classes\\RobotGuard.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\RobotGuard.cs",
+              "RelativeToolTip": "classes\\RobotGuard.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAcwBQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T18:53:17.806Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RobotGuardManager.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\RobotGuardManager.cs",
+              "RelativeDocumentMoniker": "classes\\RobotGuardManager.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\RobotGuardManager.cs",
+              "RelativeToolTip": "classes\\RobotGuardManager.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAMwE4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T18:53:10.423Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CoordinateLong.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\CoordinateLong.cs",
+              "RelativeDocumentMoniker": "classes\\CoordinateLong.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\CoordinateLong.cs",
+              "RelativeToolTip": "classes\\CoordinateLong.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-27T15:30:51.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Coordinate.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\Coordinate.cs",
+              "RelativeDocumentMoniker": "classes\\Coordinate.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\Coordinate.cs",
+              "RelativeToolTip": "classes\\Coordinate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAcwAgAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T17:28:30.064Z",
               "EditorCaption": ""
             }
           ]

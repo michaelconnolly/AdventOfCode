@@ -20,7 +20,11 @@ namespace AdventOfCode2024 {
             //Day07();
             //Day08();
             //Day09();
-            Day10();
+            //Day10();
+            //Day11();
+            //Day12();
+            //Day13();
+            Day14();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -174,6 +178,71 @@ namespace AdventOfCode2024 {
 
             Console.WriteLine("Sum of all trailhead scores: " + hikingGuide.SumOfAllTrailHeadScores());
             Console.WriteLine("Sum of all trailhead scores 2: " + hikingGuide.SumOfAllTrailHeadScores2());
+        }
+
+
+        static void Day11() {
+
+            string input = GetInputDataAll("input_11_test3.txt");
+            StoneManager stoneManager = new StoneManager(input);
+
+            stoneManager.Blink(75);
+            Console.WriteLine("Count of stones: " + stoneManager.GetStoneCount());
+
+
+            //stoneManager.Blink2(25);
+            //Console.WriteLine("Count of stones: " + stoneManager.GetStoneCount());
+
+            // StoneManager stoneManager2 = new StoneManager(input);
+            // stoneManager2.Blink2(75);
+            // Console.WriteLine("Count of stones: " + stoneManager2.GetStoneCount());
+        }
+
+        static void Day12() {
+
+            string[] input = GetInputData("input_12.txt");
+            GardenManager gardenManager = new GardenManager(input);
+
+            Console.WriteLine("Total fencing costs: " + gardenManager.TotalPriceOfFencing());
+            Console.WriteLine("Total fencing costs 2: " + gardenManager.TotalPriceOfFencing2());
+        }
+
+        static void Day13() {
+
+            string[] input = GetInputData("input_13_test2.txt");
+            ArcadeManager arcadeManager = new ArcadeManager(input, false);
+
+            Console.WriteLine("Least amount of tokens: " + arcadeManager.FewestTokensForAllPrizes());
+
+            arcadeManager = new ArcadeManager(input, true);
+            Console.WriteLine("Least amount of tokens 2: " + arcadeManager.FewestTokensForAllPrizes());
+
+        }
+
+        static void Day14() {
+
+            string[] input = GetInputData("input_14.txt");
+
+            // 101 tiles wide and 103 tiles tall
+            //RobotGuardManager rgm = new RobotGuardManager(input, 11, 7);
+            RobotGuardManager rgm = new RobotGuardManager(input, 101, 103);
+
+            // What will the safety factor be after exactly 100 seconds have elapsed?
+            rgm.Print();
+            rgm.LetTimeProceed(652);
+            rgm.Print();
+            for (int i = 40; i < 80; i++) {
+                rgm.LetTimeProceed(101);
+                rgm.Print();
+                Console.WriteLine();
+                Console.WriteLine(652 + (101 * (i - 40 + 1)));
+                //Console.WriteLine("above: " + (652 + (101 * i)));
+                Console.WriteLine();
+            }
+            // rgm.Print();
+            Console.WriteLine("safety factor: " + rgm.GetSafetyFactor());
+
+            int x = 5;
         }
     }
 }
