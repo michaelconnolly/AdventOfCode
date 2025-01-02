@@ -24,7 +24,8 @@ namespace AdventOfCode2024 {
             //Day11();
             //Day12();
             //Day13();
-            Day14();
+            //Day14();
+            Day15();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -243,6 +244,27 @@ namespace AdventOfCode2024 {
             Console.WriteLine("safety factor: " + rgm.GetSafetyFactor());
 
             int x = 5;
+        }
+
+        static void Day15() {
+
+            string[] input = GetInputData("input_15_test2.txt");
+            LanternFishManager lfm = new LanternFishManager(input);
+            lfm.PrintMap();
+            lfm.PrintMapLarge();
+            
+            //lfm.RunTheRobot();
+            //lfm.PrintMap();
+
+            // The lanternfish would like to know the sum of all boxes' GPS coordinates
+            // after the robot finishes moving. In the larger example, the sum of all
+            // boxes' GPS coordinates is 10092. In the smaller example, the sum is 2028.
+
+            // Predict the motion of the robot and boxes in the warehouse. After the robot
+            // is finished moving, what is the sum of all boxes' GPS coordinates?
+            int sum = lfm.SumOfAllBoxCoordinates();
+            Console.WriteLine("Sum of all box coordinates: " + sum);
+
         }
     }
 }

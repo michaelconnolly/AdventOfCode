@@ -57,6 +57,7 @@
     <Compile Include="classes\GardenRegion.cs" />
     <Compile Include="classes\HikingGuide.cs" />
     <Compile Include="classes\HikingLocation.cs" />
+    <Compile Include="classes\LanternFishManager.cs" />
     <Compile Include="classes\LocationLists.cs" />
     <Compile Include="classes\MissingOperatorEvaluator.cs" />
     <Compile Include="classes\MathProblem.cs" />
