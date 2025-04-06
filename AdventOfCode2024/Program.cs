@@ -248,13 +248,21 @@ namespace AdventOfCode2024 {
 
         static void Day15() {
 
-            string[] input = GetInputData("input_15_test2.txt");
+            string[] input = GetInputData("input_15.txt");
             LanternFishManager lfm = new LanternFishManager(input);
-            lfm.PrintMap();
-            lfm.PrintMapLarge();
             
-            //lfm.RunTheRobot();
-            //lfm.PrintMap();
+            lfm.PrintMap();
+            Console.WriteLine();
+            lfm.PrintMapLarge();
+            Console.WriteLine();
+            
+            lfm.RunTheRobot();
+            lfm.PrintMap();
+
+            lfm.RunTheRobotLarge();
+            lfm.PrintMapLarge();
+
+
 
             // The lanternfish would like to know the sum of all boxes' GPS coordinates
             // after the robot finishes moving. In the larger example, the sum of all
@@ -264,6 +272,9 @@ namespace AdventOfCode2024 {
             // is finished moving, what is the sum of all boxes' GPS coordinates?
             int sum = lfm.SumOfAllBoxCoordinates();
             Console.WriteLine("Sum of all box coordinates: " + sum);
+
+            sum = lfm.SumOfAllBoxCoordinatesLarge();
+            Console.WriteLine("Sum of all box coordinates (large): " + sum);
 
         }
     }

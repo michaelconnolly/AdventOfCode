@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\lanternfishmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\lanternfishmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\classes\\lanternfishmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:classes\\lanternfishmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|c:\\dev\\adventofcode\\adventofcode2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2024.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,17 +18,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs*",
-              "RelativeToolTip": "Program.cs*",
-              "ViewState": "AgIAAPcAAAAAAAAAAAAqwPwAAAAbAAAAAAAAAA==",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAAAqwPoAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-01T00:33:17.465Z",
               "IsPinned": true,
@@ -40,13 +40,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "LanternFishManager.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\LanternFishManager.cs",
               "RelativeDocumentMoniker": "classes\\LanternFishManager.cs",
               "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2024\\classes\\LanternFishManager.cs",
               "RelativeToolTip": "classes\\LanternFishManager.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAADwv1EAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAFYBAAAAAAAAAAAIwF0BAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-30T00:24:33.566Z",
               "EditorCaption": ""
