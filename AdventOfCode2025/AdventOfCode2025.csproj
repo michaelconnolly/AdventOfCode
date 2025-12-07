@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="classes\BatteryBank.cs" />
+    <Compile Include="classes\BatteryBanks.cs" />
+    <Compile Include="classes\PaperForkliftMap.cs" />
     <Compile Include="classes\ProductIdChecker.cs" />
     <Compile Include="classes\ProductIdRange.cs" />
     <Compile Include="classes\SafeCracker.cs" />
