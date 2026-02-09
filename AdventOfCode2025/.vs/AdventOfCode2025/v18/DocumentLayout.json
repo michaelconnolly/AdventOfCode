@@ -3,32 +3,44 @@
   "WorkspaceRootPath": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\indicatormachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\indicatormachine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\indicatormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\indicatormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\paperforkliftmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\indicatorbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\indicatorbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\indicatorlightgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\indicatorlightgroup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\indicatorlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\indicatorlight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\junctionboxmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\junctionboxmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\paperforkliftmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\paperforkliftmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|c:\\dev\\adventofcode\\adventofcode2025\\classes\\batterybank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\batterybank.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\tachyonmanifold.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\tachyonmanifold.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\batterybanks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\batterybanks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\safecracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\safecracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\productidchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\productidchecker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\productidrange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\productidrange.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\tachyonbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF66C26F-C67C-4BE7-BEC2-8836C4593EDA}|AdventOfCode2025.csproj|solutionrelative:classes\\tachyonbeam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,95 +50,135 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BatteryBank.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\BatteryBank.cs",
-              "RelativeDocumentMoniker": "classes\\BatteryBank.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\BatteryBank.cs",
-              "RelativeToolTip": "classes\\BatteryBank.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAvwCAAAAAsAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "IndicatorLightGroup.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorLightGroup.cs",
+              "RelativeDocumentMoniker": "classes\\IndicatorLightGroup.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorLightGroup.cs",
+              "RelativeToolTip": "classes\\IndicatorLightGroup.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T14:24:27.854Z",
+              "WhenOpened": "2025-12-23T17:23:32.548Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProductIdRange.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\ProductIdRange.cs",
-              "RelativeDocumentMoniker": "classes\\ProductIdRange.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\ProductIdRange.cs",
-              "RelativeToolTip": "classes\\ProductIdRange.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAwwF8AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "IndicatorButton.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorButton.cs",
+              "RelativeDocumentMoniker": "classes\\IndicatorButton.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorButton.cs",
+              "RelativeToolTip": "classes\\IndicatorButton.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAewBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:43:56.874Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProductIdChecker.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\ProductIdChecker.cs",
-              "RelativeDocumentMoniker": "classes\\ProductIdChecker.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\ProductIdChecker.cs",
-              "RelativeToolTip": "classes\\ProductIdChecker.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAgwAIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T14:43:56.877Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SafeCracker.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\SafeCracker.cs",
-              "RelativeDocumentMoniker": "classes\\SafeCracker.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\SafeCracker.cs",
-              "RelativeToolTip": "classes\\SafeCracker.cs",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAYwFwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T05:57:51.947Z"
+              "WhenOpened": "2025-12-22T01:07:33.744Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "IndicatorMachine.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorMachine.cs",
+              "RelativeDocumentMoniker": "classes\\IndicatorMachine.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorMachine.cs",
+              "RelativeToolTip": "classes\\IndicatorMachine.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAUwHEAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:05:57.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IndicatorManager.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorManager.cs",
+              "RelativeDocumentMoniker": "classes\\IndicatorManager.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorManager.cs",
+              "RelativeToolTip": "classes\\IndicatorManager.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAmwBEAAABXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:10:30.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IndicatorLight.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorLight.cs",
+              "RelativeDocumentMoniker": "classes\\IndicatorLight.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\IndicatorLight.cs",
+              "RelativeToolTip": "classes\\IndicatorLight.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T01:07:10.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAuwEwAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAJUAAAAAAAAAAAAqwK0AAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-01T05:43:55.609Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
+              "Title": "JunctionBoxManager.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\JunctionBoxManager.cs",
+              "RelativeDocumentMoniker": "classes\\JunctionBoxManager.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\JunctionBoxManager.cs",
+              "RelativeToolTip": "classes\\JunctionBoxManager.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwCQBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T00:57:44.044Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TachyonManifold.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\TachyonManifold.cs",
+              "RelativeDocumentMoniker": "classes\\TachyonManifold.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\TachyonManifold.cs",
+              "RelativeToolTip": "classes\\TachyonManifold.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAmwGUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T01:40:49.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "PaperForkliftMap.cs",
               "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\PaperForkliftMap.cs",
               "RelativeDocumentMoniker": "classes\\PaperForkliftMap.cs",
               "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\PaperForkliftMap.cs",
               "RelativeToolTip": "classes\\PaperForkliftMap.cs",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAswE4AAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T03:23:08.929Z",
+              "WhenOpened": "2025-12-11T00:58:07.792Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BatteryBanks.cs",
-              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\BatteryBanks.cs",
-              "RelativeDocumentMoniker": "classes\\BatteryBanks.cs",
-              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\BatteryBanks.cs",
-              "RelativeToolTip": "classes\\BatteryBanks.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAuwCkAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "TachyonBeam.cs",
+              "DocumentMoniker": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\TachyonBeam.cs",
+              "RelativeDocumentMoniker": "classes\\TachyonBeam.cs",
+              "ToolTip": "C:\\dev\\AdventOfCode\\AdventOfCode2025\\classes\\TachyonBeam.cs",
+              "RelativeToolTip": "classes\\TachyonBeam.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T14:20:30.639Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T04:15:15.417Z"
             }
           ]
         }

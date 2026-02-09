@@ -46,10 +46,29 @@
   <ItemGroup>
     <Compile Include="classes\BatteryBank.cs" />
     <Compile Include="classes\BatteryBanks.cs" />
+    <Compile Include="classes\CephalopodMath.cs" />
+    <Compile Include="classes\CephalopodMathProblem.cs" />
+    <Compile Include="classes\IndicatorButton.cs" />
+    <Compile Include="classes\IndicatorLight.cs" />
+    <Compile Include="classes\IndicatorLightGroup.cs" />
+    <Compile Include="classes\IndicatorMachine.cs" />
+    <Compile Include="classes\IndicatorManager.cs" />
+    <Compile Include="classes\IngredientAnalyzer.cs" />
+    <Compile Include="classes\IngredientRange.cs" />
+    <Compile Include="classes\JunctionBox.cs" />
+    <Compile Include="classes\JunctionBoxCircuit.cs" />
+    <Compile Include="classes\JunctionBoxManager.cs" />
+    <Compile Include="classes\JunctionBoxPair.cs" />
     <Compile Include="classes\PaperForkliftMap.cs" />
     <Compile Include="classes\ProductIdChecker.cs" />
     <Compile Include="classes\ProductIdRange.cs" />
     <Compile Include="classes\SafeCracker.cs" />
+    <Compile Include="classes\TachyonBeam.cs" />
+    <Compile Include="classes\TachyonManifold.cs" />
+    <Compile Include="classes\TachyonWorld.cs" />
+    <Compile Include="classes\Tile.cs" />
+    <Compile Include="classes\TileFloor.cs" />
+    <Compile Include="classes\TilePair.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Runtime.Remoting.Contexts;
+using System.Threading;
 
 
 namespace AdventOfCode2025 {
@@ -13,7 +18,13 @@ namespace AdventOfCode2025 {
             //Day01();
             //Day02();
             //Day03();
-            Day04();
+            //Day04();
+            // Day05();
+            //Day06();
+            //Day07();
+            //Day08();
+            //Day09();
+            Day10();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -39,7 +50,7 @@ namespace AdventOfCode2025 {
 
             string[] lines = GetInputData("input_01.txt");
             SafeCracker safeCracker = new SafeCracker(lines);
-          
+
             Console.WriteLine("Question One: " + safeCracker.QuestionOne());
             Console.WriteLine("Question Two: " + safeCracker.QuestionTwo());
         }
@@ -79,6 +90,92 @@ namespace AdventOfCode2025 {
 
             Console.WriteLine("Question 1: " + paperForkliftMap.QuestionOne());
             Console.WriteLine("Question 2: " + paperForkliftMap.QuestionTwo());
+        }
+
+        static void Day05() {
+
+            string[] input = GetInputData("input_05.txt");
+            IngredientAnalyzer ingredientAnalyzer = new IngredientAnalyzer(input);
+
+            Console.WriteLine("Count of Fresh Available Ingredients: " + ingredientAnalyzer.CountOfFreshAvailableIngredients());
+            Console.WriteLine("Count of All Ingredients: " + ingredientAnalyzer.CountOfFreshAvailableIngredients2());
+        }
+
+        static void Day06() {
+
+            string[] input = GetInputData("input_06.txt");
+            CephalopodMath cephalopodMath = new CephalopodMath(input);
+
+            Console.WriteLine("Question One: " + cephalopodMath.QuestionOne());
+            Console.WriteLine("Question Two: " + cephalopodMath.QuestionTwo());
+        }
+
+        static void Day07() {
+
+            string[] input = GetInputData("input_07.txt");
+            TachyonManifold tachyonManifold = new TachyonManifold(input);
+
+            // Question One.
+            int splitCount = tachyonManifold.Tick();
+            tachyonManifold.Print();
+            Console.WriteLine("Q1: Split count: " + splitCount);
+
+            // Question Two.
+            TachyonWorld tachyonWorld = new TachyonWorld(input);
+            splitCount = tachyonWorld.Tick(true);
+            Console.WriteLine("Q2: Split count: " + splitCount);
+        }
+
+
+        // Day08 is not yet passing. 
+        static void Day08() {
+
+            string[] input = GetInputData("input_08_test.txt");
+            JunctionBoxManager junctionBoxManager = new JunctionBoxManager(input);
+
+            //Your list contains many junction boxes; connect together the 1000 pairs of junction boxes
+            //which are closest together. Afterward, what do you get if you multiply together the sizes
+            //of the three largest circuits ?
+            double answer = junctionBoxManager.QuestionOne(10);
+            Console.WriteLine("Q1: " + answer);
+
+
+
+        }
+
+
+        // Day09 is not yet passing. 
+        // https://adventofcode.com/2025/day/9
+
+        static void Day09() {
+
+            string[] input = GetInputData("input_09.txt");
+
+            TileFloor tileFloor = new TileFloor(input);
+            tileFloor.PrintMap();
+
+            // Question One.
+            long largestArea = tileFloor.LargestArea();
+            Console.WriteLine("Q1: " + largestArea);
+
+            // Question Two.
+            tileFloor.DrawConnectingLines();
+            tileFloor.PrintMap();
+            tileFloor.FillInAreas();
+            tileFloor.PrintMap();
+            largestArea = tileFloor.LargestAreaWithinContiguousSpace();
+            Console.WriteLine("Q2: " + largestArea);
+            Debug.Assert(false, "this answer requires too much memory");
+
+        }
+
+        static void Day10() {
+
+            string[] input = GetInputData("input_10.txt");
+            IndicatorManager manager = new IndicatorManager(input);
+
+            long fewestTotalPresses = manager.FewestTotalPresses();
+            Console.WriteLine("Q1: " + fewestTotalPresses);
         }
     }
 }
