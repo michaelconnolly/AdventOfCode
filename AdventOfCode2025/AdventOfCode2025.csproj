@@ -48,6 +48,8 @@
     <Compile Include="classes\BatteryBanks.cs" />
     <Compile Include="classes\CephalopodMath.cs" />
     <Compile Include="classes\CephalopodMathProblem.cs" />
+    <Compile Include="classes\Device.cs" />
+    <Compile Include="classes\DeviceManager.cs" />
     <Compile Include="classes\IndicatorButton.cs" />
     <Compile Include="classes\IndicatorLight.cs" />
     <Compile Include="classes\IndicatorLightGroup.cs" />
