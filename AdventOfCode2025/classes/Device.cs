@@ -36,7 +36,7 @@ namespace AdventOfCode2025 {
             Console.WriteLine();
         }
 
-        public long FindPaths2(List<Device> history, string outString) {
+        public long FindPaths(List<Device> history, string outString) {
 
             long successfulPaths = 0;
 
@@ -62,7 +62,7 @@ namespace AdventOfCode2025 {
                     successfulPaths += 0;
                 }
                 else {
-                    successfulPaths += outputDevice.FindPaths2(newHistory, outString);
+                    successfulPaths += outputDevice.FindPaths(newHistory, outString);
                 }
             }
 
@@ -71,33 +71,5 @@ namespace AdventOfCode2025 {
 
             return successfulPaths;
         }
-
-        //public int FindPaths(List<Device> history) {
-
-        //    int successfulPaths = 0;
-
-        //    // Prepare a new history stack, if necessary.
-        //    List<Device> newHistory = new List<Device>();
-        //    foreach (Device historyDevice in history) {
-        //        newHistory.Add(historyDevice);
-        //    }
-        //    newHistory.Add(this);
-
-        //    // For each output, calculate the amount of successful paths out.
-        //    foreach (Device outputDevice in this.outputDevices) {
-
-        //        if (outputDevice.name == "out") {
-        //            successfulPaths++;
-        //        }
-        //        else if (history.Contains(outputDevice)) {
-        //            successfulPaths += 0;
-        //        }
-        //        else {
-        //            successfulPaths += outputDevice.FindPaths(newHistory);
-        //        }
-        //    }
-
-        //    return successfulPaths;
-        //}
     }
 }

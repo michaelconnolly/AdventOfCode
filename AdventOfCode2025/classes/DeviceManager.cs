@@ -51,15 +51,13 @@ namespace AdventOfCode2025 {
         public void Print() {
 
             foreach (Device device in this.devices) {
-                device.Print(); 
+                device.Print();
             }
         }
 
         public long FindPaths() {
 
-            //return this.start.FindPaths(new List<Device>());
-            return this.start.FindPaths2(new List<Device>(), "out");
-
+            return this.start.FindPaths(new List<Device>(), "out");
         }
 
         private void ResetAllCachedValues() {
@@ -78,19 +76,19 @@ namespace AdventOfCode2025 {
             }
 
             // start - dac - fft - end
-            long countStartToDac = this.start.FindPaths2(new List<Device>(), "dac");
+            long countStartToDac = this.start.FindPaths(new List<Device>(), "dac");
             this.ResetAllCachedValues();
-            long countDacToFft = this.dac.FindPaths2(new List<Device>(), "fft");
+            long countDacToFft = this.dac.FindPaths(new List<Device>(), "fft");
             this.ResetAllCachedValues();
-            long countFftToEnd = this.fft.FindPaths2(new List<Device>(), "out");
+            long countFftToEnd = this.fft.FindPaths(new List<Device>(), "out");
             this.ResetAllCachedValues();
             long countStartToDacToFftToEnd = countStartToDac * countDacToFft * countFftToEnd;
 
-            long countStartToFft = this.start.FindPaths2(new List<Device>(), "fft");
+            long countStartToFft = this.start.FindPaths(new List<Device>(), "fft");
             this.ResetAllCachedValues();
-            long countFftToDac = this.fft.FindPaths2(new List<Device>(), "dac");
+            long countFftToDac = this.fft.FindPaths(new List<Device>(), "dac");
             this.ResetAllCachedValues();
-            long countDacToEnd = this.dac.FindPaths2(new List<Device>(), "out");
+            long countDacToEnd = this.dac.FindPaths(new List<Device>(), "out");
             this.ResetAllCachedValues();
             long countStartToFftToDacToEnd = countStartToFft * countFftToDac * countDacToEnd;
 

@@ -24,7 +24,8 @@ namespace AdventOfCode2025 {
             //Day07();
             //Day08();
             //Day09();
-            Day10();
+            //Day10();
+            Day11();
 
             // Keep the console window open.
             Console.WriteLine("\nPress any key to exit.");
@@ -176,6 +177,25 @@ namespace AdventOfCode2025 {
 
             long fewestTotalPresses = manager.FewestTotalPresses();
             Console.WriteLine("Q1: " + fewestTotalPresses);
+        }
+
+
+        static void Day11() {
+
+            // Question One.
+            //string[] input = GetInputData("input_11_test.txt");
+            string[] input = GetInputData("input_11.txt");
+            DeviceManager deviceManager = new DeviceManager(input, "you");
+            deviceManager.Print();
+            long pathCount = deviceManager.FindPaths();
+            Console.WriteLine("Q1: path count: " + pathCount);
+
+            // Question Two.
+            //input = GetInputData("input_11_test2.txt");
+            input = GetInputData("input_11.txt");
+            deviceManager = new DeviceManager(input, "svr");
+            pathCount = deviceManager.FindPaths2();
+            Console.WriteLine("Q2: path count: " + pathCount);
         }
     }
 }
